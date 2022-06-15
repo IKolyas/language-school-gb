@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('hello_language_school');
-});
+Route::get('{any}', function () {
+    return view('app');
+})->where('any', '.*');
 
-Route::get('/test-db', function () {
-    echo DB::table('users')->get();
-});

@@ -1,28 +1,26 @@
-import './bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap';
+
 
 import { createApp } from 'vue'
 
-import store from './vuex/store' // vuex store instance
-import router from './router' // vue-router instance
+import store from './vuex/store'; // vuex store instance
+import router from './router'; // vue-router instance
 
-import App from './components/App'
+import axios from "axios";
+
+import App from './components/App';
 
 
-const app = createApp(App)
-app.use(router)
-app.use(store)
+const app = createApp(App);
 
-app.mount('#app') // Vue Instance - Root component
+app.use(router);
+app.use(store);
+
+app.config.globalProperties.$axios = axios;
+
+app.mount('#app'); // Vue Instance - Root component
 
 if (window.Cypress) {
-  window.store = store
+  window.store = store;
 }
-
-//
-//import HelloLanguageSchool from './components/HelloLanguageSchool.vue';
-//
-//const app = createApp({});
-//
-//app.component('hello-language-school', HelloLanguageSchool)
-//
-//app.mount('#app')
