@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users_classes', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('group_id')->constrained('groups')->cascadeOnDelete();
-            $table->index(['user_id', 'class_id']);
+            $table->index(['user_id', 'group_id']);
         });
     }
 
