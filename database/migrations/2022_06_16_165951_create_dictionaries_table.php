@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('dictionary_name');
-            $table->foreignId('owner_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('owner_id')->default(1)->constrained('users')->cascadeOnDelete();
         });
     }
 

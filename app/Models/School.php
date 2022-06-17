@@ -14,4 +14,9 @@ class School extends Model
         'address',
         'description',
     ];
+
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class);
+    }
 }

@@ -15,4 +15,19 @@ class Teacher extends Model
         'academic_degree',
         'about'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

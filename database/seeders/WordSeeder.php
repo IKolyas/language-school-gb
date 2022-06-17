@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Word;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -57,5 +58,6 @@ class WordSeeder extends Seeder
                 'translation' => 'игра',
             ],
         ]);
+        Word::factory(10)->create();
     }
 }

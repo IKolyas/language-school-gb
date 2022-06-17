@@ -22,4 +22,4 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 /public/js/app.js.LICENSE.txt
-.idea
+.idea/

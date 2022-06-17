@@ -13,4 +13,9 @@ class Group extends Model
         'teacher_id',
         'description',
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
 }

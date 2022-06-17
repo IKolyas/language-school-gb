@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
@@ -30,5 +31,8 @@ class UserSeeder extends Seeder
                 'email' => 'user@user.com',
                 'password' => Hash::make('password'),
             ]]);
+
+        User::factory(10)->create();
     }
+
 }
