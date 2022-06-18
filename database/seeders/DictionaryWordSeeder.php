@@ -15,7 +15,7 @@ class DictionaryWordSeeder extends Seeder
      */
     public function run()
     {
-//        DB::table('dictionary_word')->insert($this->getData());
+        DB::table('dictionary_word')->insert($this->getData());
         DB::table('dictionary_word')->insert($this->getAllWords());
     }
 
