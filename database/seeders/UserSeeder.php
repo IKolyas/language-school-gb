@@ -18,19 +18,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-//        DB::table('users')->insert([
-//            [
-//                'name' => 'Admin',
-//                'lastname' => 'Admin',
-//                'email' => 'admin@admin.com',
-//                'password' => Hash::make('password'),
-//            ],
-//            [
-//                'name' => 'User',
-//                'lastname' => 'User',
-//                'email' => 'user@user.com',
-//                'password' => Hash::make('password'),
-//            ]]);
+        DB::table('users')->insert([
+            [
+                'name' => 'Admin',
+                'lastname' => 'Admin',
+                'email' => 'admin@admin.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name' => 'User',
+                'lastname' => 'User',
+                'email' => 'user@user.com',
+                'password' => Hash::make('password'),
+            ]]);
 
         User::factory(10)->create();
     }
