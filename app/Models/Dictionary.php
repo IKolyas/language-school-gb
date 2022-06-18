@@ -11,6 +11,21 @@ class Dictionary extends Model
 
     protected $fillable = [
         'dictionary_name',
-        'owner_id',
+        'creator_id',
     ];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function words()
+    {
+        return $this->belongsToMany(Word::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

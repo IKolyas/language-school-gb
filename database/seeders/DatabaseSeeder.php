@@ -25,8 +25,9 @@ class DatabaseSeeder extends Seeder
             SchoolSeeder::class,
             TeacherSeeder::class,
             GroupSeeder::class,
+            DictionaryWordSeeder::class,
         ]);
-        
+
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

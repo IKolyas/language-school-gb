@@ -15,4 +15,9 @@ class Word extends Model
     ];
 
     protected $guarded = [];
+
+    public function dictionaries()
+    {
+        return $this->belongsToMany(Dictionary::class);
+    }
 }

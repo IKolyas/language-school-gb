@@ -49,4 +49,19 @@ class User extends Authenticatable
     {
         return $this->hasOne(Teacher::class);
     }
+
+    public function createdDictionaries()
+    {
+        return $this->hasMany(Dictionary::class, 'creator_id');
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
+
+    public function dictionaries()
+    {
+        return $this->belongsToMany(Dictionary::class);
+    }
 }

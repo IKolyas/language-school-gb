@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('words_dictionaries', function (Blueprint $table) {
+        Schema::create('dictionary_word', function (Blueprint $table) {
             $table->foreignId('word_id')->constrained('words')->cascadeOnDelete();
             $table->foreignId('dictionary_id')->constrained('dictionaries')->cascadeOnDelete();
             $table->index(['word_id', 'dictionary_id']);

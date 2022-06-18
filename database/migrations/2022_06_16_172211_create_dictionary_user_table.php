@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users_classes', function (Blueprint $table) {
+        Schema::create('dictionary_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('group_id')->constrained('groups')->cascadeOnDelete();
-            $table->index(['user_id', 'group_id']);
+            $table->foreignId('dictionary_id')->constrained('dictionaries')->cascadeOnDelete();
+            $table->index(['user_id', 'dictionary_id']);
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_classes');
+        Schema::dropIfExists('users_dictionaries');
     }
 };
