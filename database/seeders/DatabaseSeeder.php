@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             TeacherSeeder::class,
             GroupSeeder::class,
             DictionaryWordSeeder::class,
+            DictionaryUserSeeder::class,
+            GroupUserSeeder::class,
         ]);
 
         // \App\Models\User::factory()->create([

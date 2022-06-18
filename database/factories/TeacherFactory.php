@@ -19,8 +19,8 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'school_id' => 1,
-            'user_id' => 1,
+            'school_id' => mt_rand(1, 5),
+            'user_id' => mt_rand(1, 10),
             'academic_degree' => $this->faker->word(),
             'about' => $this->faker->realText(50),
             'created_at' => now(),

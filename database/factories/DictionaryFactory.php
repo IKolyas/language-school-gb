@@ -20,7 +20,7 @@ class DictionaryFactory extends Factory
     {
         return [
             'dictionary_name' => $this->faker->city(),
-            'owner_id' => '1',
+            'creator_id' => mt_rand(1, 3),
             'created_at' => now(),
             'updated_at' => now(),
         ];

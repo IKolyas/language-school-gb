@@ -15,7 +15,8 @@ class DictionaryWordSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('dictionary_word')->insert($this->getData());
+//        DB::table('dictionary_word')->insert($this->getData());
+        DB::table('dictionary_word')->insert($this->getAllWords());
     }
 
     private function getData(): array
@@ -30,6 +31,18 @@ class DictionaryWordSeeder extends Seeder
             }
         }
         return $data;
+    }
+
+    private function getAllWords(): array
+    {
+        $allWords = [];
+        for ($i = 1; $i <= 10; $i++) {
+            $allWords[] = [
+                    'dictionary_id' => 1,
+                    'word_id' => $i,
+                ];
+        }
+        return $allWords;
     }
 
 }

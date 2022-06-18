@@ -19,7 +19,7 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
-            'teacher_id' => 1,
+            'teacher_id' => mt_rand(1, 5),
             'description' => $this->faker->realText(50),
             'created_at' => now(),
             'updated_at' => now(),
