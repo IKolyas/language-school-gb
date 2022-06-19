@@ -1,17 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap';
 
-
 import { createApp } from 'vue'
 
-import store from './vuex/store'; // vuex store instance
-import router from './router'; // vue-router instance
+import store from './vuex/store' // vuex store instance
+import router from './router' // vue-router instance
 
-import axios from "axios";
+import axios from 'axios'
+
+import '../styles/style.scss'
 
 import App from './components/App';
-
-
 const app = createApp(App);
 
 app.use(router);
