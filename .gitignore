@@ -21,5 +21,8 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-/public/js/app.js.LICENSE.txt
+
+# Editor directories and files
 .idea
+.vscode
+/public/js/app.js.LICENSE.txt
