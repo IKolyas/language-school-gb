@@ -9,18 +9,18 @@
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-{{--@if (Auth::check())--}}
-{{--    @php--}}
-{{--        $user_auth_data = ['isAuth' => true, 'user' => Auth::user()];--}}
-{{--    @endphp--}}
-{{--@else--}}
-{{--    @php--}}
-{{--        $user_auth_data = ['isAuth' => false];--}}
-{{--    @endphp--}}
-{{--@endif--}}
-{{--<script>--}}
-{{--    window.Laravel = JSON.parse(atob('{{ base64_encode(json_encode($user_auth_data)) }}'));--}}
-{{--</script>--}}
+@if (Auth::check())
+    @php
+        $user_auth_data = ['isAuth' => true, 'user' => Auth::user()];
+    @endphp
+@else
+    @php
+        $user_auth_data = ['isAuth' => false];
+    @endphp
+@endif
+<script>
+    window.Laravel = JSON.parse(atob('{{ base64_encode(json_encode($user_auth_data)) }}'));
+</script>
 
 <div id="app">
 </div>
