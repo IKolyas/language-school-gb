@@ -10,7 +10,7 @@ export default new createStore({
   plugins: debug ? [createLogger()] : [],
   modules: {
     user: userModule,
-    task: taskModule
+    //task: taskModule
 
   },
 })
