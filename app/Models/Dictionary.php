@@ -21,11 +21,11 @@ class Dictionary extends Model
 
     public function words()
     {
-        return $this->belongsToMany(Word::class);
+        return $this->belongsToMany(Word::class)->using(DictionaryWord::class);
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->using(DictionaryUser::class);
     }
 }

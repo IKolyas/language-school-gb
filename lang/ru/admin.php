@@ -6,6 +6,7 @@ return [
     'logout'                => 'Выйти',
     'setting'               => 'Настройка',
     'name'                  => 'Имя',
+    'user'                  => 'Пользователь',
     'username'              => 'Логин',
     'password'              => 'Пароль',
     'password_confirmation' => 'Подтверждение пароля',
@@ -104,4 +105,7 @@ return [
     'prev'                   => 'Предыдущая',
     'next'                   => 'Следующая',
     'quick_create'           => 'Быстрое добавление',
+
+//
+    'school' => 'Школа',
 ];
