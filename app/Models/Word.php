@@ -18,6 +18,6 @@ class Word extends Model
 
     public function dictionaries()
     {
-        return $this->belongsToMany(Dictionary::class);
+        return $this->belongsToMany(Dictionary::class)->using(DictionaryWord::class);
     }
 }

@@ -3,21 +3,20 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Dictionary;
-use App\Models\Group;
-use App\Models\User;
+use App\Models\Word;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class UserController extends AdminController
+class WordController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'User';
+    protected $title = 'Word';
 
     /**
      * Make a grid builder.
@@ -26,16 +25,22 @@ class UserController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new User());
+        $grid = new Grid(new Word());
 
         $grid->column('id', __('Id'));
-        $grid->column('name', __('Name'));
-        $grid->column('lastname', __('Lastname'));
-        $grid->column('email', __('Email'));
-        $grid->column('email_verified_at', __('Email verified at'));
+        $grid->column('word', __('Word'));
+        $grid->column('translation', __('Translation'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-        $grid->column('deleted_at', __('Deleted at'));
+
+        //  CREATE
+        $grid->quickCreate(function (Grid\Tools\QuickCreate $create) {
+            $create->text('word', __('Word'));
+            $create->text('translation', __('Translation'));
+        });
+
+        //  SEARCH
+        $grid->quickSearch('word', 'translation');
 
         return $grid;
     }
@@ -48,16 +53,13 @@ class UserController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(User::findOrFail($id));
-
+        $show = new Show(Word::findOrFail($id));
         $show->field('id', __('Id'));
-        $show->field('name', __('Name'));
-        $show->field('lastname', __('Lastname'));
-        $show->field('email', __('Email'));
-        $show->field('email_verified_at', __('Email verified at'));
+        $show->field('word', __('Word'));
+        $show->field('translation', __('Translation'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
-        $show->field('deleted_at', __('Deleted at'));
+
 
         return $show;
     }
@@ -69,14 +71,11 @@ class UserController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new User());
+        $form = new Form(new Word());
 
-        $form->text('name', __('Name'));
-        $form->text('lastname', __('Lastname'));
-        $form->email('email', __('Email'));
-        $form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
+        $form->text('word', __('Word'));
+        $form->text('translation', __('Translation'));
         $form->listbox('dictionaries', __('Dictionaries'))->options(Dictionary::all()->pluck('dictionary_name', 'id'));
-        $form->listbox('groups', __('Groups'))->options(Group::all()->pluck('description', 'id'));
 
         return $form;
     }
