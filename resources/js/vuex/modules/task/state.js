@@ -1,16 +1,9 @@
 
 export default {
     state: () => ({
-        isAuth: false,
-        localStorage: {}, //Копия localstorage. Отслеживаем и меняем.
-        name: '',
-        lastname: '',
-        email: '',
-        token: '',
-        tasks: {},
-        photo: '',
-        statistics: {}
-
+        dictionaryId: null,
+        dictionaryName: '',
+        words: [], // item === {id: null, rate: null, word: '', translation: ''}
     })
     
 }

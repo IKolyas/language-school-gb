@@ -1,6 +1,6 @@
 import { createStore, createLogger } from 'vuex';
 import userModule from './modules/user';
-//import taskModule from './modules/task';
+import taskModule from './modules/task';
 
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -10,8 +10,8 @@ export default new createStore({
   plugins: debug ? [createLogger()] : [],
 
   state: {
-    isAuth: false,
-    user: false
+    // isAuth: false,
+    // user: false
   },
 
   mutations: {
@@ -30,7 +30,6 @@ export default new createStore({
 
   modules: {
     user: userModule,
-    // task: taskModule
-
+    task: taskModule
   },
 })
