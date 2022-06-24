@@ -15,11 +15,11 @@
 					<router-link to="/login" class="flex-shrink-0 text-dark" v-if="!isAuth" style="margin-right: 10px">Войти</router-link>
 					<router-link to="/register" class="flex-shrink-0 text-dark" v-if="!isAuth" style="margin-right: 10px">Регистрация</router-link>
 					<!--	Заменить на v-else	-->
-					<div v-if="isAuth" class="flex-shrink-0 dropdown">
-						<a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-							<span class="nav-item nav-link">{{ 'user.name' }}</span>
+					<div v-if="'exit'" class="flex-shrink-0 dropdown">
+						<span class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+							<span class="nav-item" style="margin-right: 10px">{{ 'user.name' }}</span>
 							<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-						</a>
+						</span>
 						<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
 							<li class="dropdown-item"><strong>Статус</strong></li>
 							<li><hr class="dropdown-divider"></li>
