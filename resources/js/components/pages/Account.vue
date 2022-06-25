@@ -2,30 +2,28 @@
     <main class="d-flex flex-nowrap">
         <h1 class="visually-hidden">Личный кабинет пользователя</h1>
         <account-sidebar/>
-        <div class="b-example-divider b-example-vr"></div>
-        <div class="p-2 flex-fill">
-            <account-dictionaries/>
+        <div class="p-2 flex-fill position-relative">
             <account-details/>
+            <account-dictionaries/>
+            <account-achievements/>
+            <account-groups/>
         </div>
     </main>
 </template>
 
 <script>
-import AccountSidebar from "../partials/AccountSidebar";
-import AccountDictionaries from "../partials/AccountDictionaries";
-import AccountDetails from "../partials/AccountDetails";
+import AccountSidebar from "../partials/account/AccountSidebar";
+import AccountDictionaries from "../partials/account/AccountDictionaries";
+import AccountDetails from "../partials/account/AccountDetails";
+import AccountAchievements from "../partials/account/AccountAchievements";
+import AccountGroups from "../partials/account/AccountGroups";
 
 export default {
     name: "Account",
-    components: {AccountDictionaries, AccountSidebar, AccountDetails}
+    components: {AccountGroups, AccountAchievements, AccountDictionaries, AccountSidebar, AccountDetails}
 }
 </script>
 
 <style scoped>
-.b-example-vr {
-    flex-shrink: 0;
-    width: 1.5rem;
-    height: 100vh;
-}
 
 </style>
