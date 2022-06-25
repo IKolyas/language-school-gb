@@ -259,7 +259,7 @@ return [
     | Supported: "tencent", "google", "yandex".
     |
     */
-    'map_provider' => 'google',
+    'map_provider' => 'yandex',
 
     /*
     |--------------------------------------------------------------------------
@@ -405,6 +405,17 @@ return [
     |
     */
     'extensions' => [
+        'api-tester' => [
 
+            // route prefix for APIs
+            'prefix' => 'api',
+
+            // auth guard for api
+            'guard'  => 'api',
+        ],
+
+        'media-manager' => [
+            'disk' => 'local'   // Points to the disk set in config/filesystem.php
+        ],
     ],
 ];
