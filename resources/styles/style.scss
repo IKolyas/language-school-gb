@@ -13,3 +13,13 @@ body {
     width: 100vw;
   }
 }
+
+.router-link-active:hover,
+.router-link-active:focus,
+.router-link-active {
+  color: $color-second;
+}
+
+.router-link-exact-active {
+
+}
