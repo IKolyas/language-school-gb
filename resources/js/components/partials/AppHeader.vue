@@ -17,14 +17,14 @@
 					<!--	Заменить на v-else	-->
 					<div v-if="'exit'" class="flex-shrink-0 dropdown">
 						<span class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-							<span class="nav-item" style="margin-right: 10px">{{ 'user.name' }}</span>
+							<span class="nav-item" style="margin-right: 10px; cursor: pointer">{{ 'user.name' }}</span>
 							<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
 						</span>
 						<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
 							<li class="dropdown-item"><strong>Статус</strong></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="#">Новый проект</a></li>
-							<li><a class="dropdown-item" href="#">Профиль</a></li>
+							<li><router-link class="dropdown-item" :to="{name: 'account'}">Профиль</router-link></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><router-link to="/logout" class="dropdown-item" href="#">Выйти</router-link></li>
 						</ul>
