@@ -106,6 +106,7 @@ export default {
 		}
 
 		const onStartedPractice = () => {
+			count.value = 0
 			currentIndex.value = 0
 			isPractice.value = true
 			currentTask.value = tasks[0]
