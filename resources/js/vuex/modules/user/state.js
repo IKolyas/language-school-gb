@@ -1,7 +1,7 @@
 
 export default {
     state: () => ({
-        isAuth: false,
+        isAuth: true,
         localStorage: {}, //Копия localstorage. Отслеживаем и меняем.
         name: '',
         lastname: '',

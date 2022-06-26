@@ -5,10 +5,12 @@ import mutations from './mutations';
 
 
 
-export default {
+const userModule = {
   namespaced: true,
   state,
   actions,
   getters,
   mutations,
 };
+
+export default userModule;

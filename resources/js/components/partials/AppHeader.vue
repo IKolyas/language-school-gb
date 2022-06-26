@@ -15,7 +15,7 @@
 					<router-link to="/login" class="flex-shrink-0 text-dark" v-if="!isAuth" style="margin-right: 10px">Войти</router-link>
 					<router-link to="/register" class="flex-shrink-0 text-dark" v-if="!isAuth" style="margin-right: 10px">Регистрация</router-link>
 					<!--	Заменить на v-else	-->
-					<div v-if="'exit'" class="flex-shrink-0 dropdown">
+					<div v-if="$store.state.user.isAuth" class="flex-shrink-0 dropdown">
 						<span class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
 							<span class="nav-item" style="margin-right: 10px">{{ 'user.name' }}</span>
 							<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
@@ -45,27 +45,36 @@ export default {
   },
   data() {
 	return {
+		// isAuth: false
 	}
   },
   components: {
     // TheNav
   },
-  methods: {
+  computed: {
         ...mapState({
             isAuth: 'user/isAuth',
+            // isAuth: state => state.user.isAuth,
             // name: 'user/name',
             // lastname: 'user/lastname',
             // email: 'user/email',
             // photo: 'user/photo',
         }),
-        ...mapMutations({
+        
+
+    },
+	methods: {
+		...mapMutations({
             
         }),
         ...mapActions({
 			logout: 'user/logout',
         }),
 
-    }
+	},
+	mounted() {
+		console.log('isAuth',this.$store.state);
+	}
 }
 </script>
 
