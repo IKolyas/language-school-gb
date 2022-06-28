@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
         <img src="http://placekitten.com/100/100" alt="avatar" width="100px" height="100px">
-        <span class="fs-4">User Name</span>
+        <span class="fs-4">{{ userInfo.name}} {{userInfo.lastname}}</span>
         <hr>
         <ul class="nav nav-pills flex-column profile-sidebar" id="sidebarTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -55,6 +55,7 @@
 
 <script>
 export default {
+    props: ['user-info'],
     name: "AccountSidebar"
 }
 </script>

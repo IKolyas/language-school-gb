@@ -6,23 +6,24 @@
             <span class="fs-4">Настройте свой профиль</span>
         </div>
         <img src="http://placekitten.com/200/200" alt="" width="200" height="200"><br>
-        <form>
+        <form v-on:submit.prevent="onSubmit">
             <div class="mb-3">
                 <label for="formFile" class="form-label">Выберите новый аватар</label>
                 <input class="form-control" type="file" id="formFile">
             </div>
             <div class="row g-2">
                 <div class="col-md">
+                    <p>{{userInfo.email}}</p>
                     <div class="form-floating">
                         <input type="email" class="form-control" id="floatingInputGridEmail" placeholder="name@example.com"
-                               value="current email">
+                               :v-model="userInfo.email">
                         <label for="floatingInputGridEmail">Email address</label>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInputGrid" placeholder="password"
-                               value="*******">
+                        <input type="password" class="form-control" id="floatingInputGrid" placeholder="password"
+                               value="">
                         <label for="floatingInputGrid">Password</label>
                     </div>
                 </div>
@@ -34,14 +35,14 @@
             <div class="row g-2">
                 <div class="col-md">
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInputGridName" placeholder="name"
+                        <input type="text" class="form-control" id="floatingInputGridName" placeholder="name"
                                value="current name">
                         <label for="floatingInputGridName">Your name</label>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInputLastname" placeholder="lastname"
+                        <input type="text" class="form-control" id="floatingInputLastname" placeholder="lastname"
                                value="Current lastname">
                         <label for="floatingInputLastname">Your lastname</label>
                     </div>
@@ -52,14 +53,20 @@
                 <input type="textarea" class="form-control" value="current user info" style="height: 100px"
                        placeholder="tell about yourself">
             </div>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary" v-on:click = "sendNewData">Save changes</button>
         </form>
     </div>
 </template>
 
 <script>
 export default {
-    name: "AccountDetails"
+    props: ['userInfo'],
+    name: "AccountDetails",
+    methods: {
+        onSubmit() {
+            alert("Новые данные сохранены");
+        }
+    }
 }
 </script>
 
