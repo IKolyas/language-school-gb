@@ -22,7 +22,7 @@
                 <div class="col-md">
                     <div class="form-floating">
                         <input type="password" class="form-control" id="floatingInputGrid" placeholder="password"
-                               value="">
+                              @click.="changePassword" >
                         <label for="floatingInputGrid">Password</label>
                     </div>
                 </div>
@@ -64,6 +64,9 @@ export default {
     methods: {
         onSubmit() {
             alert("Новые данные сохранены");
+        },
+        changePassword() {
+            alert("Появляется форма смены пароля");
         }
     }
 }
