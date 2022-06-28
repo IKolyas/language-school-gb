@@ -53,7 +53,7 @@
                 <input type="textarea" class="form-control" value="current user info" style="height: 100px"
                        placeholder="tell about yourself">
             </div>
-            <button type="submit" class="btn btn-primary" v-on:click = "sendNewData">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
     </div>
 </template>
