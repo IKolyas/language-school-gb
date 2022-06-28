@@ -54,6 +54,7 @@
 </template>
 
 <script>
+
 export default {
     props: ['user-info'],
     name: "AccountSidebar"

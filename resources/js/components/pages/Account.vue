@@ -4,9 +4,9 @@
         <account-sidebar :user-info="userInfo"/>
         <div class="p-2 flex-fill position-relative">
             <account-details :user-info="userInfo"/>
-            <account-dictionaries :user-dictionaries="userDictionaries"/>
+            <account-dictionaries :user-dictionaries="userInfo.dictionaries"/>
             <account-achievements/>
-            <account-groups :user-groups="userGroups"/>
+            <account-groups :user-groups="userInfo.groups"/>
         </div>
     </main>
 </template>
@@ -67,6 +67,11 @@ export default {
 
             ]
         };
+    },
+    mounted() {
+        fetch('https://dev-language-school-gb.herokuapp.com/api/user/1')
+        .then(response => response.json())
+        .then(json => {this.userInfo = json.data})
     }
 }
 </script>

@@ -13,10 +13,9 @@
             </div>
             <div class="row g-2">
                 <div class="col-md">
-                    <p>{{userInfo.email}}</p>
                     <div class="form-floating">
                         <input type="email" class="form-control" id="floatingInputGridEmail" placeholder="name@example.com"
-                               :v-model="userInfo.email">
+                               :value="userInfo.email">
                         <label for="floatingInputGridEmail">Email address</label>
                     </div>
                 </div>
@@ -36,14 +35,14 @@
                 <div class="col-md">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInputGridName" placeholder="name"
-                               value="current name">
+                               :value="userInfo.name">
                         <label for="floatingInputGridName">Your name</label>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="floatingInputLastname" placeholder="lastname"
-                               value="Current lastname">
+                               :value="userInfo.lastname">
                         <label for="floatingInputLastname">Your lastname</label>
                     </div>
                 </div>
