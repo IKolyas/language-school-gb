@@ -23,7 +23,7 @@
 <script>
 export default {
     name: "Dictionaries",
-    props: ['userDictionaries']
+    props: ['user-dictionaries']
 }
 </script>
 
