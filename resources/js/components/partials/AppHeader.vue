@@ -69,11 +69,13 @@ export default {
         }),
         ...mapActions({
 			logout: 'user/logout',
+			fetchUser: 'user/fetchUser'
         }),
 		
 
 	},
 	mounted() {
+		this.$store.dispatch('user/fetchUser', {id: 1});
 		console.log('isAuth',this.$store.state);
 	}
 }

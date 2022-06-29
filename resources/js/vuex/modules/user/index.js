@@ -6,11 +6,14 @@ import mutations from './mutations';
 const state = () => ({
   isAuth: true,
   localStorage: {}, //Копия localstorage. Отслеживаем и меняем.
+  id: '',
   name: '',
   lastname: '',
   email: '',
+  groups: [],
   token: '',
   tasks: {},
+  dictionaries: [],
   photo: '',
   statistics: {}
 })

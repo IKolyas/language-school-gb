@@ -15,9 +15,9 @@ const app = createApp(App);
 
 app.use(router);
 app.use(store);
-console.log(store); //TODO delete it
-app.config.globalProperties.$axios = axios;
 
+app.config.globalProperties.$axios = axios;
+console.log(axios); //TODO delete it
 app.mount('#app'); // Vue Instance - Root component
 
 if (window.Cypress) {

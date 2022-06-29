@@ -15,19 +15,11 @@ const store = createStore({
   //   // commonState: true
   // },
 
-<<<<<<< HEAD
-  // mutations: {
-  //   changeAuth (state) {
-  //     state.isAuth = laravel.isAuth
-  //   }
-  // },
-=======
   mutations: {
     CHANGE_AUTH (state) {
       state.isAuth = laravel.isAuth
     }
   },
->>>>>>> dev
 
   // actions: {
 

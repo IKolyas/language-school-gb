@@ -1,14 +1,13 @@
 export default {
     setCurrentUser(state, payload) {
         state.isAuth = true;
-        state.localStorage = setLocalStorage();
+        // state.localStorage = setLocalStorage();
         state.name = payload.name;
         state.lastname = payload.lastname;
         state.email = payload.email;
-        state.token = payload.token;
+        state.dictionaries = payload.dictionaries;
         state.tasks = payload.tasks;
-        state.photo = payload.photo;
-        state.statistics = payload.statistics;
+        state.groups = payload.groups;
     },
     resetUser() {
         state.isAuth = false;
@@ -16,9 +15,8 @@ export default {
         state.name = '';
         state.lastname = '';
         state.email = '';
-        state.token = '';
+        state.dictionaries = [];
         state.tasks = {};
-        state.photo = '';
-        state.statistics = {};
+        state.groups = [];
     }
 }
