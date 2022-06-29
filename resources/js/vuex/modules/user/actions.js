@@ -61,6 +61,23 @@ export default {
                     console.error(error);
                 });
         })
+    },
+
+    fetchUser({commit}, payload) {
+        console.log('fetchUser', `https://dev-language-school-gb.herokuapp.com/api/user/${payload.id}`);
+        axios.get(`https://dev-language-school-gb.herokuapp.com/api/user/${payload.id}`)
+                .then(response => {
+                    if (response.data.status = 200) {
+                        // window.location.href = "/"
+                        commit('setCurrentUser', response.data.data)
+
+                    } else {
+                        console.log(response)
+                    }
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
     }
 
 }

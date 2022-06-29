@@ -1,19 +1,19 @@
-import { createStore, createLogger } from 'vuex';
+import { createStore, createLogger, storeKey } from 'vuex';
 import userModule from './modules/user';
-//import taskModule from './modules/task';
+import taskModule from './modules/task';
 
 const laravel = window.Laravel
 
 const debug = process.env.NODE_ENV !== 'production'
 
-export default new createStore({
+const store = createStore({
   strict: debug,
   plugins: debug ? [createLogger()] : [],
 
-  state: {
-    isAuth: false,
-    user: false
-  },
+  // state: {
+  //   // isAuth: false,
+  //   // commonState: true
+  // },
 
   mutations: {
     CHANGE_AUTH (state) {
@@ -21,17 +21,18 @@ export default new createStore({
     }
   },
 
-  actions: {
+  // actions: {
 
-  },
+  // },
 
-  getters: {
+  // getters: {
 
-  },
+  // },
 
   modules: {
     user: userModule,
-    // task: taskModule
-
+    task: taskModule
   },
 })
+
+export default store;

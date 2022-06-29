@@ -12,10 +12,10 @@
 				</ul>
 
 				<div class="d-flex align-items-center">
-					<router-link to="/login" class="flex-shrink-0 text-dark" v-if="'enter'" style="margin-right: 10px">Войти</router-link>
-					<router-link to="/register" class="flex-shrink-0 text-dark" v-if="'enter'" style="margin-right: 10px">Регистрация</router-link>
+					<router-link to="/login" class="flex-shrink-0 text-dark" v-if="!$store.state.user.isAuth" style="margin-right: 10px">Войти</router-link>
+					<router-link to="/register" class="flex-shrink-0 text-dark" v-if="!$store.state.user.isAuth" style="margin-right: 10px">Регистрация</router-link>
 					<!--	Заменить на v-else	-->
-					<div v-if="'exit'" class="flex-shrink-0 dropdown">
+					<div v-if="$store.state.user.isAuth" class="flex-shrink-0 dropdown">
 						<span class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
 							<span class="nav-item" style="margin-right: 10px; cursor: pointer">{{ 'user.name' }}</span>
 							<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
@@ -26,7 +26,7 @@
 							<li><a class="dropdown-item" href="#">Новый проект</a></li>
 							<li><router-link class="dropdown-item" :to="{name: 'account'}">Профиль</router-link></li>
 							<li><hr class="dropdown-divider"></li>
-							<li><router-link to="/logout" class="dropdown-item" href="#">Выйти</router-link></li>
+							<li><a @click.pervent='logout' class="dropdown-item" href="#">Выйти</a></li>
 						</ul>
 					</div>
 				</div>
@@ -36,14 +36,48 @@
 </template>
 
 <script>
+import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 // import TheNav from '@/components/TheNav'
+
 export default {
   setup () {
 
   },
+  data() {
+	return {
+		// isAuth: false
+	}
+  },
   components: {
     // TheNav
-  }
+  },
+  computed: {
+        ...mapState({
+            isAuth: 'user/isAuth',
+            // isAuth: state => state.user.isAuth,
+            // name: 'user/name',
+            // lastname: 'user/lastname',
+            // email: 'user/email',
+            // photo: 'user/photo',
+        }),
+        
+
+    },
+	methods: {
+		...mapMutations({
+            
+        }),
+        ...mapActions({
+			logout: 'user/logout',
+			fetchUser: 'user/fetchUser'
+        }),
+		
+
+	},
+	mounted() {
+		this.$store.dispatch('user/fetchUser', {id: 1});
+		console.log('isAuth',this.$store.state);
+	}
 }
 </script>
 

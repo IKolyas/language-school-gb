@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import 'bootstrap';
+import './bootstrap';
 
 import { createApp } from 'vue'
 
@@ -17,7 +17,7 @@ app.use(router);
 app.use(store);
 
 app.config.globalProperties.$axios = axios;
-
+console.log(axios); //TODO delete it
 app.mount('#app'); // Vue Instance - Root component
 
 if (window.Cypress) {
