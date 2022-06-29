@@ -20589,7 +20589,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [!_ctx.isAuth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [!_ctx.$store.state.user.isAuth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
     key: 0,
     to: "/login",
     "class": "flex-shrink-0 text-dark",
@@ -20603,7 +20603,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.isAuth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), !_ctx.$store.state.user.isAuth ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
     key: 1,
     to: "/register",
     "class": "flex-shrink-0 text-dark",
@@ -20660,7 +20660,8 @@ __webpack_require__.r(__webpack_exports__);
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_2__.createApp)(_components_App__WEBPACK_IMPORTED_MODULE_7__["default"]);
 app.use(_router__WEBPACK_IMPORTED_MODULE_4__["default"]);
 app.use(_vuex_store__WEBPACK_IMPORTED_MODULE_3__["default"]);
-console.log(_vuex_store__WEBPACK_IMPORTED_MODULE_3__["default"]);
+console.log(_vuex_store__WEBPACK_IMPORTED_MODULE_3__["default"]); //TODO delete it
+
 app.config.globalProperties.$axios = (axios__WEBPACK_IMPORTED_MODULE_5___default());
 app.mount('#app'); // Vue Instance - Root component
 
@@ -20960,20 +20961,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./resources/js/vuex/modules/user/state.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actions */ "./resources/js/vuex/modules/user/actions.js");
-/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./getters */ "./resources/js/vuex/modules/user/getters.js");
-/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mutations */ "./resources/js/vuex/modules/user/mutations.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actions */ "./resources/js/vuex/modules/user/actions.js");
+/* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getters */ "./resources/js/vuex/modules/user/getters.js");
+/* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./mutations */ "./resources/js/vuex/modules/user/mutations.js");
+// import state from './state';
 
 
 
+
+var state = function state() {
+  return {
+    isAuth: true,
+    localStorage: {},
+    //Копия localstorage. Отслеживаем и меняем.
+    name: '',
+    lastname: '',
+    email: '',
+    token: '',
+    tasks: {},
+    photo: '',
+    statistics: {}
+  };
+};
 
 var userModule = {
   namespaced: true,
-  state: _state__WEBPACK_IMPORTED_MODULE_0__["default"],
-  actions: _actions__WEBPACK_IMPORTED_MODULE_1__["default"],
-  getters: _getters__WEBPACK_IMPORTED_MODULE_2__["default"],
-  mutations: _mutations__WEBPACK_IMPORTED_MODULE_3__["default"]
+  state: state,
+  actions: _actions__WEBPACK_IMPORTED_MODULE_0__["default"],
+  getters: _getters__WEBPACK_IMPORTED_MODULE_1__["default"],
+  mutations: _mutations__WEBPACK_IMPORTED_MODULE_2__["default"]
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (userModule);
 
@@ -21012,36 +21028,6 @@ __webpack_require__.r(__webpack_exports__);
     state.tasks = {};
     state.photo = '';
     state.statistics = {};
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/vuex/modules/user/state.js":
-/*!*************************************************!*\
-  !*** ./resources/js/vuex/modules/user/state.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  state: function state() {
-    return {
-      isAuth: true,
-      localStorage: {},
-      //Копия localstorage. Отслеживаем и меняем.
-      name: '',
-      lastname: '',
-      email: '',
-      token: '',
-      tasks: {},
-      photo: '',
-      statistics: {}
-    };
   }
 });
 

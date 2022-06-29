@@ -12,8 +12,8 @@
 				</ul>
 
 				<div class="d-flex align-items-center">
-					<router-link to="/login" class="flex-shrink-0 text-dark" v-if="!isAuth" style="margin-right: 10px">Войти</router-link>
-					<router-link to="/register" class="flex-shrink-0 text-dark" v-if="!isAuth" style="margin-right: 10px">Регистрация</router-link>
+					<router-link to="/login" class="flex-shrink-0 text-dark" v-if="!$store.state.user.isAuth" style="margin-right: 10px">Войти</router-link>
+					<router-link to="/register" class="flex-shrink-0 text-dark" v-if="!$store.state.user.isAuth" style="margin-right: 10px">Регистрация</router-link>
 					<!--	Заменить на v-else	-->
 					<div v-if="$store.state.user.isAuth" class="flex-shrink-0 dropdown">
 						<span class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,6 +70,7 @@ export default {
         ...mapActions({
 			logout: 'user/logout',
         }),
+		
 
 	},
 	mounted() {

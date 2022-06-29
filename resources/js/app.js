@@ -15,7 +15,7 @@ const app = createApp(App);
 
 app.use(router);
 app.use(store);
-console.log(store);
+console.log(store); //TODO delete it
 app.config.globalProperties.$axios = axios;
 
 app.mount('#app'); // Vue Instance - Root component
