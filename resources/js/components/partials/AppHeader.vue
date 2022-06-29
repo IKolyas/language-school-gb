@@ -60,22 +60,22 @@ export default {
             // email: 'user/email',
             // photo: 'user/photo',
         }),
-        
+
 
     },
 	methods: {
 		...mapMutations({
-            
+
         }),
         ...mapActions({
 			logout: 'user/logout',
 			fetchUser: 'user/fetchUser'
         }),
-		
+
 
 	},
 	mounted() {
-		this.$store.dispatch('user/fetchUser', {id: 1});
+		this.$store.dispatch('user/fetchUser', {id: 3});
 		console.log('isAuth',this.$store.state);
 	}
 }
