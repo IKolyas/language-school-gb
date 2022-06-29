@@ -16,7 +16,7 @@ export default new createStore({
   },
 
   mutations: {
-    changeAuth (state) {
+    CHANGE_AUTH (state) {
       state.isAuth = laravel.isAuth
     }
   },

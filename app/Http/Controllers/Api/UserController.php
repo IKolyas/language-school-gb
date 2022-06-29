@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class UserController extends Controller
 {
@@ -68,5 +70,37 @@ class UserController extends Controller
         }
 
         return response()->json(compact('success', 'message'));
+    }
+
+    public function index(): AnonymousResourceCollection
+    {
+        return UserResource::collection(User::with('dictionaries')->get());
+    }
+
+    public function store(Request $request)
+    {
+//        $validated = $request->validated();
+//        $dictionary = Dictionary::create($validated);
+//        return response()->json(['success' => true, 'dictionary' => $dictionary->id]);
+
+    }
+
+    public function show(int $id): UserResource
+    {
+        return new UserResource(User::with('dictionaries')->findOrFail($id));
+    }
+
+    public function update(Request $request, $id)
+    {
+//        $validated = $request->validated();
+//        $dictionary = Dictionary::where('id', $id)->firstOrFail();
+//        $dictionary->update($validated);
+//        return response()->json(['success' => true, 'dictionary' => $dictionary->id]);
+    }
+
+    public function destroy(int $id)
+    {
+//        if(Dictionary::destroy($id)) return response()->json(['success' => true, 'dictionary' => $id]);
+//        return response()->json(['success' => false, 'dictionary' => $id]);
     }
 }
