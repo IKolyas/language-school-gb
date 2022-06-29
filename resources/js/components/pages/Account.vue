@@ -69,7 +69,7 @@ export default {
         };
     },
     mounted() {
-        fetch('https://dev-language-school-gb.herokuapp.com/api/user/1')
+        fetch('https://dev-language-school-gb.herokuapp.com/api/user/3')
         .then(response => response.json())
         .then(json => {this.userInfo = json.data})
     }
