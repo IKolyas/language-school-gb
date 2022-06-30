@@ -22,58 +22,6 @@ import {mapState} from "vuex";
 export default {
     name: "Account",
     components: {AccountGroups, AccountAchievements, AccountDictionaries, AccountSidebar, AccountDetails},
-    // data() {
-    //     return {
-    //         userInfo: {
-    //             name: "Уилл",
-    //             lastname: "Смит",
-    //             email: "WillSmith@WillSmith.com",
-    //             tasks: {}
-    //         },
-    //         userDictionaries: [
-    //             {
-    //                 dictionaryId: "16",
-    //                 dictionaryName: "Словарь неправильных глаголов",
-    //                 dictionaryCreator: "Вернер Гейзенберг",
-    //                 dictionaryDescription: "Словарь как бы есть, но как бы нет"
-    //             },
-    //             {
-    //                 dictionaryId: "17",
-    //                 dictionaryName: "Словарь простых слов",
-    //                 dictionaryCreator: "Марья Ивановна",
-    //                 dictionaryDescription: "Вы уже знаете эти слова"
-    //             },
-    //             {
-    //                 dictionaryId: "6",
-    //                 dictionaryName: "Словарь избранного",
-    //                 dictionaryCreator: "Уилл Смит",
-    //                 dictionaryDescription: "Smith Will Smith will smith Will Smith's statue"
-    //             },
-    //         ],
-    //         userGroups: [
-    //             {
-    //                 groupId: "144",
-    //                 groupDescription: "Младшая группа отстающих школы села Васюки",
-    //                 groutTeacher: "Марья Ивановна",
-    //                 groupTeacherDegree: "школьный учитель",
-    //                 groupSchool: "Школа Васюки",
-    //             },
-    //             {
-    //                 groupId: "602",
-    //                 groupDescription: "Группа самых умных ребят закрытого клуба второкурсников",
-    //                 groutTeacher: "Вернер Гейзенберг",
-    //                 groupTeacherDegree: "профессор",
-    //                 groupSchool: "Гарвардский университет",
-    //             },
-    //
-    //         ]
-    //     };
-    // },
-    // mounted() {
-    //     fetch('https://dev-language-school-gb.herokuapp.com/api/user/3')
-    //     .then(response => response.json())
-    //     .then(json => {this.userInfo = json.data})
-    // }
     computed: mapState({
         user: state => state.user,
         dictionaries: state => state.user.dictionaries,
