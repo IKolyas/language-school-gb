@@ -7,24 +7,14 @@
         tabindex="0">
         <h2 class="my-4">Группы</h2>
         <div class="card-group">
-            <div class="card">
+            <div class="card" v-for="group in userGroups">
                 <img src="http://placekitten.com/300/150" class="card-img-top" alt="">
                 <div class="card-body">
-                    <h5 class="card-title">Название группы</h5>
-                    <p class="card-text">Описание группы</p>
+                    <h5 class="card-title">Группа номер {{group.id}} школы "{{group.school}}"</h5>
+                    <p class="card-text">{{ group.description }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Преподаватель</small>
-                </div>
-            </div>
-            <div class="card">
-                <img src="http://placekitten.com/300/150" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Название группы</h5>
-                    <p class="card-text">Описание группы</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Преподаватель</small>
+                    <small class="text-muted">Преподаватель: {{ group.teacher }} {{group.academic_degree}}</small>
                 </div>
             </div>
         </div>
@@ -33,7 +23,8 @@
 
 <script>
 export default {
-    name: "AccountGroups"
+    name: "AccountGroups",
+    props: ['userGroups'],
 }
 </script>
 

@@ -2,6 +2,7 @@ export default {
     setCurrentUser(state, payload) {
         state.isAuth = true;
         // state.localStorage = setLocalStorage();
+        state.id = payload.id;
         state.name = payload.name;
         state.lastname = payload.lastname;
         state.email = payload.email;
@@ -11,6 +12,7 @@ export default {
     },
     resetUser() {
         state.isAuth = false;
+        state.id='';
         state.localStorage = {};
         state.name = '';
         state.lastname = '';

@@ -1,5 +1,6 @@
 <template>
-	<h2 class="h2 mb-3">Практика!</h2>
+   	<h2 class="h2 mb-3" v-if="!dictionaryId">Практика!</h2>
+    <h2 class="h2 mb-3" v-else>Время практиковаться со словарём {{dictionaryId}}!</h2>
 
 	<button
 		v-if="!isPractice || isTaskFinished"
@@ -168,7 +169,8 @@ export default {
 	components: {
 		FinishedTasks,
 		VTask,
-	}
+	},
+    props: ['dictionaryId'],
 }
 </script>
 
