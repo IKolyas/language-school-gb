@@ -9,18 +9,15 @@
 	>Начать тренировку
 	</button>
 
-	<div class="border p-3 mb-3">
+	<div
+		v-if="isPractice"
+		class="border p-3 mb-3"
+	>
 		<VTask
 			v-if="isPractice && !isTaskFinished"
-			:task="currentTask"
-			:isActiveAnswerId="isActiveAnswerId"
-			:hasRightAnswer="hasRightAnswer"
-			:hasCheckAnswer="hasCheckAnswer"
 			@onAnswerClick="onAnswerClick"
 		/>
 		<FinishedTasks
-			:tasks="tasks"
-			:count="count"
 			v-else-if="isTaskFinished"
 		/>
 	</div>
@@ -32,7 +29,7 @@
 		<button
 			v-if="!hasCheckAnswer"
 			class="btn btn-outline-info"
-			:class="{'disabled': !isActiveAnswerId}"
+			:class="{'disabled': !isActiveAnswer}"
 			@click="onCheckAnswer"
 		>
 			Проверить
@@ -48,37 +45,74 @@
 </template>
 
 <script>
-import VTask from '../partials/practice/VTask'
-import {computed, ref} from 'vue'
-import FinishedTasks from '../partials/practice/FinishedTasks'
+import VTask from '../partials/practice/VTask';
+import {computed, onMounted, provide, ref} from 'vue';
+import FinishedTasks from '../partials/practice/FinishedTasks';
+import {getDictionaryOne} from '../../services/dictionary.service';
+import {randomIncorrectAnswers} from '../../use/practice/useCollectAnswers';
 
 export default {
     name: 'Practice',
-	setup () {
-		const results = ref([])
-		const tasks = [
+	props: ['dictionaryId', 'dictionaries'],
+
+	setup (props) {
+		const isPracticeTest = ref(false)
+		let tasks = ref([
 			{
 				id: 1,
-				wordBeingStudied: 'слово',
-				rightAnswerId: 1,
-				rightAnswer: 'word',
-				answers: [{text: 'word', id: 1}, {text: 'words', id: 2}, {text: 'would', id: 3}, {text: 'write', id: 4}]
+				word: 'слово',
+				translation: 'word',
+				// answers: ['word', 'words', 'would', 'write']
 			},
 			{
 				id: 2,
-				wordBeingStudied: 'символ',
-				rightAnswerId: 2,
-				rightAnswer: 'symbol',
-				answers: [{text: 'word', id: 1}, {text: 'symbol', id: 2}, {text: 'would', id: 3}, {text: 'write', id: 4}]
+				word: 'символ',
+				translation: 'symbol',
+				// answers: ['word', 'words', 'symbol', 'write']
 			},
 			{
 				id: 3,
-				wordBeingStudied: 'число',
-				rightAnswerId: 4,
-				rightAnswer: 'number',
-				answers: [{text: 'word', id: 1}, {text: 'words', id: 2}, {text: 'would', id: 3}, {text: 'number', id: 4}]
+				word: 'число',
+				translation: 'number',
+				// answers: ['word', 'words', 'would', 'number']
 			}
-		]
+		])
+		// const wordsFromDictionaries = [
+		// 	'word',
+		// 	'base',
+		// 	'please',
+		// 	'friend',
+		// 	'table',
+		// 	'lamp',
+		// 	'hand',
+		// ]
+
+		onMounted(async () => {
+			if (props?.dictionaryId !== undefined) {
+				isPracticeTest.value = true
+			}
+
+			if (isPracticeTest.value) {
+				const { data } = await getDictionaryOne(props.dictionaryId)
+				tasks.value = data.words
+			}
+
+			const translateWords = ref([])
+
+			for (let task of tasks.value) {
+				translateWords.value.push(task.translation)
+			}
+
+			tasks.value = tasks.value.map(task => {
+				const answers = randomIncorrectAnswers(translateWords.value, task.translation, 5)
+				task.value = {...task, answers: answers.value}
+				return task.value
+			})
+
+			console.log('tasks.value', tasks.value);
+		})
+
+		const results = ref([])
 		const count = ref(0)
 
 		const currentIndex = ref(0)
@@ -86,18 +120,18 @@ export default {
 		const isFinished = ref(false)
 		const isPractice = ref(false)
 
-		const isActiveAnswerId = ref(null)
+		const isActiveAnswer = ref(null)
 		const hasCheckAnswer = ref(false)
 		const hasRightAnswer = ref(false)
 
 		const isTaskFinished = computed(() => {
-			return currentIndex.value === tasks.length
+			return currentIndex.value === tasks.value.length
 		})
 
 		const onNextTask = () => {
 			if (isTaskFinished) {
 				currentIndex.value += 1
-				currentTask.value = tasks[currentIndex.value]
+				currentTask.value = tasks.value[currentIndex.value]
 			} else {
 				isFinished.value = true
 				isPractice.value = false
@@ -110,19 +144,22 @@ export default {
 			count.value = 0
 			currentIndex.value = 0
 			isPractice.value = true
-			currentTask.value = tasks[0]
+			currentTask.value = tasks.value[0]
 			isFinished.value = !isFinished.value
 		}
 
-		const onAnswerClick = id => {
-			isActiveAnswerId.value = id
+		const onAnswerClick = word => {
+			isActiveAnswer.value = word
 		}
 
 		const onCheckAnswer = () => {
-			if (isActiveAnswerId.value === currentTask.value.rightAnswerId) {
+			const answer = isActiveAnswer.value.toLowerCase().trim()
+			const translation = currentTask.value.translation.toLowerCase().trim()
+
+			if (answer === translation) {
 				results.value.push(
 					{
-						id: isActiveAnswerId.value,
+						word: answer,
 						hasRightAnswer: true
 					}
 				)
@@ -132,7 +169,7 @@ export default {
 			} else {
 				results.value.push(
 					{
-						id: isActiveAnswerId.value,
+						word: answer,
 						hasRightAnswer: false
 					}
 				)
@@ -146,8 +183,16 @@ export default {
 		const resetValues = () => {
 			hasRightAnswer.value = false
 			hasCheckAnswer.value = false
-			isActiveAnswerId.value = null
+			isActiveAnswer.value = null
 		}
+
+		provide('task', currentTask)
+		provide('tasks', tasks)
+		provide('isActiveAnswer', isActiveAnswer)
+		provide('hasRightAnswer', hasRightAnswer)
+		provide('hasCheckAnswer', hasCheckAnswer)
+		provide('hasCheckAnswer', hasCheckAnswer)
+		provide('count', count)
 
 		return {
 			tasks,
@@ -156,7 +201,7 @@ export default {
 			currentIndex,
 			isPractice,
 			isFinished,
-			isActiveAnswerId,
+			isActiveAnswer,
 			hasCheckAnswer,
 			hasRightAnswer,
 			count,
@@ -170,7 +215,6 @@ export default {
 		FinishedTasks,
 		VTask,
 	},
-    props: ['dictionaryId'],
 }
 </script>
 

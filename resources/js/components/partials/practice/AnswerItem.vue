@@ -1,17 +1,25 @@
 <template>
 	<li
 		class="btn btn-outline-info me-3"
-		:class="[{'active': isActiveAnswerId === answer.id}]"
-		@click="$emit('onAnswerClick', answer.id)"
+		:class="[{'active': isActiveAnswer === answer}]"
+		@click="$emit('onAnswerClick', answer)"
 	>
-		{{ answer.text }}
+		{{ answer }}
 	</li>
 </template>
 
 <script>
+import {inject} from 'vue';
+
 export default {
-	props: ['answer', 'isActiveAnswerId'],
-	emits: ['onAnswerClick']
+	props: ['answer'],
+	emits: ['onAnswerClick'],
+
+	setup () {
+		return {
+			isActiveAnswer: inject('isActiveAnswer')
+		}
+	}
 }
 </script>
 

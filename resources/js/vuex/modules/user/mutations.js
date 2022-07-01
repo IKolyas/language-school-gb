@@ -10,7 +10,7 @@ export default {
         state.tasks = payload.tasks;
         state.groups = payload.groups;
     },
-    resetUser() {
+    resetUser(state) {
         state.isAuth = false;
         state.id='';
         state.localStorage = {};

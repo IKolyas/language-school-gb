@@ -5,7 +5,9 @@
         <h2 class="my-4">Словари</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col" v-for="dictionary in userDictionaries">
-                <router-link tag="a" :to="{name: 'practice', params: {dictionaryId: dictionary.id}}">
+                <router-link
+					:to="{name: 'practice', params: { dictionaryId: dictionary.id }}"
+				>
                     <div class="card h-100">
                         <img src="http://placekitten.com/300/150" class="card-img-top" alt="">
                         <div class="card-body">
@@ -27,7 +29,7 @@
 <script>
 export default {
     name: "Dictionaries",
-    props: ['user-dictionaries']
+    props: ['userDictionaries']
 }
 </script>
 
