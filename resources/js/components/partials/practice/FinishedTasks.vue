@@ -5,8 +5,15 @@
 </template>
 
 <script>
+import { inject } from 'vue';
+
 export default {
-	props: ['count', 'tasks']
+	setup() {
+		return {
+			tasks: inject('tasks'),
+			count: inject('count'),
+		}
+	}
 }
 </script>
 

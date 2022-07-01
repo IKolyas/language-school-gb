@@ -1,3 +1,5 @@
+import {getUser} from '../../../services/auth.service';
+
 export default {
     login(e) {
         e.preventDefault()
@@ -63,21 +65,12 @@ export default {
         })
     },
 
-    fetchUser({commit}, payload) {
-        console.log('fetchUser', `https://dev-language-school-gb.herokuapp.com/api/user/${payload.id}`);
-        axios.get(`https://dev-language-school-gb.herokuapp.com/api/user/${payload.id}`)
-                .then(response => {
-                    if (response.data.status = 200) {
-                        // window.location.href = "/"
-                        commit('setCurrentUser', response.data.data)
-
-                    } else {
-                        console.log(response)
-                    }
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
+    async fetchUser({commit}, payload) {
+        try {
+            const { data } = await getUser(payload.id)
+            commit('setCurrentUser', data)
+        } catch (e) {
+            console.error('fetchUser', e);
+        }
     }
-
 }

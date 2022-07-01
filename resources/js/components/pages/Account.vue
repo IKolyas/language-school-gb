@@ -17,21 +17,23 @@ import AccountDictionaries from "../partials/account/AccountDictionaries";
 import AccountDetails from "../partials/account/AccountDetails";
 import AccountAchievements from "../partials/account/AccountAchievements";
 import AccountGroups from "../partials/account/AccountGroups";
-import {mapState} from "vuex";
+import {mapGetters, mapState} from "vuex";
 
 export default {
     name: "Account",
     components: {AccountGroups, AccountAchievements, AccountDictionaries, AccountSidebar, AccountDetails},
-    computed: mapState({
-        user: state => state.user,
-        dictionaries: state => state.user.dictionaries,
-        groups: state => state.user.groups,
-    })
+    computed: {
+	    ...mapState({
+		       user: state => state.user
+			}),
+
+	    ...mapGetters('user', {
+		    dictionaries: 'dictionaries',
+		    groups: 'groups'
+	    })
+	}
 }
 </script>
 
 <style scoped>
-    .active {
-        z-index: 10;
-    }
 </style>

@@ -8,7 +8,17 @@ import Account from "./components/pages/Account";
 
 const routes = [
     {name: 'home', path: '/', component: Home},
-    {name: 'practice', path: '/practice', component: Practice, props: true},
+    {
+        name: 'practiceTest',
+        path: '/practiceTest',
+        component: Practice
+    },
+    {
+        name: 'practice',
+        path: '/practice/:dictionaryId',
+        component: Practice,
+        props: true
+    },
     {name: 'login', path: '/login', component: Login},
     {name: 'register', path: '/register', component: Register},
     {name: 'account', path: '/account', component: Account},
