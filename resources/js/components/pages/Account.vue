@@ -36,4 +36,7 @@ export default {
 </script>
 
 <style scoped>
+.active {
+    z-index: 10;
+}
 </style>

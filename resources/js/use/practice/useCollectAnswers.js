@@ -6,6 +6,13 @@ const randArray = array => {
 	return array[randNum]
 }
 
+function shuffle(array) {
+	for (let i = array.length - 1; i > 0; i--) {
+		let rand = Math.floor(Math.random() * (i + 1));
+		[array[i], array[rand]] = [array[rand], array[i]];
+	}
+}
+
 export function randomIncorrectAnswers (dictionaries, basic, count = 5) {
 	if (!isArray(dictionaries)) {
 		throw new Error('dictionaries are not on Array')
@@ -29,6 +36,8 @@ export function randomIncorrectAnswers (dictionaries, basic, count = 5) {
 			array.value.push(word)
 		}
 	}
+
+	shuffle(array.value)
 
 	return array
 }
