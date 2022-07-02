@@ -66,6 +66,7 @@ export default {
     },
 
     async fetchUser({commit}, payload) {
+        console.log('userpayload', payload);
         try {
             const { data } = await getUser(payload.id)
             commit('setCurrentUser', data)
