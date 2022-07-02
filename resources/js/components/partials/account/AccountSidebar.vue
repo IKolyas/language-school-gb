@@ -8,23 +8,23 @@
                 <div
                     class="nav-link active" id="account-details-tab" data-bs-toggle="pill"
                     data-bs-target="#account-details-pane"
-                    role="tab" aria-controls="pills-account-details" aria-selected="true">Настройки
+                    role="tab" aria-controls="account-details-pane" aria-selected="true">Настройки
                 </div>
             </li>
             <li class="nav-item" role="presentation">
                 <div class="nav-link"
                      id="dictionaries-tab" data-bs-toggle="pill" data-bs-target="#dictionaries-pane"
-                     role="tab" aria-controls="pills-dictionaries" aria-selected="false">Словари
+                     role="tab" aria-controls="dictionaries-pane" aria-selected="false">Словари
                 </div>
             </li>
             <li class="nav-item" role="presentation">
                 <div class="nav-link" id="achievements-tab" data-bs-toggle="pill" data-bs-target="#achievements-pane"
-                     role="tab" aria-controls="pills-achievements" aria-selected="false">Достижения
+                     role="tab" aria-controls="achievements-pane" aria-selected="false">Достижения
                 </div>
             </li>
             <li class="nav-item" role="presentation">
                 <div class="nav-link" id="groups-tab" data-bs-toggle="pill" data-bs-target="#groups-pane"
-                     role="tab" aria-controls="pills-groups" aria-selected="false">Группы
+                     role="tab" aria-controls="groups-pane" aria-selected="false">Группы
                 </div>
             </li>
         </ul>

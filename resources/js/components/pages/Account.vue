@@ -2,7 +2,7 @@
     <main class="d-flex flex-nowrap">
         <h1 class="visually-hidden">Личный кабинет пользователя</h1>
         <account-sidebar :user-info="user"/>
-        <div class="p-2 flex-fill position-relative">
+        <div class="p-2 flex-fill position-relative tab-content">
             <account-details :user-info="user"/>
             <account-dictionaries :user-dictionaries="dictionaries"/>
             <account-achievements/>
