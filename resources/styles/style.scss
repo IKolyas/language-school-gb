@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import 'base';
+@import 'variables';
+
+body {
+  font-family: $font-inter;
+  color: $color-primary;
+  min-height: 100vh;
+  //font-size: 1.6rem;
+
+  &.no-scroll {
+    overflow: hidden;
+    width: 100vw;
+  }
+}
+
+.router-link-active:hover,
+.router-link-active:focus,
+.router-link-active {
+  color: $color-second;
+}
+
+.router-link-exact-active {
+
+}

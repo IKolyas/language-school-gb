@@ -14,6 +14,9 @@ public/hot
 # Laravel 5 & Lumen specific with changed public path
 public_html/storage
 public_html/hot
+/public/hot
+/public/storage
+/public/js
 
 storage/*.key
 .env
@@ -21,3 +24,8 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+
+# Editor directories and files
+.idea
+.vscode
+/public/js/app.js.LICENSE.txt
