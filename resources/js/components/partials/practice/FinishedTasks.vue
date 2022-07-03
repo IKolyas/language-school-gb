@@ -1,6 +1,6 @@
 <template>
   <div>
-	  Вы ответили на {{ count }} правильно из {{ tasks.length }}
+	  Вы ответили на {{ successCount }} правильно из {{ count }}
   </div>
 </template>
 
@@ -10,8 +10,9 @@ import { inject } from 'vue';
 export default {
 	setup() {
 		return {
-			tasks: inject('tasks'),
+            finishResults: inject('finishResults'),
 			count: inject('count'),
+            successCount: inject('successCount'),
 		}
 	}
 }

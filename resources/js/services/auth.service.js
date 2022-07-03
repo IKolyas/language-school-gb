@@ -8,9 +8,12 @@ import { request } from './generic.service'
 
 const getUser = id => request({ url: `api/user/${id}`, method: 'get' })
 
+const updateUser = (id, data) => request({ url: `api/user/${id}`, method: 'put', data })
+
 export {
 	// login,
 	// register,
 	// logout,
-	getUser
+	getUser,
+	updateUser
 }

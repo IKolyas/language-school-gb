@@ -1,4 +1,4 @@
-import {getDictionaries, getDictionaryOne} from '../../../services/dictionary.service';
+import {getDictionaries} from '../../../services/dictionary.service';
 
 const state = () => ({
     dictionary: {},
@@ -37,7 +37,7 @@ const actions = {
 
 const getters = {}
 
-const userModule = {
+const dictionaryModule = {
     namespaced: true,
     state,
     actions,
@@ -45,4 +45,4 @@ const userModule = {
     mutations,
 };
 
-export default userModule;
+export default dictionaryModule;
