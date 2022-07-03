@@ -1,6 +1,7 @@
 import { createStore, createLogger } from 'vuex';
 import userModule from './modules/user';
 import taskModule from './modules/task';
+import dictionaryModule from './modules/dictionary';
 
 // const laravel = window.Laravel
 
@@ -31,6 +32,7 @@ const store = createStore({
 
   modules: {
     user: userModule,
+    dictionary: dictionaryModule,
     task: taskModule
   },
 })

@@ -12,8 +12,8 @@ const mutations = {
 }
 
 const actions = {
-  fetchDictionaries({commit}) {
-    const {data} = getDictionaries()
+  async fetchDictionaries({commit}) {
+    const data = await getDictionaries()
     console.log('data', data);
     commit('setDictionaries', data)
   }
@@ -23,7 +23,7 @@ const getters = {
 
 }
 
-const userModule = {
+const dictionaryModule = {
   namespaced: true,
   state,
   actions,
@@ -31,4 +31,4 @@ const userModule = {
   mutations,
 };
 
-export default userModule;
+export default dictionaryModule;

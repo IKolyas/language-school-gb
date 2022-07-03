@@ -1,4 +1,3 @@
-import {ref} from 'vue';
 import {isArray, isString} from '../../utils/checkType';
 
 const randArray = array => {
@@ -6,7 +5,7 @@ const randArray = array => {
 	return array[randNum]
 }
 
-function shuffle(array) {
+export function shuffle(array) {
 	for (let i = array.length - 1; i > 0; i--) {
 		let rand = Math.floor(Math.random() * (i + 1));
 		[array[i], array[rand]] = [array[rand], array[i]];
@@ -27,17 +26,17 @@ export function randomIncorrectAnswers (dictionaries, basic, count = 5) {
 		count = dictionaries.length
 	}
 
-	const array = ref([])
-	array.value.push(basic)
+	const array = []
+	array.push(basic)
 
-	while (array.value.length < count) {
+	while (array.length < count) {
 		let word = randArray(dictionaries)
-		if (!array.value.includes(word)) {
-			array.value.push(word)
+		if (!array.includes(word)) {
+			array.push(word)
 		}
 	}
 
-	shuffle(array.value)
+	shuffle(array)
 
 	return array
 }
