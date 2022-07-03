@@ -10,7 +10,7 @@
 					<router-link :to="{name: 'details'}" class="nav-link">Настройки</router-link>
 				</li>
 				<li class="nav-item" role="presentation">
-					<router-link :to="{name: 'dictionaries'}" class="nav-link">Словари</router-link>
+					<router-link :to="{name: 'dictionariesNew'}" class="nav-link">Словари</router-link>
 				</li>
 			</ul>
 			<hr>

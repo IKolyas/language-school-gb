@@ -6,9 +6,10 @@ import Login from "./components/pages/auth/Login";
 import Register from "./components/pages/auth/Register";
 import Account from "./components/pages/Account";
 import DictionaryOne from "./components/pages/Dictionaries/DictionaryOne";
+import Dictionaries from "./components/pages/Dictionaries/Dictionaries";
 import AccountNew from "./components/pages/account/Index";
 import Details from './components/pages/account/Details';
-import Dictionaries from './components/pages/account/Dictionaries';
+import DictionariesAccount from './components/pages/account/DictionariesAccount';
 
 const routes = [
     {name: 'home', path: '/', component: Home},
@@ -41,9 +42,9 @@ const routes = [
                 component: Details,
             },
             {
-                name: 'dictionaries',
-                path: 'dictionaries',
-                component: Dictionaries,
+                name: 'dictionariesNew',
+                path: 'dictionaries_new',
+                component: DictionariesAccount,
             }
         ]
     },
