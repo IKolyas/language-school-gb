@@ -5,6 +5,7 @@ import Practice from "./components/pages/Practice";
 import Login from "./components/pages/auth/Login";
 import Register from "./components/pages/auth/Register";
 import Account from "./components/pages/Account";
+import DictionaryOne from "./components/pages/Dictionaries/DictionaryOne";
 import AccountNew from "./components/pages/account/Index";
 import Details from './components/pages/account/Details';
 import Dictionaries from './components/pages/account/Dictionaries';
@@ -46,6 +47,9 @@ const routes = [
             }
         ]
     },
+    {name: 'account', path: '/account', component: Account},
+    {name: 'dictionaries', path: '/dictionaries', component: Dictionaries},
+    {name: 'dictionaryOne', path: '/dictionaryOne/:id', component: DictionaryOne, props: true},
 ];
 
 const router = createRouter({

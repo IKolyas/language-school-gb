@@ -32,8 +32,8 @@ const store = createStore({
 
   modules: {
     user: userModule,
-    dictionary: dictionaryModule,
-    task: taskModule
+    task: taskModule,
+    dictionaries: dictionaryModule,
   },
 })
 
