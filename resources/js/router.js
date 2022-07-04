@@ -10,6 +10,7 @@ import Dictionaries from "./components/pages/Dictionaries/Dictionaries";
 import AccountNew from "./components/pages/account/Index";
 import Details from './components/pages/account/Details';
 import DictionariesAccount from './components/pages/account/DictionariesAccount';
+import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
 
 const routes = [
     {name: 'home', path: '/', component: Home},
@@ -51,6 +52,7 @@ const routes = [
     {name: 'account', path: '/account', component: Account},
     {name: 'dictionaries', path: '/dictionaries', component: Dictionaries},
     {name: 'dictionaryOne', path: '/dictionaryOne/:id', component: DictionaryOne, props: true},
+    {name: 'dictionaryCreate', path: '/dictionaryCreate', component: DictionaryCreate},
 ];
 
 const router = createRouter({
