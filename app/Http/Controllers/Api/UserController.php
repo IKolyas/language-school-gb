@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\UserUpdateTasksRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -83,6 +84,41 @@ class UserController extends Controller
 //        $dictionary = Dictionary::create($validated);
 //        return response()->json(['success' => true, 'dictionary' => $dictionary->id]);
 
+    }
+
+    public function updateTasks(Request $request, $id): \Illuminate\Http\JsonResponse
+    {
+//        TODO: Реализовать валидацию данных после принятия окончательного решения по формату json
+        $user = User::findOrFail($id);
+        $dictionary_id = $request->id;
+        $learnedWords = $request->learnedWords;
+
+        if (is_null($user->tasks)) {
+            $task = [];
+            $task[$dictionary_id] = $learnedWords;
+            $user->tasks = json_encode($task, JSON_UNESCAPED_UNICODE);
+
+            if($user->save()) return response()->json(['status' => 'success', 'user' => $user->id]);
+
+            return response()->json(['status' => 'error', 'message' => 'error to save user task!']);
+        }
+
+        $tasks = json_decode($user->tasks);
+
+        $tasks->$dictionary_id = $learnedWords;
+
+        $user->tasks = json_encode($tasks, JSON_UNESCAPED_UNICODE);
+
+        if($user->save()) return response()->json(['status' => 'success', 'user' => $user->id]);
+
+        return response()->json(['status' => 'error', 'message' => 'error to save user task!']);
+    }
+
+    public function tasks($id): \Illuminate\Http\JsonResponse
+    {
+        $user = User::findOrFail($id);
+
+        return response()->json(['status' => 'success', 'tasks' => $user->tasks]);
     }
 
     public function show(int $id): UserResource
