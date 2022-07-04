@@ -9,11 +9,13 @@ import { request } from './generic.service'
 const getUser = id => request({ url: `api/user/${id}`, method: 'get' })
 
 const updateUser = (id, data) => request({ url: `api/user/${id}`, method: 'put', data })
+const updateUserTask = (id, data) => request({ url: `api/user/tasks/${id}`, method: 'put', data })
 
 export {
 	// login,
 	// register,
 	// logout,
 	getUser,
-	updateUser
+	updateUser,
+    updateUserTask
 }
