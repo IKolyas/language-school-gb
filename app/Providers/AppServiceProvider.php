@@ -25,9 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $table = config('admin.extensions.config.table', 'admin_config');
-        if (Schema::hasTable($table)) {
-            Config::load();
-        }
+//        $table = config('admin.extensions.config.table', 'admin_config');
+//        if (Schema::hasTable($table)) {
+//            Config::load();
+//        }
     }
 }
