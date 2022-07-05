@@ -3,60 +3,48 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\WordRequest;
+use App\Models\DictionaryWord;
+use App\Models\Word;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class WordController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index(): JsonResponse
     {
-        //
+        $words = Word::all();
+        return response()->json(['success' => true, 'words' => $words]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(WordRequest $request): JsonResponse
     {
-        //
+        $validated = $request->validated();
+        $word = $validated['word'];
+        $translation = $validated['translation'];
+        $dictionary_id = $validated['dictionary_id'];
+
+        $newWord = Word::firstOrCreate(
+            ['word' => $word],
+            ['translation' => $translation]
+        );
+
+        DictionaryWord::create(['word_id' => $newWord->id, 'dictionary_id' => $dictionary_id]);
+
+        return response()->json(['success' => true, 'wordId' => $newWord->id]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
