@@ -48,11 +48,10 @@
 <script>
 import { onMounted, onUnmounted, provide, ref } from 'vue';
 import {getDictionaryOne} from '../../services/dictionary.service';
-import { updateUser } from '../../services/auth.service';
+import {updateUser, updateUserTask} from '../../services/auth.service';
 import {randomIncorrectAnswers} from '../../use/practice/useCollectAnswers';
 import VTask from '../partials/practice/VTask';
 import FinishedTasks from '../partials/practice/FinishedTasks';
-import axios from 'axios';
 
 const testDictionary = {
     dictionary_name: 'тестовый словарь',
@@ -237,8 +236,7 @@ export default {
             isFinished.value = true
 
             try {
-                // this.$axios.put(`api/user/3`, postData)
-                // updateUser(idUser, postData)
+                updateUserTask(idUser, postData)
             } catch (e) {
                 console.log('error', e);
             }
