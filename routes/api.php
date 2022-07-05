@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\UserController,
-    App\Http\Controllers\Api\DictionaryController;
+    App\Http\Controllers\Api\DictionaryController,
+    App\Http\Controllers\Api\WordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,12 @@ Route::middleware('auth:sanctum')->group(function () {
 //    Route::post('/practice', []);
 });
 Route::apiResource('dictionary', DictionaryController::class);
+Route::apiResource('word', WordController::class);
+
 Route::apiResource('user', UserController::class);
+Route::put('/user/tasks/{id}', [UserController::class, 'updateTasks'])->name('user_put_task');
+Route::get('/user/tasks/{id}', [UserController::class, 'tasks'])->name('user_get_task');
+
+
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);

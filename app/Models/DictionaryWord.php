@@ -9,4 +9,11 @@ class DictionaryWord extends Pivot
 {
     use HasFactory;
 
+    protected $fillable = [
+        'word_id',
+        'dictionary_id',
+    ];
+
+    public $timestamps = false;
+
 }
