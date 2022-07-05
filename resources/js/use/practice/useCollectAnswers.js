@@ -36,7 +36,5 @@ export function randomIncorrectAnswers (dictionaries, basic, count = 5) {
 		}
 	}
 
-	shuffle(array)
-
 	return array
 }
