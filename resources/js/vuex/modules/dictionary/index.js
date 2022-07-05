@@ -1,4 +1,4 @@
-import {getDictionaries} from '../../../services/dictionary.service';
+import {getDictionaries, getDictionaryOne} from '../../../services/dictionary.service';
 
 const state = () => ({
     dictionary: {},
@@ -11,6 +11,9 @@ const mutations = {
     },
     setDictionary(state, dictionary) {
         state.dictionary = dictionary.data;
+    },
+    addWord(state, payload) {
+        state.dictionary.words.push({id: payload.id, word: payload.word, translation: payload.translation})
     }
 }
 
@@ -24,13 +27,20 @@ const actions = {
         }
     },
     async fetchDictionary({commit}, payload) {
-        console.log(payload.id)
         try {
             const data = await getDictionaryOne(payload.id);
-            console.log('data', data);
             commit('setDictionary', data);
         } catch (e) {
             console.error('setDictionary', e);
+        }
+    },
+    async addWord({commit}, payload) {
+        try {
+            // Посылается запрос на добавление слова, получается его id
+            payload.id = 33;
+            commit('addWord', payload);
+        } catch(e) {
+            console.error('addWord', e)
         }
     }
 }
