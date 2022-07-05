@@ -52,6 +52,7 @@ import { updateUser } from '../../services/auth.service';
 import {randomIncorrectAnswers} from '../../use/practice/useCollectAnswers';
 import VTask from '../partials/practice/VTask';
 import FinishedTasks from '../partials/practice/FinishedTasks';
+import axios from 'axios';
 
 const testDictionary = {
     dictionary_name: 'тестовый словарь',
@@ -133,38 +134,50 @@ export default {
                 currentDictionary.value = testDictionary
 			}
 
+            // const { data } = await getDictionaryOne(props.dictionaryId)
+
             dictionaryName.value = currentDictionary.value.dictionary_name
-            tasks = [...currentDictionary.value.words]
-
-			// const { data } = await getDictionaryOne(props.dictionaryId)
-
-			const translateWords = []
-
-			for (let task of tasks) {
-				translateWords.push(task.translation)
-			}
-
-			tasks = tasks.map(task => {
-				const answers = randomIncorrectAnswers(translateWords, task.translation, 5)
-				task = {
-					...task,
-					successCounter: 0,
-					answers: answers
+            tasks = [...currentDictionary.value.words].map(t => {
+                if (!t.successCounter) {
+                    return {
+                        ...t,
+                        successCounter: 0,
+                    }
 				}
-				return task
+				return t
 			})
-		})
 
-		onUnmounted(() => {
-            resetValues()
-            currentDictionary.value = null
-            dictionaryName.value = ''
-            tasks = []
-            unlearnedWords = []
-            learnedWords = []
-            wordsInStudies.value = []
-            count.value = 0
-		})
+			let allAnswers
+
+			// const translateWords = []
+			//
+			// for (let task of tasks) {
+			// 	translateWords.push(task.translation)
+			// }
+			//
+			// tasks = tasks.map(task => {
+			// 	const answers = randomIncorrectAnswers(translateWords, task.translation, 5)
+			// 	task = {
+			// 		...task,
+			// 		answers: answers
+			// 	}
+			// 	return task
+			// })
+
+            console.log('tasks', tasks);
+
+        })
+
+		// onUnmounted(() => {
+        //     resetValues()
+        //     currentDictionary.value = null
+        //     dictionaryName.value = ''
+        //     tasks = []
+        //     unlearnedWords = []
+        //     learnedWords = []
+        //     wordsInStudies.value = []
+        //     count.value = 0
+		// })
 
 		const onNextTask = () => {
             if (count.value === maxCount) {
@@ -174,6 +187,25 @@ export default {
             resetValues()
             currentTask.value = wordsInStudies.value.shift()
 		}
+
+        const collectQuestions = (currentTask, answers, lang='original') => {
+            if (lang === 'original') {
+                return {
+                    ...currentTask,
+                    answers
+                }
+            } else if (lang === 'translation') {
+                let tempWord = currentTask.word
+                return {
+                    ...currentTask,
+					word: currentTask.transition,
+                    transition: tempWord,
+                    answers
+                }
+			}
+        }
+
+        // collectQuestions(currentTask.value, answers)
 
 		const onStartedPractice = () => {
 			count.value = 0
@@ -205,7 +237,8 @@ export default {
             isFinished.value = true
 
             try {
-                updateUser(idUser, postData)
+                // this.$axios.put(`api/user/3`, postData)
+                // updateUser(idUser, postData)
             } catch (e) {
                 console.log('error', e);
             }
