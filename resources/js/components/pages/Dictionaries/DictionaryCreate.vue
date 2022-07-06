@@ -22,7 +22,8 @@
                 </select>
             </div>
         </div>
-        <input type="text" class="form-control" id="floatingInputGridName" placeholder="Название словаря">
+        <input type="text" class="form-control" id="floatingInputGridName" placeholder="Название словаря"
+               v-model="dictionary_name">
         <div class="mb-3">
             Описание словаря
             <input type="textarea" class="form-control" style="height: 100px">
@@ -37,18 +38,38 @@
 </template>
 
 <script>
+import {addDictionary} from "../../../services/dictionary.service";
+import {mapState} from "vuex";
+
 export default {
     name: "DictionaryCreate",
+    data() {
+        return {
+            dictionary_name: '',
+        }
+    },
+    computed: {
+        ...mapState({
+            dictionary: state => state.dictionaries.dictionary,
+            dictionaryName: state => state.dictionaries.dictionary.dictionary_name,
+            creator: state => state.dictionaries.dictionary.creator,
+            creationDate: state => state.dictionaries.dictionary.created_at,
+            words: state => state.dictionaries.dictionary.words,
+            dictionaryId: state => state.dictionaries.dictionary.id,
+            user: state => state.user,
+        }),
+    },
     methods: {
         onSubmitDictionary() {
-            console.log('Отправляем создание словаря');
+            addDictionary({dictionary_name: this.dictionary_name, creator_id: this.user.id})
+            console.log('Отправляем создание словаря ' + this.dictionary_name + ' с creator_id ' + this.user.id);
             //здесь нужно получить значение его id
-            this.$router.push({
-                name: 'dictionaryOne',
-                params: {
-                    id: 2 //сюда вставить нужный id
-                }
-            });
+            // this.$router.push({
+            //     name: 'dictionaryOne',
+            //     params: {
+            //         id: 2 //сюда вставить нужный id
+            //     }
+            // });
         }
     }
 

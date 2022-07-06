@@ -16,42 +16,16 @@
                     </div>
                 </div>
             </div>
-        <div v-if="addFormActive">
-                <form v-on:submit.prevent="onSubmitWord">
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <input type="text" class="form-control"  placeholder="Word in English">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" class="form-control" placeholder="Слово на русском">
-                        </div>
-                    </div>
-
-                    <div class="row g-2">
-                        <div class="col-6">
-                            Example sentence
-                            <input type="textarea" class="form-control" style="height: 70px">
-                        </div>
-                        <div class="col-6">
-                            Пример использования
-                            <input type="textarea" class="form-control" style="height: 70px">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" @click="addWord">Добавить слово</button>
-                </form>
-            <button type="button" class="btn btn-primary" @click="toggleAddForm">Закончить добавлять слова</button>
-            //эта кнопка активна, если словарь принадлежит пользователю, то есть он его создатель
-        </div>
+        <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
+        <button type="button" class="btn btn-primary" v-if="userHasDictionary && !addFormActive">Удалить из своих словарей</button>
+        <button type="button" class="btn btn-primary" v-else-if="!addFormActive">Добавить словарь к себе</button>
+        <!--             TODO эта кнопка активна, если словарь принадлежит пользователю, то есть он его создатель-->
+        <button type="button" class="btn btn-primary" @click="toggleAddForm" v-if="!addFormActive">Добавить слова</button>
         <ul>
             <li v-for="word in words">
                 <p>{{ word.word }} - {{ word.translation }}</p>
             </li>
         </ul>
-        <button type="button" class="btn btn-primary">Добавить словарь к себе</button>
-        //если словаря нет у пользователя
-        <button type="button" class="btn btn-primary">Удалить из своих словарей</button>
-        //если словарь уже у пользователя
-        <button type="button" class="btn btn-primary" @click="toggleAddForm" v-if="!addFormActive">Добавить слова</button>
         //эта кнопка активна, если словарь принадлежит пользователю, то есть он его создатель
     </div>
 
@@ -59,18 +33,18 @@
 </template>
 
 <script>
-import {mapState} from "vuex";
+import {mapGetters, mapState} from "vuex";
+import DictionaryAddWord from "./DictionaryAddWord";
 
 export default {
     name: "DictionaryOne",
+    components: {DictionaryAddWord},
     data() {
         return {
             addFormActive: false,
         }
     },
-    props: {
-        id: id,
-    },
+    props: ['id'],
     computed: {
         ...mapState({
             dictionary: state => state.dictionaries.dictionary,
@@ -78,8 +52,22 @@ export default {
             creator: state => state.dictionaries.dictionary.creator,
             creationDate: state => state.dictionaries.dictionary.created_at,
             words: state => state.dictionaries.dictionary.words,
-            id: state => state.dictionaries.dictionary.id,
+            dictionaryId: state => state.dictionaries.dictionary.id,
+            user: state => state.user,
         }),
+        ...mapGetters('user', {
+            dictionaries: 'dictionaries',
+        }),
+        userHasDictionary() {
+            let has = false;
+            this.user.dictionaries.some( dictionary => {
+                 if (dictionary.id === this.dictionaryId) {
+                     has = true;
+                 }
+            })
+            return has;
+        }
+
     },
     mounted() {
         const id = this.$route.params.id;
@@ -90,9 +78,6 @@ export default {
         toggleAddForm() {
             this.addFormActive = !this.addFormActive;
         },
-        addWord() {
-            this.$store.dispatch("dictionaries/addWord", {word: 'victoria', translation: 'победа'});
-        }
     }
 }
 </script>

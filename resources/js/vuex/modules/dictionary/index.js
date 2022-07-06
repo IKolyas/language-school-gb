@@ -29,6 +29,7 @@ const actions = {
     async fetchDictionary({commit}, payload) {
         try {
             const data = await getDictionaryOne(payload.id);
+            console.log('dict', data)
             commit('setDictionary', data);
         } catch (e) {
             console.error('setDictionary', e);
