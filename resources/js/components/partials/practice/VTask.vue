@@ -1,5 +1,5 @@
 <template>
-  	<p>Выберите верный вариант для {{ task.id }} задания</p>
+  	<p>Выберите верный вариант</p>
 	<p class="fs-2" :style="{color: 'green', fontWeight: 'bold'}">{{ task.word }}</p>
 
 	<ul class="d-flex align-items-center ps-0">

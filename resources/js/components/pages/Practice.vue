@@ -1,64 +1,69 @@
 <template>
-<!--   	<h2 class="h2 mb-3" v-if="!dictionaryId">Практика!</h2>-->
-    <h2 class="h2 mb-3">{{`Время практиковаться со словарём ${dictionaryName}!`}}</h2>
+	<div>
+		<AppLoader v-if="loading"/>
+		<div v-else>
+			<h2 class="h2 mb-3">{{`Время практиковаться со словарём ${dictionaryName}!`}}</h2>
 
-	<button
-		v-if="!isPractice"
-		class="btn btn-outline-info mb-3"
-		@click="onStartedPractice"
-	>Начать тренировку
-	</button>
+			<button
+				v-if="!isPractice"
+				class="btn btn-outline-info mb-3"
+				@click="onStartedPractice"
+			>Начать тренировку
+			</button>
 
-	<div v-if="isPractice || isFinished" class="border p-3 mb-3">
-		<VTask
-			v-if="isPractice"
-			@onAnswerClick="onAnswerClick"
-		/>
-		<FinishedTasks v-else-if="isFinished"/>
-	</div>
+			<div v-if="isPractice || isFinished" class="border p-3 mb-3">
+				<VTask
+					v-if="isPractice"
+					@onAnswerClick="onAnswerClick"
+				/>
+				<FinishedTasks v-else-if="isFinished"/>
+			</div>
 
-	<div
-		v-if="isPractice"
-		class="d-flex justify-content-center"
-	>
-		<button
-			v-if="!hasCheckAnswer"
-			class="btn btn-outline-info"
-			:class="{'disabled': !isActiveAnswer}"
-			@click="onCheckAnswer(currentTask)"
-		>
-			Проверить
-		</button>
-		<button
-			v-else
-			class="btn btn-outline-info"
-			@click="onNextTask"
-		>
-			Продолжить
-		</button>
-		<button
-			class="btn btn-outline-info ms-3"
-			@click="onFinishedTask"
-		>
-			Закончить тренировку
-		</button>
+			<div
+				v-if="isPractice"
+				class="d-flex justify-content-center"
+			>
+				<button
+					v-if="!hasCheckAnswer"
+					class="btn btn-outline-info"
+					:class="{'disabled': !isActiveAnswer}"
+					@click="onCheckAnswer(currentTask)"
+				>
+					Проверить
+				</button>
+				<button
+					v-else
+					class="btn btn-outline-info"
+					@click="onNextTask"
+				>
+					Продолжить
+				</button>
+				<button
+					class="btn btn-outline-info ms-3"
+					@click="onFinishedTask"
+				>
+					Закончить тренировку
+				</button>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
-import { onMounted, onUnmounted, provide, ref } from 'vue';
+import {onBeforeMount, onMounted, provide, ref} from 'vue';
 import {getDictionaryOne} from '../../services/dictionary.service';
 import {updateUser, updateUserTask} from '../../services/auth.service';
-import {randomIncorrectAnswers} from '../../use/practice/useCollectAnswers';
+import {collectQuestions} from '../../use/practice/useCollectAnswers';
 import VTask from '../partials/practice/VTask';
 import FinishedTasks from '../partials/practice/FinishedTasks';
+import {useRoute} from 'vue-router';
 
 const testDictionary = {
     dictionary_name: 'тестовый словарь',
     author: 'author_name',
     dictionary_description: 'desc',
     created_at: '03-07-2022',
-    words:[
+    words: [
         {
             id: 1,
             word: 'слово',
@@ -76,203 +81,207 @@ const testDictionary = {
             word: 'число',
             translation: 'number',
             // answers: ['word', 'words', 'would', 'number']
-        }
-    ]
-}
+        },
+    ],
+};
 
 export default {
     name: 'Practice',
-	props: ['dictionaryId'],
 
-	setup (props) {
-		const currentDictionary = ref({})
-        const dictionaryName = ref('')
-        const isPracticeTest = ref(false)
-		let tasks = []
+    setup() {
+        let loading = ref(true);
+        const route = useRoute();
+        const dictionaryId = ref(undefined);
 
-		let unlearnedWords = []
-		let learnedWords = []
-		let wordsInStudies = ref([])
-		const repeatsCount = ref(5)
-		const numberSuccessAnswer = 3
+        onBeforeMount(async () => {
+            dictionaryId.value = +route.params.dictionaryId;
+        });
 
-        const count = ref(0)
-        const successCount = ref(0)
-        const maxCount = 20
-		const finishResults = ref(null)
+        const currentDictionary = ref({});
+        const dictionaryName = ref('');
+        const isPracticeTest = ref(false);
+        let tasks = [];
 
-        const isFinished = ref(false)
-        const isPractice = ref(false)
+        let unlearnedWords = [];
+        let learnedWords = [];
+        let wordsInStudies = ref([]);
+        const repeatsCount = ref(5);
+        const numberSuccessAnswer = 3;
 
-        const currentTask = ref(null)
-        const isActiveAnswer = ref(null)
-        const hasCheckAnswer = ref(false)
-        const hasRightAnswer = ref(false)
+        const count = ref(0);
+        const successCount = ref(0);
+        const maxCount = 10;
+        const finishResults = ref(null);
+
+        const isFinished = ref(false);
+        const isPractice = ref(false);
+
+        const currentTask = ref(null);
+        const isActiveAnswer = ref(null);
+        const hasCheckAnswer = ref(false);
+        const hasRightAnswer = ref(false);
 
         const fillStudiedWord = array => {
-            unlearnedWords = [...array].filter(item =>  item.successCounter < numberSuccessAnswer)
+            unlearnedWords = [...array].filter(item => item.successCounter < numberSuccessAnswer);
 
             if (repeatsCount.value > unlearnedWords.length) {
-                repeatsCount.value = unlearnedWords.length
+                repeatsCount.value = unlearnedWords.length;
             }
 
-            for(let i = 0; i < repeatsCount.value; i++) {
-                wordsInStudies.value.push(unlearnedWords[i])
+            for (let i = 0; i < repeatsCount.value; i++) {
+                wordsInStudies.value.push(unlearnedWords[i]);
             }
-        }
+        };
 
         onMounted(async () => {
-			if (props?.dictionaryId !== undefined) {
-				isPracticeTest.value = true
-			}
-
-			if (isPracticeTest.value) {
-				const { data } = await getDictionaryOne(props.dictionaryId)
-                currentDictionary.value = data
-			} else {
-                currentDictionary.value = testDictionary
-			}
-
-            dictionaryName.value = currentDictionary.value.dictionary_name
-            tasks = [...currentDictionary.value.words]
-
-			// const { data } = await getDictionaryOne(props.dictionaryId)
-
-			const translateWords = []
-
-			for (let task of tasks) {
-				translateWords.push(task.translation)
-			}
-
-			tasks = tasks.map(task => {
-				const answers = randomIncorrectAnswers(translateWords, task.translation, 5)
-				task = {
-					...task,
-					successCounter: 0,
-					answers: answers
-				}
-				return task
-			})
-		})
-
-		onUnmounted(() => {
-            resetValues()
-            currentDictionary.value = null
-            dictionaryName.value = ''
-            tasks = []
-            unlearnedWords = []
-            learnedWords = []
-            wordsInStudies.value = []
-            count.value = 0
-		})
-
-		const onNextTask = () => {
-            if (count.value === maxCount) {
-                onFinishedTask()
-			}
-
-            resetValues()
-            currentTask.value = wordsInStudies.value.shift()
-		}
-
-		const onStartedPractice = () => {
-			count.value = 0
-			isPractice.value = true
-            wordsInStudies.value.length = 0
-            fillStudiedWord(tasks)
-            onNextTask()
-		}
-
-		const onFinishedTask = () => {
-            resetValues()
-
-            const results = {
-                learnedWords,
-                unlearnedWords
+            if (!dictionaryId.value) {
+                isPracticeTest.value = true;
             }
 
-            const postData = {
-                ...results,
-                ...currentDictionary.value
+            if (!isPracticeTest.value) {
+                try {
+                    const {data} = await getDictionaryOne(dictionaryId.value);
+                    currentDictionary.value = data;
+                }
+                catch (e) {
+                    console.error(e);
+                } finally {
+                    loading.value = false;
+                }
+
+            } else {
+                currentDictionary.value = testDictionary;
+                loading.value = false;
             }
 
-            console.log('postData', postData);
+            // const { data } = await getDictionaryOne(props.dictionaryId.value)
 
-            const idUser = 3
+            dictionaryName.value = currentDictionary.value.dictionary_name;
+            tasks = [...currentDictionary.value.words].map(task => {
+                if (!task.successCounter) {
+                    return {
+                        ...task,
+                        successCounter: 0,
+                    };
+                }
+                return task;
+            });
+        });
 
-            finishResults.value = results
-            isPractice.value = false
-            isFinished.value = true
-
-            try {
-                updateUserTask(idUser, postData)
-            } catch (e) {
-                console.log('error', e);
+        const onNextTask = () => {
+            if (count.value === maxCount || wordsInStudies.value.length === 0) {
+                return onFinishedTask();
             }
-        }
 
-		const onAnswerClick = word => isActiveAnswer.value = word
+            resetValues();
+            currentTask.value = wordsInStudies.value.shift();
+            currentTask.value = collectQuestions(tasks, currentTask.value);
+            return currentTask.value;
+        };
 
-		const onCheckAnswer = (task) => {
-			const answer = isActiveAnswer.value.toLowerCase().trim()
-			const translation = currentTask.value.translation.toLowerCase().trim()
+        const onStartedPractice = () => {
+            count.value = 0;
+            isPractice.value = true;
+            wordsInStudies.value.length = 0;
+            fillStudiedWord(tasks);
+            onNextTask();
+        };
 
-			if (answer === translation) {
-				task.successCounter++
-                successCount.value++
-				hasRightAnswer.value = true
-			} else {
-				task.successCounter = 0
-				hasRightAnswer.value = false
-			}
+        const onFinishedTask = () => {
+            const words = {
+                ...learnedWords,
+                ...unlearnedWords,
+            };
 
-			if (task.successCounter < numberSuccessAnswer) {
-                wordsInStudies.value.push(task)
-			} else {
-                learnedWords.push(task)
-                unlearnedWords = unlearnedWords.filter(t => t.id !== task.id )
-			}
-			hasCheckAnswer.value = true
-            count.value++
-		}
+            finishResults.value = words;
+            isPractice.value = false;
+            isFinished.value = true;
 
-		const resetValues = () => {
-			hasRightAnswer.value = false
-			hasCheckAnswer.value = false
-			isActiveAnswer.value = null
-            currentTask.value = null
-		}
+            if (!isPracticeTest.value) {
+                const idUser = 3;
 
-		provide('task', currentTask)
-		provide('isActiveAnswer', isActiveAnswer)
-		provide('hasRightAnswer', hasRightAnswer)
-		provide('hasCheckAnswer', hasCheckAnswer)
-		provide('count', count)
-		provide('successCount', successCount)
-		provide('finishResults', finishResults)
+                console.log('id', dictionaryId.value);
 
-		return {
-			currentTask,
-			// isTaskFinished,
-			isPractice,
-			isFinished,
-			isActiveAnswer,
-			hasCheckAnswer,
-			hasRightAnswer,
-			count,
-			dictionaryName,
-			onNextTask,
-			onStartedPractice,
-			onFinishedTask,
-			onAnswerClick,
-			onCheckAnswer,
-		}
-	},
-	components: {
-		FinishedTasks,
-		VTask,
-	},
-}
+                const postData = {
+                    [dictionaryId.value]: {
+                        ...currentDictionary.value,
+                        words,
+                    },
+                };
+                console.log('postData', postData);
+
+                try {
+                    updateUserTask(idUser, postData)
+                }
+                catch (e) {
+                    console.log('error', e);
+                }
+            }
+
+        };
+
+        const onAnswerClick = word => isActiveAnswer.value = word;
+
+        const onCheckAnswer = (task) => {
+            const answer = isActiveAnswer.value.toLowerCase().trim();
+            const translation = currentTask.value.translation.toLowerCase().trim();
+
+            if (answer === translation) {
+                task.successCounter++;
+                successCount.value++;
+                hasRightAnswer.value = true;
+            } else {
+                task.successCounter = 0;
+                hasRightAnswer.value = false;
+            }
+
+            if (task.successCounter < numberSuccessAnswer) {
+                wordsInStudies.value.push(task);
+            } else {
+                learnedWords.push(task);
+                unlearnedWords = unlearnedWords.filter(t => t.id !== task.id);
+            }
+            hasCheckAnswer.value = true;
+            count.value++;
+        };
+
+        const resetValues = () => {
+            hasRightAnswer.value = false;
+            hasCheckAnswer.value = false;
+            isActiveAnswer.value = null;
+            currentTask.value = null;
+        };
+
+        provide('task', currentTask);
+        provide('isActiveAnswer', isActiveAnswer);
+        provide('hasRightAnswer', hasRightAnswer);
+        provide('hasCheckAnswer', hasCheckAnswer);
+        provide('count', count);
+        provide('successCount', successCount);
+        provide('finishResults', finishResults);
+
+        return {
+            loading,
+            currentTask,
+            isPractice,
+            isFinished,
+            isActiveAnswer,
+            hasCheckAnswer,
+            hasRightAnswer,
+            count,
+            dictionaryName,
+            onNextTask,
+            onStartedPractice,
+            onFinishedTask,
+            onAnswerClick,
+            onCheckAnswer,
+        };
+    },
+    components: {
+        FinishedTasks,
+        VTask,
+    },
+};
 </script>
 
 <style lang="scss">
