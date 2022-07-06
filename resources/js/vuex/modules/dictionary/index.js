@@ -38,7 +38,6 @@ const actions = {
     async addWord({commit}, payload) {
         try {
             // Посылается запрос на добавление слова, получается его id
-            payload.id = 33;
             commit('addWord', payload);
         } catch(e) {
             console.error('addWord', e)

@@ -19,12 +19,14 @@
                 <input type="textarea" class="form-control" style="height: 70px">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" @click="addWord">Добавить слово</button>
+        <button type="submit" class="btn btn-primary" @click="onSubmitWord">Добавить слово</button>
     </form>
     <button type="button" class="btn btn-primary" @click="$emit('toggleAddForm')">Закончить добавлять слова</button>
 </template>
 
 <script>
+import {addWord} from "../../../services/dictionary.service";
+
 export default {
     name: "DictionaryAddWord",
     data() {
@@ -34,8 +36,10 @@ export default {
         }
     },
     methods: {
-        addWord() {
-            this.$store.dispatch("dictionaries/addWord", {word: this.word, translation: this.translation});
+        onSubmitWord() {
+            addWord({word: this.word, translation: this.translation})
+            //TODO Метод не работает, должен возвращать id, который передается в dispatch
+            this.$store.dispatch("dictionaries/addWord", {word: this.word, translation: this.translation, id: 77});
             this.word = '';
             this.translation = '';
         }

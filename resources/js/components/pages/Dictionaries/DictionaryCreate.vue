@@ -34,7 +34,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Продолжить</button>
     </form>
-    <h2>Когда закончил наполнять форму и нажал сохранить должно редиректить на страничку просмотра одного словаря</h2>
+    <h2>Когда закончил наполнять форму и нажал сохранить будет редиректить на страничку просмотра одного словаря</h2>
 </template>
 
 <script>
@@ -62,6 +62,7 @@ export default {
     methods: {
         onSubmitDictionary() {
             addDictionary({dictionary_name: this.dictionary_name, creator_id: this.user.id})
+            // TODO Метод не срабатывает, ошибка 419
             console.log('Отправляем создание словаря ' + this.dictionary_name + ' с creator_id ' + this.user.id);
             //здесь нужно получить значение его id
             // this.$router.push({
