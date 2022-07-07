@@ -11,7 +11,11 @@
 			>Начать тренировку
 			</button>
 
-			<div v-if="isPractice || isFinished" class="border p-3 mb-3">
+			<div v-if="isPractice || isFinished" class="border p-3 mb-3 pos-r">
+				<div class="score">
+					<p>{{currentTask.successCounter}} / 5</p>
+				</div>
+
 				<VTask
 					v-if="isPractice"
 					@onAnswerClick="onAnswerClick"
@@ -288,5 +292,13 @@ export default {
 .btn-outline-info.disabled, .btn-outline-info:disabled {
   color: gray;
   border-color: gray;
+}
+
+.pos-r {
+  position: relative;
+}
+.score {
+  position: absolute;
+  right: 20px;
 }
 </style>
