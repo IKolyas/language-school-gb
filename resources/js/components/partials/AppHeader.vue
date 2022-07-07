@@ -28,7 +28,7 @@
 							<li class="dropdown-item"><strong>Статус</strong></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="#">Новый проект</a></li>
-							<li><router-link class="dropdown-item" :to="{name: 'accountNew'}">Профиль</router-link></li>
+							<li><router-link class="dropdown-item" :to="{name: 'account'}">Профиль</router-link></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a @click.prevent='logout' class="dropdown-item" href="#">Выйти</a></li>
 						</ul>

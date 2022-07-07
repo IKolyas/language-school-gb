@@ -4,11 +4,12 @@ import Home from './components/pages/Home';
 import Practice from "./components/pages/Practice";
 import Login from "./components/pages/auth/Login";
 import Register from "./components/pages/auth/Register";
-import Account from "./components/pages/Account";
 import DictionaryOne from "./components/pages/Dictionaries/DictionaryOne";
 import Dictionaries from "./components/pages/Dictionaries/Dictionaries";
-import AccountNew from "./components/pages/account/Index";
+import Account from "./components/pages/account/Index";
 import Details from './components/pages/account/Details';
+import Groups from './components/pages/account/Groups';
+import Achievements from './components/pages/account/Achievements';
 import DictionariesAccount from './components/pages/account/DictionariesAccount';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
 
@@ -31,11 +32,6 @@ const routes = [
         name: 'account',
         path: '/account',
         component: Account,
-    },
-    {
-        name: 'accountNew',
-        path: '/accountNew',
-        component: AccountNew,
         children: [
             {
                 name: 'details',
@@ -46,10 +42,19 @@ const routes = [
                 name: 'dictionariesNew',
                 path: 'dictionaries_new',
                 component: DictionariesAccount,
+            },
+            {
+                name: 'groups',
+                path: 'groups',
+                component: Groups,
+            },
+            {
+                name: 'achievements',
+                path: 'achievements',
+                component: Achievements,
             }
         ]
     },
-    {name: 'account', path: '/account', component: Account},
     {name: 'dictionaries', path: '/dictionaries', component: Dictionaries},
     {name: 'dictionaryOne', path: '/dictionaryOne/:id', component: DictionaryOne, props: true},
     {name: 'dictionaryCreate', path: '/dictionaryCreate', component: DictionaryCreate},

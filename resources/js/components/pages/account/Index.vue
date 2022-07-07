@@ -12,6 +12,12 @@
 				<li class="nav-item" role="presentation">
 					<router-link :to="{name: 'dictionariesNew'}" class="nav-link">Словари</router-link>
 				</li>
+                <li class="nav-item" role="presentation">
+                    <router-link :to="{name: 'groups'}" class="nav-link">Группы</router-link>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <router-link :to="{name: 'achievements'}" class="nav-link">Достижения</router-link>
+                </li>
 			</ul>
 			<hr>
 
