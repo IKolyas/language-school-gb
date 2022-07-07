@@ -37,11 +37,13 @@ export default {
     },
     methods: {
         onSubmitWord() {
-            addWord({word: this.word, translation: this.translation})
+            console.log({word: this.word, translation: this.translation})
+            const word = addWord({word: this.word, translation: this.translation})
+            console.log(word + "Here is your id")
             //TODO Метод не работает, должен возвращать id, который передается в dispatch
-            this.$store.dispatch("dictionaries/addWord", {word: this.word, translation: this.translation, id: 77});
-            this.word = '';
-            this.translation = '';
+            // this.$store.dispatch("dictionaries/addWord", {word: this.word, translation: this.translation, id: 77});
+            // this.word = '';
+            // this.translation = '';
         }
     },
     emits: ['toggleAddForm'],
