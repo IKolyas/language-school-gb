@@ -7,6 +7,7 @@ use App\Http\Requests\Api\UserUpdateTasksRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 class UserController extends Controller
 {
 //  TODO: реализовать валидацию
-    public function register(Request $request): \Illuminate\Http\JsonResponse
+    public function register(Request $request): JsonResponse
     {
 
         $user = new User();
@@ -37,7 +38,7 @@ class UserController extends Controller
     }
 
 
-    public function login(UserLoginRequest $request): \Illuminate\Http\JsonResponse
+    public function login(UserLoginRequest $request): JsonResponse
     {
 
         $validated = $request->validated();
@@ -59,7 +60,7 @@ class UserController extends Controller
     }
 
 
-    public function logout(): \Illuminate\Http\JsonResponse
+    public function logout(): JsonResponse
     {
         try {
             Session::flush();
@@ -86,11 +87,10 @@ class UserController extends Controller
 
     }
 
-    public function updateTasks(Request $request, $id): \Illuminate\Http\JsonResponse
+    public function updateTask(Request $request, $user_id, $dictionary_id): JsonResponse
     {
 //        TODO: Реализовать валидацию данных после принятия окончательного решения по формату json
-        $user = User::findOrFail($id);
-        $dictionary_id = $request->id;
+        $user = User::findOrFail($user_id);
         $learnedWords = $request->learnedWords;
 
         if (is_null($user->tasks)) {
@@ -114,11 +114,18 @@ class UserController extends Controller
         return response()->json(['status' => 'error', 'message' => 'error to save user task!']);
     }
 
-    public function tasks($id): \Illuminate\Http\JsonResponse
+    public function task($user_id, $dictionary_id = false): JsonResponse
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user_id);
 
-        return response()->json(['status' => 'success', 'tasks' => $user->tasks]);
+        if(!$dictionary_id) return response()->json(['status' => 'success', 'task' => $user->tasks]);
+
+        $tasks = json_decode($user->tasks);
+        $task = $tasks->$dictionary_id;
+
+        if($task) return response()->json(['status' => 'success', 'task' => $task]);
+
+        return response()->json(['status' => 'error', 'message' => "Not find task: $dictionary_id"]);
     }
 
     public function show(int $id): UserResource
