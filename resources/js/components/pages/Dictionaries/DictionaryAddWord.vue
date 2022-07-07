@@ -12,14 +12,14 @@
         <div class="row g-2">
             <div class="col-6">
                 Example sentence
-                <input type="textarea" class="form-control" style="height: 70px">
+                <textarea class="form-control" rows="3"></textarea>
             </div>
             <div class="col-6">
                 Пример использования
-                <input type="textarea" class="form-control" style="height: 70px">
+                <textarea class="form-control" rows="3"></textarea>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" @click="onSubmitWord">Добавить слово</button>
+        <button type="submit" class="btn btn-primary">Добавить слово</button>
     </form>
     <button type="button" class="btn btn-primary" @click="$emit('toggleAddForm')">Закончить добавлять слова</button>
 </template>
@@ -37,13 +37,10 @@ export default {
     },
     methods: {
         onSubmitWord() {
-            console.log({word: this.word, translation: this.translation})
-            const word = addWord({word: this.word, translation: this.translation})
-            console.log(word + "Here is your id")
-            //TODO Метод не работает, должен возвращать id, который передается в dispatch
-            // this.$store.dispatch("dictionaries/addWord", {word: this.word, translation: this.translation, id: 77});
-            // this.word = '';
-            // this.translation = '';
+            addWord({word: this.word, translation: this.translation, dictionary_id: this.$route.params.id})
+            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+            this.word = '';
+            this.translation = '';
         }
     },
     emits: ['toggleAddForm'],

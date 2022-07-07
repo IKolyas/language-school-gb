@@ -12,9 +12,9 @@ const mutations = {
     setDictionary(state, dictionary) {
         state.dictionary = dictionary.data;
     },
-    addWord(state, payload) {
-        state.dictionary.words.push({id: payload.id, word: payload.word, translation: payload.translation})
-    }
+    // addWord(state, payload) {
+    //     state.dictionary.words.push({id: payload.id, word: payload.word, translation: payload.translation})
+    // }
 }
 
 const actions = {
@@ -29,20 +29,18 @@ const actions = {
     async fetchDictionary({commit}, payload) {
         try {
             const data = await getDictionaryOne(payload.id);
-            console.log('dict', data)
             commit('setDictionary', data);
         } catch (e) {
             console.error('setDictionary', e);
         }
     },
-    async addWord({commit}, payload) {
-        try {
-            // Посылается запрос на добавление слова, получается его id
-            commit('addWord', payload);
-        } catch(e) {
-            console.error('addWord', e)
-        }
-    }
+    // async addWord({commit}, payload) {
+    //     try {
+    //         commit('addWord', payload);
+    //     } catch(e) {
+    //         console.error('addWord', e)
+    //     }
+    // }
 }
 
 const getters = {}

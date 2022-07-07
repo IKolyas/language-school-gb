@@ -21,12 +21,13 @@
         </button>
         <button type="button" class="btn btn-primary" v-else-if="!addFormActive">Добавить словарь к себе</button>
         <!--             TODO эта кнопка активна, если словарь принадлежит пользователю, то есть он его создатель-->
-        <button type="button" class="btn btn-primary" @click="toggleAddForm" v-if="!addFormActive">Редактировать слова
+        <button type="button" class="btn btn-primary" @click="toggleAddForm" v-if="!addFormActive">Добавить слова
         </button>
         <ul>
             <li v-for="word in words">
                 <span>{{ word.word }} - {{ word.translation }}</span>
-                <button class="btn btn-primary">X</button>
+<!--                TODO удаление слов-->
+<!--                <button class="btn btn-primary">X</button>-->
             </li>
         </ul>
     </div>

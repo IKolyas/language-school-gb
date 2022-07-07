@@ -26,7 +26,7 @@
                v-model="dictionary_name">
         <div class="mb-3">
             Описание словаря
-            <input type="textarea" class="form-control" style="height: 100px">
+            <textarea class="form-control" rows="3"></textarea>
         </div>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="notifyCheckbox" checked>
@@ -61,7 +61,6 @@ export default {
     methods: {
         onSubmitDictionary() {
             addDictionary({dictionary_name: this.dictionary_name, creator_id: this.user.id}).then((data) => {
-                // console.log('created dictionary id = ' + data.dictionary + 'user_id = ' + this.user.id);
                 this.$router.push({
                     name: 'dictionaryOne',
                     params: {
