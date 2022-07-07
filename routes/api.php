@@ -25,8 +25,8 @@ Route::apiResource('dictionary', DictionaryController::class);
 Route::apiResource('word', WordController::class);
 
 Route::apiResource('user', UserController::class);
-Route::put('/user/tasks/{id}', [UserController::class, 'updateTasks'])->name('user_put_task');
-Route::get('/user/tasks/{id}', [UserController::class, 'tasks'])->name('user_get_task');
+Route::put('/user/{user_id}/task/{dictionary_id}', [UserController::class, 'updateTask'])->name('user_put_task');
+Route::get('/user/{user_id}/task/{dictionary_id?}', [UserController::class, 'task'])->name('user_get_task');
 
 
 Route::post('login', [UserController::class, 'login']);
