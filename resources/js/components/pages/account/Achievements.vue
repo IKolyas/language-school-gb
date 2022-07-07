@@ -1,7 +1,4 @@
 <template>
-    <div class="tab-pane fade position-absolute top-0 start-30"
-         id="achievements-pane" role="tabpanel"
-         aria-labelledby="pills-achievements-tab" tabindex="0">
         <h2 class="my-4">Достижения</h2>
         <ul class="nav nav-pills d-flex flex-wrap justify-content-between achivement-list">
             <li class="nav-item">
@@ -32,7 +29,6 @@
                 </div>
             </li>
         </ul>
-    </div>
 </template>
 
 <script>
