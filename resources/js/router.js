@@ -7,10 +7,10 @@ import Register from "./components/pages/auth/Register";
 import DictionaryOne from "./components/pages/Dictionaries/DictionaryOne";
 import Dictionaries from "./components/pages/Dictionaries/Dictionaries";
 import Account from "./components/pages/account/Index";
-import Details from './components/pages/account/Details';
-import Groups from './components/pages/account/Groups';
-import Achievements from './components/pages/account/Achievements';
-import DictionariesAccount from './components/pages/account/DictionariesAccount';
+import AccountDetails from './components/pages/account/Details';
+import AccountGroups from './components/pages/account/Groups';
+import AccountAchievements from './components/pages/account/Achievements';
+import AccountDictionaries from './components/pages/account/Dictionaries';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
 
 const routes = [
@@ -36,22 +36,22 @@ const routes = [
             {
                 name: 'details',
                 path: 'details',
-                component: Details,
+                component: AccountDetails,
             },
             {
                 name: 'dictionariesNew',
                 path: 'dictionaries_new',
-                component: DictionariesAccount,
+                component: AccountDictionaries,
             },
             {
                 name: 'groups',
                 path: 'groups',
-                component: Groups,
+                component: AccountGroups,
             },
             {
                 name: 'achievements',
                 path: 'achievements',
-                component: Achievements,
+                component: AccountAchievements,
             }
         ]
     },
