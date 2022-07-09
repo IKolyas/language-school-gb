@@ -31,6 +31,7 @@ const routes = [
     {
         name: 'account',
         path: '/account',
+        redirect: {name: 'dictionariesNew'},
         component: Account,
         children: [
             {

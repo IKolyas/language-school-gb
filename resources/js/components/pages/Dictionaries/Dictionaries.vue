@@ -1,5 +1,9 @@
 <template>
-<h2>Dictionaries</h2>
+<h2>На этой странице представлены вообще все словари, которые есть. Выбирай нужный, добавляй к себе и тренируйся!</h2>
+    <div class="input-group">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-primary">search</button>
+    </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" v-for="dictionary in dictionaries">
             <router-link

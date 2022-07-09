@@ -8,5 +8,7 @@ const addDictionary = data => request({url: 'api/dictionary', method: 'post', da
 
 const addWord = data => request({url: 'api/word', method: 'post', data: data});
 
+const removeWord = (id, data) => request({url: `api/dictionary/${id}`, method: 'delete'})
+
 
 export { getDictionaries, getDictionaryOne, addDictionary, addWord}

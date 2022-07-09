@@ -1,10 +1,13 @@
 <template>
+    {{ user }}
+    -----
+    {{ dictionary }}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-3 card">
                 <img src="http://placekitten.com/300/150" class="card-img-top" alt="">
                 <div class="card-body">
-                    <h5 class="card-title">{{dictionaryName}}</h5>
+                    <h5 class="card-title">{{ dictionaryName }}</h5>
                     <p class="card-text">Словарь создал {{ creator }}</p>
                     <p class="card-text">Языки: русский-английский</p>
                 </div>
@@ -20,16 +23,31 @@
             словарей
         </button>
         <button type="button" class="btn btn-primary" v-else-if="!addFormActive">Добавить словарь к себе</button>
-        <!--             TODO эта кнопка активна, если словарь принадлежит пользователю, то есть он его создатель-->
-        <button type="button" class="btn btn-primary" @click="toggleAddForm" v-if="!addFormActive">Добавить слова
+        <button type="button" class="btn btn-primary" @click="toggleAddForm" v-if="!addFormActive && isThisUserCreator">
+            Добавить слова
         </button>
-        <ul>
-            <li v-for="word in words">
-                <span>{{ word.word }} - {{ word.translation }}</span>
-<!--                TODO удаление слов-->
-<!--                <button class="btn btn-primary">X</button>-->
-            </li>
-        </ul>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Слово на русском</th>
+                <th scope="col">Word in English</th>
+                <th scope="col">Удалить?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(word, index) in words">
+                <th scope="row">{{ index }}</th>
+                <td>{{ word.word }}</td>
+                <td>{{ word.translation }}</td>
+                <!--                TODO удаление слов-->
+                <td>
+                    <button class="btn btn-primary" @click="removeWord(word.id)">X</button>
+                </td>
+            </tr>
+            </tbody>
+            >
+        </table>
     </div>
 
 
@@ -58,6 +76,9 @@ export default {
             dictionaryId: state => state.dictionaries.dictionary.id,
             user: state => state.user,
         }),
+        isThisUserCreator() {
+            return this.dictionary.creator_id === this.user.id;
+        },
         ...mapGetters('user', {
             dictionaries: 'dictionaries',
         }),
@@ -78,6 +99,9 @@ export default {
         toggleAddForm() {
             this.addFormActive = !this.addFormActive;
         },
+        removeWord(wordId) {
+            console.log('словарь ' + this.dictionaryId + ' слово ' + wordId);
+        }
     }
 }
 </script>
