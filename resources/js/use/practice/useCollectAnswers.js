@@ -5,12 +5,16 @@ const randArray = array => {
 	return array[randNum]
 }
 
-function getAllAnswers(dictionaries, lang='translation') {
+function getAllAnswers(dictionaries, type='translation') {
 	if (!isArray(dictionaries)) {
 		throw new Error('dictionaries are not on Array')
 	}
 
-	return dictionaries.map(item => item[lang])
+	if (type === 'original') {
+		type = 'word'
+	}
+
+	return dictionaries.map(item => item[type])
 }
 
 function shuffle(array) {
@@ -60,15 +64,12 @@ function typeAnswers(currentTask) {
 
 	if (lang === 'translation') {
 		let tempWord = currentTask.word
-		const obj = {
+		return {
 			...currentTask,
 			word: currentTask.translation,
 			translation: tempWord,
 			type: 'translation'
 		}
-
-		console.log('obj', obj);
-		return obj
 	}
 
 	return currentTask
@@ -79,9 +80,15 @@ export function collectQuestions (tasks, currentTask) {
 		throw new Error('dictionaries are not on Array')
 	}
 
-	// currentTask = typeAnswers(currentTask)
+	let allAnswers
+	currentTask = typeAnswers(currentTask)
 
-	let allAnswers = getAllAnswers(tasks)
+	if (currentTask.type === 'translation') {
+		allAnswers = getAllAnswers(tasks, 'original')
+	} else {
+		allAnswers = getAllAnswers(tasks)
+	}
+
 	const answers = setAnswers(allAnswers, currentTask.translation, 5)
 
 	return {
