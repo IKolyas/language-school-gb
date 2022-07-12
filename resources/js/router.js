@@ -7,10 +7,8 @@ import Register from "./components/pages/auth/Register";
 import DictionaryOne from "./components/pages/Dictionaries/DictionaryOne";
 import Dictionaries from "./components/pages/Dictionaries/Dictionaries";
 import Account from "./components/pages/account/Index";
-import AccountDetails from './components/pages/account/Details';
 import AccountGroups from './components/pages/account/Groups';
 import AccountAchievements from './components/pages/account/Achievements';
-import AccountDictionaries from './components/pages/account/Dictionaries';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
 
 const routes = [
@@ -31,18 +29,18 @@ const routes = [
     {
         name: 'account',
         path: '/account',
-        redirect: {name: 'dictionariesNew'},
+        redirect: { name: 'dictionariesNew' },
         component: Account,
         children: [
             {
                 name: 'details',
                 path: 'details',
-                component: AccountDetails,
+                component: () => import('./components/pages/account/Details'),
             },
             {
                 name: 'dictionariesNew',
                 path: 'dictionaries_new',
-                component: AccountDictionaries,
+                component: () => import('./components/pages/account/Dictionaries'),
             },
             {
                 name: 'groups',
