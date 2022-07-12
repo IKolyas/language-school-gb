@@ -90,8 +90,9 @@ class UserController extends Controller
     public function updateTask(Request $request, int $user_id, int $dictionary_id): JsonResponse
     {
 //        TODO: Реализовать валидацию данных после принятия окончательного решения по формату json
+
         $user = User::findOrFail($user_id);
-        $words = $request->words;
+        $words = $request[1]['words'];
 
         if (is_null($user->tasks)) {
             $task = [];
