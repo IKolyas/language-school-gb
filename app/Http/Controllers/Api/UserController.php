@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\UserUpdateTasksRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Resources\UserResource;
+use App\Models\DictionaryUser;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -87,15 +87,15 @@ class UserController extends Controller
 
     }
 
-    public function updateTask(Request $request, $user_id, $dictionary_id): JsonResponse
+    public function updateTask(Request $request, int $user_id, int $dictionary_id): JsonResponse
     {
 //        TODO: Реализовать валидацию данных после принятия окончательного решения по формату json
         $user = User::findOrFail($user_id);
-        $learnedWords = $request->learnedWords;
+        $words = $request->words;
 
         if (is_null($user->tasks)) {
             $task = [];
-            $task[$dictionary_id] = $learnedWords;
+            $task[$dictionary_id] = $words;
             $user->tasks = json_encode($task, JSON_UNESCAPED_UNICODE);
 
             if($user->save()) return response()->json(['status' => 'success', 'user' => $user->id]);
@@ -105,7 +105,7 @@ class UserController extends Controller
 
         $tasks = json_decode($user->tasks);
 
-        $tasks->$dictionary_id = $learnedWords;
+        $tasks->$dictionary_id = $words;
 
         $user->tasks = json_encode($tasks, JSON_UNESCAPED_UNICODE);
 
@@ -114,7 +114,7 @@ class UserController extends Controller
         return response()->json(['status' => 'error', 'message' => 'error to save user task!']);
     }
 
-    public function task($user_id, $dictionary_id = false): JsonResponse
+    public function task(int $user_id, int $dictionary_id = 0): JsonResponse
     {
         $user = User::findOrFail($user_id);
 
@@ -128,12 +128,25 @@ class UserController extends Controller
         return response()->json(['status' => 'error', 'message' => "Not find task: $dictionary_id"]);
     }
 
+    public function destroyUserDictionary(int $user_id, int $dictionary_id): JsonResponse
+    {
+        $dictionary = DictionaryUser::where([
+            ["dictionary_id", "=",  $dictionary_id],
+            ["user_id", "=",  $user_id],
+        ])->first();
+
+        if (!$dictionary)  return response()->json(['status' => 'error', 'message' => "Error destroy: $dictionary_id"]);
+
+        $dictionary->delete();
+        return response()->json(['status' => 'success', 'dictionary' => $dictionary->id]);
+    }
+
     public function show(int $id): UserResource
     {
         return new UserResource(User::with('dictionaries')->findOrFail($id));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
 //        $validated = $request->validated();
 //        $dictionary = Dictionary::where('id', $id)->firstOrFail();
