@@ -21,7 +21,6 @@ class DictionaryController extends Controller
 
     public function store(DictionaryPostRequest $request): JsonResponse
     {
-//        TODO: add user_id -> creator_is DictionaryUser table
         $validated = $request->validated();
         $dictionary = Dictionary::create($validated);
         return response()->json(['success' => true, 'dictionary' => $dictionary->id]);

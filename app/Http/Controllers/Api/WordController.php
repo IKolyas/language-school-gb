@@ -45,8 +45,9 @@ class WordController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
-        //
+        if(Word::destroy($id)) return response()->json(['success' => true, 'word' => $id]);
+        return response()->json(['success' => false, 'word' => $id]);
     }
 }

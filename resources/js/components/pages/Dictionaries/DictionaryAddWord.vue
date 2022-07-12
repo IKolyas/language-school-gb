@@ -12,11 +12,11 @@
         <div class="row g-2">
             <div class="col-6">
                 Example sentence
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea class="form-control" rows="3">Поле пока не работает</textarea>
             </div>
             <div class="col-6">
                 Пример использования
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea class="form-control" rows="3">Надо ли нам эти поля?</textarea>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Добавить слово</button>
