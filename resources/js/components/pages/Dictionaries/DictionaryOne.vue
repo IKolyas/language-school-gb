@@ -1,7 +1,4 @@
 <template>
-    {{ user }}
-    -----
-    {{ dictionary }}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-3 card">
