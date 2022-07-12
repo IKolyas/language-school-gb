@@ -23,9 +23,11 @@
             словарей
         </button>
         <button type="button" class="btn btn-primary" v-else-if="!addFormActive">Добавить словарь к себе</button>
-        <button type="button" class="btn btn-primary" @click="toggleAddForm" v-if="!addFormActive && isThisUserCreator">
-            Добавить слова
-        </button>
+
+        <div v-if="!addFormActive && isThisUserCreator">
+        <button type="button" class="btn btn-primary" @click="toggleAddForm">Добавить слова</button>
+            <button type="button" class="btn btn-primary" @click="destroyDictionary">Уничтожить словарь</button>
+        </div>
         <table class="table">
             <thead>
             <tr>
@@ -56,6 +58,7 @@
 <script>
 import {mapGetters, mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
+import {destroyDictionary, removeWord} from "../../../services/dictionary.service";
 
 export default {
     name: "DictionaryOne",
@@ -100,7 +103,14 @@ export default {
             this.addFormActive = !this.addFormActive;
         },
         removeWord(wordId) {
-            console.log('словарь ' + this.dictionaryId + ' слово ' + wordId);
+            removeWord(wordId);
+            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+        },
+        destroyDictionary() {
+            destroyDictionary(this.dictionaryId);
+            this.$router.push({
+                name: 'dictionaries'
+            });
         }
     }
 }

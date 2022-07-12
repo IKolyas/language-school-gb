@@ -23,6 +23,9 @@
             </router-link>
         </div>
     </div>
+    <router-link :to="{name: 'dictionaryCreate'}">
+        <button class="btn btn-primary">Создать новый словарь</button>
+    </router-link>
 
 </template>
 

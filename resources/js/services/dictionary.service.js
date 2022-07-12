@@ -6,9 +6,11 @@ const getDictionaryOne = id => request({ url: `api/dictionary/${id}`, method: 'g
 
 const addDictionary = data => request({url: 'api/dictionary', method: 'post', data: data});
 
+const destroyDictionary = id => request({url: `api/dictionary/${id}`, method: 'delete'});
+
 const addWord = data => request({url: 'api/word', method: 'post', data: data});
 
-const removeWord = (id, data) => request({url: `api/dictionary/${id}`, method: 'delete'})
+const removeWord = id => request({url: `api/word/${id}`, method: 'delete'});
 
 
-export { getDictionaries, getDictionaryOne, addDictionary, addWord}
+export { getDictionaries, getDictionaryOne, addDictionary, addWord, removeWord, destroyDictionary}
