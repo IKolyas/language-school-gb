@@ -16,18 +16,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('logout', [UserController::class, 'logout']);
 
-//    Route::post('/practice', []);
-});
-Route::apiResource('dictionary', DictionaryController::class);
-Route::apiResource('word', WordController::class);
 
 Route::apiResource('user', UserController::class);
-Route::put('/user/{user_id}/task/{dictionary_id}', [UserController::class, 'updateTask'])->name('user_put_task');
-Route::get('/user/{user_id}/task/{dictionary_id?}', [UserController::class, 'task'])->name('user_get_task');
+Route::name('user.')->prefix('user')->group(function () {
+    Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+    Route::post('login', [UserController::class, 'login']);
+    Route::post('register', [UserController::class, 'register']);
+
+    Route::put('/{user_id}/task/{dictionary_id}', [UserController::class, 'updateTask'])->name('user_put_task');
+    Route::get('/{user_id}/task/{dictionary_id?}', [UserController::class, 'task'])->name('user_get_task');
+    Route::delete('/{user_id}/dictionary/{dictionary_id}', [UserController::class, 'destroyUserDictionary'])->name('user_destroy_dictionary');
+});
+
+Route::apiResource('/dictionary', DictionaryController::class);
+Route::name('dictionary.')->prefix('dictionary')->group(function () {
+
+    Route::delete('/{dictionary_id}/word/{word_id}', [DictionaryController::class, 'destroyDictionaryWord']);
+});
+
+Route::apiResource('word', WordController::class);
+//Route::name('word.')->prefix('word')->group(function () {
+//
+//});
 
 
-Route::post('login', [UserController::class, 'login']);
-Route::post('register', [UserController::class, 'register']);
+
+
+
+
+

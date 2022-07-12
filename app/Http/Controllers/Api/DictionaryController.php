@@ -8,6 +8,7 @@ use App\Http\Requests\Api\DictionaryPutRequest;
 use App\Http\Resources\DictionaryResource;
 use App\Http\Resources\DictionaryWordsResource;
 use App\Models\Dictionary;
+use App\Models\DictionaryWord;
 use Illuminate\Http\JsonResponse,
     Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -43,5 +44,19 @@ class DictionaryController extends Controller
     {
         if(Dictionary::destroy($id)) return response()->json(['success' => true, 'dictionary' => $id]);
         return response()->json(['success' => false, 'dictionary' => $id]);
+    }
+
+    public function destroyDictionaryWord(int $dictionary_id, int $word_id): JsonResponse
+    {
+
+        $word = DictionaryWord::where('dictionary_id',  $dictionary_id)
+            ->where('word_id', $word_id)
+            ->get()->first();
+
+        if (!$word) return response()->json(['status' => 'error', 'message' => "Not word: $word_id in dictionary: $dictionary_id"]);
+
+        $word->delete();
+
+        return response()->json(['status' => 'success', 'dictionary' => $word_id]);
     }
 }
