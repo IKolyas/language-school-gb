@@ -92,7 +92,7 @@ class UserController extends Controller
 //        TODO: Реализовать валидацию данных после принятия окончательного решения по формату json
 
         $user = User::findOrFail($user_id);
-        $words = $request[1]['words'];
+        $words = $request['words'];
 
         if (is_null($user->tasks)) {
             $task = [];
