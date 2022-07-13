@@ -207,11 +207,9 @@ export default {
                 console.log('id', dictionaryId.value);
 
                 const postData = {
-                    [dictionaryId.value]: {
-                        ...currentDictionary.value,
-                        words,
-                    },
-                };
+                    ...currentDictionary.value,
+                    words,
+                }
                 console.log('postData', postData);
 
                 try {
