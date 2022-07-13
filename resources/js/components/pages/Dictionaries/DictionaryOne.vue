@@ -31,6 +31,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Слово на русском</th>
                 <th scope="col">Word in English</th>
+                <th scope="col">Текущий рейтинг</th>
                 <th scope="col">Удалить?</th>
             </tr>
             </thead>
@@ -39,6 +40,7 @@
                 <th scope="row">{{ index }}</th>
                 <td>{{ word.word }}</td>
                 <td>{{ word.translation }}</td>
+                <td>{{ word.rating }}</td>
                 <!--                TODO удаление слов-->
                 <td>
                     <button class="btn btn-primary" @click="removeWord(word.id)">X</button>
@@ -93,7 +95,9 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+        // this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+        //TODO how to find user_id
+        this.$store.dispatch('dictionaries/fetchDictionaryRating', {dictionary_id: this.$route.params.id, user_id: 3});
     },
     methods: {
         toggleAddForm() {

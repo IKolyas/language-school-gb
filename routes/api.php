@@ -31,6 +31,7 @@ Route::name('user.')->prefix('user')->group(function () {
 
 Route::apiResource('/dictionary', DictionaryController::class);
 Route::name('dictionary.')->prefix('dictionary')->group(function () {
+    Route::get('/{dictionary_id}/user/{user_id}', [DictionaryController::class, 'getDictionaryWithRatings']);
 
     Route::delete('/{dictionary_id}/word/{word_id}', [DictionaryController::class, 'destroyDictionaryWord']);
 });

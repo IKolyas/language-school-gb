@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Dictionary::class)->using(DictionaryUser::class);
     }
+
+    public function wordsRatings()
+    {
+        return $this->hasMany(Rating::class, 'user_id');
+    }
 }

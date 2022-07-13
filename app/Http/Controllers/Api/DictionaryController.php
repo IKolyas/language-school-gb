@@ -59,4 +59,9 @@ class DictionaryController extends Controller
 
         return response()->json(['status' => 'success', 'dictionary' => $word_id]);
     }
+
+    public function getDictionaryWithRatings(int $dictionary_id) {
+        //TODO как-то отфильтровать массив с рейтингами по юзеру
+        return Dictionary::with('words', 'wordsRatings')->findOrFail($dictionary_id);
+    }
 }

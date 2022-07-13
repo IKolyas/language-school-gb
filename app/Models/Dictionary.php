@@ -28,4 +28,9 @@ class Dictionary extends Model
     {
         return $this->belongsToMany(User::class)->using(DictionaryUser::class);
     }
+
+    public function wordsRatings()
+    {
+        return $this->hasMany(Rating::class, 'dictionary_id');
+    }
 }
