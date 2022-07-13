@@ -13,6 +13,11 @@
 							Практика
 						</router-link>
 					</li>
+					<li>
+						<router-link :to="{name: 'dictionaries'}" class="nav-link px-2 link-dark">
+							Словари
+						</router-link>
+					</li>
 				</ul>
 
 				<div class="d-flex align-items-center">
