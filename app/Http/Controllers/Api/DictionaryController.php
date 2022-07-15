@@ -11,6 +11,7 @@ use App\Models\Dictionary;
 use App\Models\DictionaryWord;
 use Illuminate\Http\JsonResponse,
     Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
 
 class DictionaryController extends Controller
 {
@@ -61,7 +62,21 @@ class DictionaryController extends Controller
     }
 
     public function getDictionaryWithRatings(int $dictionary_id) {
-        //TODO как-то отфильтровать массив с рейтингами по юзеру
-        return Dictionary::with('words', 'wordsRatings')->findOrFail($dictionary_id);
+        $dictionary = Dictionary::findOrFail($dictionary_id);
+        $wordsRating = DB::table('dictionaries')
+            ->join('dictionary_word', 'dictionaries.id', '=', 'dictionary_word.dictionary_id')
+            ->join('words', 'dictionary_word.word_id', '=', 'words.id')
+            ->join('ratings', 'words.id', '=', 'ratings.word_id')
+            ->select(
+                'words.*',
+                'ratings.rating'
+                )
+            ->where('dictionaries.id', '=', $dictionary_id)
+            ->where('ratings.user_id', '=', 3)
+            ->orderBy('words.id')
+            ->get();
+        $dictionary->words = $wordsRating;
+        return $dictionary;
+
     }
 }

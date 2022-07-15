@@ -41,16 +41,17 @@ const actions = {
     async fetchDictionaryRating({commit}, payload) {
         try {
             const data = await getDictionaryWithRatings(payload.dictionary_id, payload.user_id);
-            const wordsRating = data.words_ratings;
-            data.words = data.words.map((word) => {
-                for(let i = 0; i < wordsRating.length; i++) {
-                    if(wordsRating[i].word_id === word.id && wordsRating[i].user_id === payload.user_id) {
-                        word.rating = wordsRating[i].rating;
-                        break;
-                    }
-                }
-                return word;
-            })
+            // console.log(data);
+            // const wordsRating = data.words_ratings;
+            // data.words = data.words.map((word) => {
+            //     for(let i = 0; i < wordsRating.length; i++) {
+            //         if(wordsRating[i].word_id === word.id && wordsRating[i].user_id === payload.user_id) {
+            //             word.rating = wordsRating[i].rating;
+            //             break;
+            //         }
+            //     }
+            //     return word;
+            // })
             commit('setDictionaryWithRating', data);
         } catch (e) {
             console.error('setDictionary', e);
