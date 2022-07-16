@@ -61,7 +61,7 @@ class DictionaryController extends Controller
         return response()->json(['status' => 'success', 'dictionary' => $word_id]);
     }
 
-    public function getDictionaryWithRatings(int $dictionary_id) {
+    public function getDictionaryWithRatings(int $dictionary_id, int $user_id) {
         $dictionary = Dictionary::findOrFail($dictionary_id);
         $wordsRating = DB::table('dictionaries')
             ->join('dictionary_word', 'dictionaries.id', '=', 'dictionary_word.dictionary_id')
@@ -72,7 +72,7 @@ class DictionaryController extends Controller
                 'ratings.rating'
                 )
             ->where('dictionaries.id', '=', $dictionary_id)
-            ->where('ratings.user_id', '=', 3)
+            ->where('ratings.user_id', '=', $user_id)
             ->orderBy('words.id')
             ->get();
         $dictionary->words = $wordsRating;

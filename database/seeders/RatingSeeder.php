@@ -18,29 +18,72 @@ class RatingSeeder extends Seeder
             [
                 'word_id' => '2',
                 'user_id' => '3',
-                'dictionary_id' => '1',
-                'rating' => '1',
+                'rating' => '3',
             ],
             [
                 'word_id' => '3',
                 'user_id' => '3',
-                'dictionary_id' => '1',
-                'rating' => '2',
-            ],[
+                'rating' => '3',
+            ],
+            [
                 'word_id' => '4',
                 'user_id' => '3',
-                'dictionary_id' => '1',
                 'rating' => '3',
-            ],[
+            ],
+            [
                 'word_id' => '5',
                 'user_id' => '3',
-                'dictionary_id' => '1',
-                'rating' => '4',
-            ],[
+                'rating' => '3',
+            ],
+            [
                 'word_id' => '6',
                 'user_id' => '3',
-                'dictionary_id' => '1',
-                'rating' => '5',
+                'rating' => '3',
+            ],
+            [
+                'word_id' => '7',
+                'user_id' => '3',
+                'rating' => '0',
+            ],
+            [
+                'word_id' => '8',
+                'user_id' => '3',
+                'rating' => '0',
+            ],
+            [
+                'word_id' => '9',
+                'user_id' => '3',
+                'rating' => '3',
+            ],
+            [
+                'word_id' => '10',
+                'user_id' => '3',
+                'rating' => '0',
+            ],
+            [
+                'word_id' => '4',
+                'user_id' => '2',
+                'rating' => '2',
+            ],
+            [
+                'word_id' => '5',
+                'user_id' => '2',
+                'rating' => '2',
+            ],
+            [
+                'word_id' => '6',
+                'user_id' => '2',
+                'rating' => '2',
+            ],
+            [
+                'word_id' => '7',
+                'user_id' => '2',
+                'rating' => '2',
+            ],
+            [
+                'word_id' => '7',
+                'user_id' => '1',
+                'rating' => '1',
             ],
         ]);
     }

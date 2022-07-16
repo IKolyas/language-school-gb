@@ -19,9 +19,6 @@
         <button type="button" class="btn btn-primary" v-if="userHasDictionary && !addFormActive" @click="removeFromMyDictionaries">Удалить из своих
             словарей
         </button>
-        <button type="button" class="btn btn-primary" v-else-if="!addFormActive"
-                @click="addToMyDictionaries">Добавить словарь к себе
-        </button>
 
         <div v-if="!addFormActive && isThisUserCreator">
             <button type="button" class="btn btn-primary" @click="toggleAddForm">Добавить слова</button>
@@ -33,15 +30,23 @@
                 <th scope="col">#</th>
                 <th scope="col">Слово на русском</th>
                 <th scope="col">Word in English</th>
+                <th scope="col">Текущий рейтинг</th>
+                <th scope="col">Удалить?</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(word, index) in words">
-                <th scope="row">{{ index }}</th>
+                <th scope="row">{{ index + 1 }}</th>
                 <td>{{ word.word }}</td>
                 <td>{{ word.translation }}</td>
+                <td>{{ word.rating }}</td>
+                <!--                TODO удаление слов-->
+                <td>
+                    <button class="btn btn-primary" @click="removeWord(word.id)">X</button>
+                </td>
             </tr>
             </tbody>
+            >
         </table>
     </div>
 
@@ -51,7 +56,7 @@
 <script>
 import {mapGetters, mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
-import {createUserDictionary, destroyDictionary, removeWord} from "../../../services/dictionary.service";
+import {deleteUserDictionary, destroyDictionary, removeWord} from "../../../services/dictionary.service";
 
 export default {
     name: "DictionaryOne",
@@ -89,7 +94,8 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+        //TODO how to find user_id
+        this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
     },
     methods: {
         toggleAddForm() {
@@ -103,12 +109,6 @@ export default {
             destroyDictionary(this.dictionaryId);
             this.$router.push({
                 name: 'dictionaries'
-            });
-        },
-        addToMyDictionaries() {
-            createUserDictionary(this.$route.params.id, this.user.id);
-            this.$router.push({
-                name: 'account'
             });
         },
         removeFromMyDictionaries() {

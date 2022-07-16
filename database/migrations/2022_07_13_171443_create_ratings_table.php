@@ -18,7 +18,6 @@ return new class extends Migration
             $table->smallInteger('rating');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('word_id')->constrained('words')->cascadeOnDelete();
-            $table->foreignId('dictionary_id')->constrained('dictionaries')->cascadeOnDelete();
         });
     }
 
