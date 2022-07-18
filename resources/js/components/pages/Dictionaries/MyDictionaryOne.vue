@@ -49,8 +49,6 @@
             >
         </table>
     </div>
-
-
 </template>
 
 <script>
@@ -94,8 +92,14 @@ export default {
         }
     },
     mounted() {
-        //TODO how to find user_id
-        this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
+        //TODO Здесь костыль, дважды вызывается fetchUser если эта страница загружается первой.
+        if (this.user.id === '') {
+            this.$store.dispatch('user/fetchUser', {id: 3}).then(() => {
+                this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
+            });
+        } else {
+            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
+        }
     },
     methods: {
         toggleAddForm() {
@@ -113,6 +117,7 @@ export default {
         },
         removeFromMyDictionaries() {
             deleteUserDictionary(this.$route.params.id, this.user.id);
+            this.$store.dispatch('user/fetchUser', {id: this.user.id});
             this.$router.push({
                 name: 'account'
             });

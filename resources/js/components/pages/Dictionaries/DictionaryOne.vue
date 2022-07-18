@@ -51,7 +51,12 @@
 <script>
 import {mapGetters, mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
-import {createUserDictionary, destroyDictionary, removeWord} from "../../../services/dictionary.service";
+import {
+    createUserDictionary,
+    deleteUserDictionary,
+    destroyDictionary,
+    removeWord
+} from "../../../services/dictionary.service";
 
 export default {
     name: "DictionaryOne",
@@ -107,12 +112,14 @@ export default {
         },
         addToMyDictionaries() {
             createUserDictionary(this.$route.params.id, this.user.id);
+            this.$store.dispatch('user/fetchUser', {id: this.user.id});
             this.$router.push({
                 name: 'account'
             });
         },
         removeFromMyDictionaries() {
             deleteUserDictionary(this.$route.params.id, this.user.id);
+            this.$store.dispatch('user/fetchUser', {id: this.user.id});
             this.$router.push({
                 name: 'account'
             });

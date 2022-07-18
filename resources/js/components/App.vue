@@ -15,7 +15,11 @@ export default {
 			layout: computed(() => route.meta.layout || 'main')
 		}
 	},
-	components: { MainLayout }
+	components: { MainLayout },
+
+    created() {
+        this.$store.dispatch('user/fetchUser', {id: 3});
+    },
 }
 
 

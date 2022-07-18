@@ -11,10 +11,9 @@ const mutations = {
     },
     setDictionary(state, dictionary) {
         state.dictionary = dictionary.data;
-        console.log(123, state.dictionary)
     },
     setDictionaryWithRating(state, dictionary) {
-        state.dictionary = dictionary;
+        state.dictionary = dictionary.data;
     },
     // addWord(state, payload) {
     //     state.dictionary.words.push({id: payload.id, word: payload.word, translation: payload.translation})
