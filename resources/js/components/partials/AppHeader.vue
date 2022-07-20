@@ -81,9 +81,6 @@ export default {
 
 
 	},
-	mounted() {
-		this.$store.dispatch('user/fetchUser', {id: 3});
-	}
 }
 </script>
 

@@ -20,4 +20,9 @@ class Word extends Model
     {
         return $this->belongsToMany(Dictionary::class)->using(DictionaryWord::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 }

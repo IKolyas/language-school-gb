@@ -66,7 +66,7 @@ export default {
 		    dictionaries: 'dictionaries',
 		    groups: 'groups'
 	    })
-	}
+	},
 }
 </script>
 

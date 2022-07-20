@@ -16,11 +16,9 @@
         </div>
         <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
 
-        <button type="button" class="btn btn-primary" v-if="userHasDictionary && !addFormActive" @click="removeFromMyDictionaries">Удалить из своих
+        <button type="button" class="btn btn-primary" v-if="userHasDictionary && !addFormActive"
+                @click="removeFromMyDictionaries">Удалить из своих
             словарей
-        </button>
-        <button type="button" class="btn btn-primary" v-else-if="!addFormActive"
-                @click="addToMyDictionaries">Добавить словарь к себе
         </button>
 
         <div v-if="!addFormActive && isThisUserCreator">
@@ -33,15 +31,23 @@
                 <th scope="col">#</th>
                 <th scope="col">Слово на русском</th>
                 <th scope="col">Word in English</th>
+                <th scope="col">Текущий рейтинг</th>
+                <th scope="col">Удалить?</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(word, index) in words">
-                <th scope="row">{{ index }}</th>
+                <th scope="row">{{ index + 1 }}</th>
                 <td>{{ word.word }}</td>
                 <td>{{ word.translation }}</td>
+                <td>{{ word.rating }}</td>
+                <!--                TODO удаление слов-->
+                <td>
+                    <button class="btn btn-primary" @click="removeWord(word.id)">X</button>
+                </td>
             </tr>
             </tbody>
+            >
         </table>
     </div>
 </template>
@@ -49,12 +55,7 @@
 <script>
 import {mapGetters, mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
-import {
-    createUserDictionary,
-    deleteUserDictionary,
-    destroyDictionary,
-    removeWord
-} from "../../../services/dictionary.service";
+import {deleteUserDictionary, destroyDictionary, removeWord} from "../../../services/dictionary.service";
 
 export default {
     name: "DictionaryOne",
@@ -92,8 +93,13 @@ export default {
         }
     },
     mounted() {
-        if(this.dictionaryId != this.$route.params.id) {
-            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+        //TODO Здесь костыль, дважды вызывается fetchUser если эта страница загружается первой.
+        if (this.user.id === '') {
+            this.$store.dispatch('user/fetchUser', {id: 3}).then(() => {
+                this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
+            });
+        } else {
+            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
         }
     },
     methods: {
@@ -101,21 +107,13 @@ export default {
             this.addFormActive = !this.addFormActive;
         },
         removeWord(wordId) {
-            removeWord(wordId);
-            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+            removeWord(this.$route.params.id, wordId);
+            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
         },
         destroyDictionary() {
             destroyDictionary(this.dictionaryId);
-            this.$store.dispatch('dictionaries/fetchDictionaries');
             this.$router.push({
                 name: 'dictionaries'
-            });
-        },
-        addToMyDictionaries() {
-            createUserDictionary(this.$route.params.id, this.user.id);
-            this.$store.dispatch('user/fetchUser', {id: this.user.id});
-            this.$router.push({
-                name: 'account'
             });
         },
         removeFromMyDictionaries() {

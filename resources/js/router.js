@@ -10,6 +10,7 @@ import Account from "./components/pages/account/Index";
 import AccountGroups from './components/pages/account/Groups';
 import AccountAchievements from './components/pages/account/Achievements';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
+import MyDictionaryOne from "./components/pages/Dictionaries/MyDictionaryOne";
 
 const routes = [
     {name: 'home', path: '/', component: Home},
@@ -56,6 +57,7 @@ const routes = [
     },
     {name: 'dictionaries', path: '/dictionaries', component: Dictionaries},
     {name: 'dictionaryOne', path: '/dictionaryOne/:id', component: DictionaryOne, props: true},
+    {name: 'myDictionaryOne', path: '/myDictionaryOne/:id', component: MyDictionaryOne, props: true},
     {name: 'dictionaryCreate', path: '/dictionaryCreate', component: DictionaryCreate},
 ];
 

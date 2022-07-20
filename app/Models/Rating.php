@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class DictionaryUser extends Pivot
+class Rating extends Model
 {
     protected $fillable = [
+        'word_id',
         'user_id',
         'dictionary_id',
+        'rating'
     ];
 
     public $timestamps = false;

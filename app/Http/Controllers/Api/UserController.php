@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Dictionary;
 use App\Models\DictionaryUser;
+use App\Models\Rating;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,7 +69,7 @@ class UserController extends Controller
             Session::flush();
             $success = true;
             $message = 'Successfully logged out';
-        } catch (\Illuminate\Database\QueryException $ex) {
+        } catch (QueryException $ex) {
             $success = false;
             $message = $ex->getMessage();
         }
@@ -127,6 +130,27 @@ class UserController extends Controller
         if($task) return response()->json(['status' => 'success', 'task' => $task]);
 
         return response()->json(['status' => 'error', 'message' => "Not find task: $dictionary_id"]);
+    }
+
+    public function createUserDictionary(int $user_id, int $dictionary_id)
+    {
+        $newDictionaryUser = DictionaryUser::create(['user_id' => $user_id, 'dictionary_id' => $dictionary_id]);
+
+        $words = Dictionary::find($dictionary_id)->words;
+        $newRatings = [];
+
+        foreach ($words as $word) {
+                $newRating = Rating::firstOrCreate(
+                    ['user_id' => $user_id, 'word_id' => $word->id],
+        ['rating' => 0]
+                );
+            $newRatings[] = $newRating;
+        }
+        $newRatingsIsOk = count($words) === count($newRatings);
+
+        if (!$newDictionaryUser || !$newRatingsIsOk)  return response()->json(['status' => 'error', 'message' => "Error create: $dictionary_id"]);
+
+        return response()->json(['success' => true, '$newDictionaryWord' => $newDictionaryUser->id]);
     }
 
     public function destroyUserDictionary(int $user_id, int $dictionary_id): JsonResponse

@@ -1,4 +1,4 @@
-import {getDictionaries, getDictionaryOne} from '../../../services/dictionary.service';
+import {getDictionaries, getDictionaryOne, getDictionaryWithRatings} from '../../../services/dictionary.service';
 
 const state = () => ({
     dictionary: {},
@@ -10,6 +10,9 @@ const mutations = {
         state.dictionariesList = dictionaries.data
     },
     setDictionary(state, dictionary) {
+        state.dictionary = dictionary.data;
+    },
+    setDictionaryWithRating(state, dictionary) {
         state.dictionary = dictionary.data;
     },
     // addWord(state, payload) {
@@ -30,6 +33,14 @@ const actions = {
         try {
             const data = await getDictionaryOne(payload.id);
             commit('setDictionary', data);
+        } catch (e) {
+            console.error('setDictionary', e);
+        }
+    },
+    async fetchDictionaryWithRating({commit}, payload) {
+        try {
+            const data = await getDictionaryWithRatings(payload.dictionary_id, payload.user_id);
+            commit('setDictionaryWithRating', data);
         } catch (e) {
             console.error('setDictionary', e);
         }
