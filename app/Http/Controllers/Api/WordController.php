@@ -26,8 +26,7 @@ class WordController extends Controller
         $dictionary_id = $validated['dictionary_id'];
 
         $newWord = Word::firstOrCreate(
-            ['word' => $word],
-            ['translation' => $translation]
+            ['translation' => $translation, 'word' => $word],
         );
 
         DictionaryWord::create(['word_id' => $newWord->id, 'dictionary_id' => $dictionary_id]);

@@ -12,7 +12,7 @@ const destroyDictionary = id => request({url: `api/dictionary/${id}`, method: 'd
 
 const addWord = data => request({url: 'api/word', method: 'post', data: data});
 
-const removeWord = id => request({url: `api/word/${id}`, method: 'delete'});
+const removeWord = (dictionary_id, word_id) => request({url: `api/dictionary/${dictionary_id}/word/${word_id}`, method: 'delete'});
 
 const createUserDictionary = (dictionary_id, user_id) => request({ url: `api/user/${user_id}/dictionary/${dictionary_id}`, method: 'put' });
 

@@ -44,8 +44,6 @@
             </tbody>
         </table>
     </div>
-
-
 </template>
 
 <script>
@@ -94,7 +92,9 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+        if(this.dictionaryId !== this.$route.params.id) {
+            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+        }
     },
     methods: {
         toggleAddForm() {
@@ -106,6 +106,7 @@ export default {
         },
         destroyDictionary() {
             destroyDictionary(this.dictionaryId);
+            this.$store.dispatch('dictionaries/fetchDictionaries');
             this.$router.push({
                 name: 'dictionaries'
             });

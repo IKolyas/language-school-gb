@@ -16,7 +16,8 @@
         </div>
         <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
 
-        <button type="button" class="btn btn-primary" v-if="userHasDictionary && !addFormActive" @click="removeFromMyDictionaries">Удалить из своих
+        <button type="button" class="btn btn-primary" v-if="userHasDictionary && !addFormActive"
+                @click="removeFromMyDictionaries">Удалить из своих
             словарей
         </button>
 
@@ -106,8 +107,8 @@ export default {
             this.addFormActive = !this.addFormActive;
         },
         removeWord(wordId) {
-            removeWord(wordId);
-            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+            removeWord(this.$route.params.id, wordId);
+            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
         },
         destroyDictionary() {
             destroyDictionary(this.dictionaryId);

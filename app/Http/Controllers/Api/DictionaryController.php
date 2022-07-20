@@ -58,7 +58,7 @@ class DictionaryController extends Controller
 
         $word->delete();
 
-        return response()->json(['status' => 'success', 'dictionary' => $word_id]);
+        return response()->json(['status' => 'success', 'dictionaryWord' => $word->id]);
     }
 
     public function getDictionaryWithRatings(int $dictionary_id, int $user_id): DictionaryWordsResource
