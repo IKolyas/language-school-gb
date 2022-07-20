@@ -92,7 +92,7 @@ export default {
         }
     },
     mounted() {
-        if(this.dictionaryId !== this.$route.params.id) {
+        if(this.dictionaryId != this.$route.params.id) {
             this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
         }
     },
