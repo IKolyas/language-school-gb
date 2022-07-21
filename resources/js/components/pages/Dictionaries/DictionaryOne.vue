@@ -50,7 +50,7 @@
 import {mapGetters, mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
 import {
-    createUserDictionary,
+    addUserDictionary,
     deleteUserDictionary,
     destroyDictionary,
     removeWord
@@ -92,7 +92,7 @@ export default {
         }
     },
     mounted() {
-        if(this.dictionaryId != this.$route.params.id) {
+        if(this.dictionaryId !== +this.$route.params.id) {
             this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
         }
     },
@@ -102,7 +102,7 @@ export default {
         },
         removeWord(wordId) {
             removeWord(wordId);
-            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.dictionaryId});
         },
         destroyDictionary() {
             destroyDictionary(this.dictionaryId);
@@ -112,14 +112,14 @@ export default {
             });
         },
         addToMyDictionaries() {
-            createUserDictionary(this.$route.params.id, this.user.id);
+            addUserDictionary({user_id: this.user.id, dictionary_id: this.dictionaryId});
             this.$store.dispatch('user/fetchUser', {id: this.user.id});
             this.$router.push({
                 name: 'account'
             });
         },
         removeFromMyDictionaries() {
-            deleteUserDictionary(this.$route.params.id, this.user.id);
+            deleteUserDictionary(this.dictionaryId, this.user.id);
             this.$store.dispatch('user/fetchUser', {id: this.user.id});
             this.$router.push({
                 name: 'account'
