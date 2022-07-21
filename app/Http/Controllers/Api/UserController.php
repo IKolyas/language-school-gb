@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\UserDictionaryRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Dictionary;
@@ -29,7 +30,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
-        if($user->save()) {
+        if ($user->save()) {
             $success = true;
             $message = 'Пользователь успешно зарегистрирован!';
         } else {
@@ -99,7 +100,7 @@ class UserController extends Controller
             $task[$dictionary_id] = $words;
             $user->tasks = json_encode($task, JSON_UNESCAPED_UNICODE);
 
-            if($user->save()) return response()->json(['status' => 'success', 'user' => $user->id]);
+            if ($user->save()) return response()->json(['status' => 'success', 'user' => $user->id]);
 
             return response()->json(['status' => 'error', 'message' => 'error to save user task!']);
         }
@@ -110,7 +111,7 @@ class UserController extends Controller
 
         $user->tasks = json_encode($tasks, JSON_UNESCAPED_UNICODE);
 
-        if($user->save()) return response()->json(['status' => 'success', 'user' => $user->id]);
+        if ($user->save()) return response()->json(['status' => 'success', 'user' => $user->id]);
 
         return response()->json(['status' => 'error', 'message' => 'error to save user task!']);
     }
@@ -119,45 +120,52 @@ class UserController extends Controller
     {
         $user = User::findOrFail($user_id);
 
-        if(!$dictionary_id) return response()->json(['status' => 'success', 'task' => $user->tasks]);
+        if (!$dictionary_id) return response()->json(['status' => 'success', 'task' => $user->tasks]);
 
         $tasks = json_decode($user->tasks);
         $task = $tasks->$dictionary_id;
 
-        if($task) return response()->json(['status' => 'success', 'task' => $task]);
+        if ($task) return response()->json(['status' => 'success', 'task' => $task]);
 
         return response()->json(['status' => 'error', 'message' => "Not find task: $dictionary_id"]);
     }
 
-    public function createUserDictionary(int $user_id, int $dictionary_id)
+    public function addUserDictionary(UserDictionaryRequest $request): JsonResponse
     {
+        $validated = $request->validated();
+        $user_id = $validated['user_id'];
+        $dictionary_id = $validated['dictionary_id'];
+
         $newDictionaryUser = DictionaryUser::create(['user_id' => $user_id, 'dictionary_id' => $dictionary_id]);
 
         $words = Dictionary::find($dictionary_id)->words;
-        $newRatings = [];
 
         foreach ($words as $word) {
-                $newRating = Rating::firstOrCreate(
-                    ['user_id' => $user_id, 'word_id' => $word->id],
-        ['rating' => 0]
-                );
-            $newRatings[] = $newRating;
+            $this->createUserRating($user_id, $word->id);
         }
-        $newRatingsIsOk = count($words) === count($newRatings);
 
-        if (!$newDictionaryUser || !$newRatingsIsOk)  return response()->json(['status' => 'error', 'message' => "Error create: $dictionary_id"]);
+        if (!$newDictionaryUser) return response()->json(['status' => 'error', 'message' => "Error create: $dictionary_id"]);
 
         return response()->json(['success' => true, '$newDictionaryWord' => $newDictionaryUser->id]);
+    }
+
+    public function createUserRating(int $user_id, int $word_id)
+    {
+        $newRating = Rating::firstOrCreate(
+            ['user_id' => $user_id, 'word_id' => $word_id],
+            ['rating' => 0]
+        );
+        return response()->json(['success' => true, 'ratingId' => $newRating->id]);
     }
 
     public function destroyUserDictionary(int $user_id, int $dictionary_id): JsonResponse
     {
         $dictionary = DictionaryUser::where([
-            ["dictionary_id", "=",  $dictionary_id],
-            ["user_id", "=",  $user_id],
+            ["dictionary_id", "=", $dictionary_id],
+            ["user_id", "=", $user_id],
         ])->first();
 
-        if (!$dictionary)  return response()->json(['status' => 'error', 'message' => "Error destroy: $dictionary_id"]);
+        if (!$dictionary) return response()->json(['status' => 'error', 'message' => "Error destroy: $dictionary_id"]);
 
         $dictionary->delete();
         return response()->json(['status' => 'success', 'dictionary' => $dictionary->id]);
