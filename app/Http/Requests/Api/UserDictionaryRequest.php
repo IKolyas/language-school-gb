@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
-class UserAddDictionaryRequest extends FormRequest
+class UserDictionaryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

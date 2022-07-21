@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\UserAddDictionaryRequest;
+use App\Http\Requests\Api\UserDictionaryRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Dictionary;
@@ -133,7 +133,7 @@ class UserController extends Controller
         return response()->json(['status' => 'error', 'message' => "Not find task: $dictionary_id"]);
     }
 
-    public function addUserDictionary(UserAddDictionaryRequest $request): JsonResponse
+    public function addUserDictionary(UserDictionaryRequest $request): JsonResponse
     {
         $validated = $request->validated();
         $user_id = $validated['user_id'];
