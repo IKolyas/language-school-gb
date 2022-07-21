@@ -51,15 +51,12 @@ class UserController extends Controller
             'password' => $validated['password'],
         ];
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('web')->attempt($credentials)) {
+            $user = auth()->guard('web')->user();
             $success = true;
-            $message = 'Вы успешно авторизованы!';
-        } else {
-            $success = false;
-            $message = 'Ошибка при авторизации пользователя!';
+            return response()->json(compact('success', 'user'));
         }
-
-        return response()->json(compact('success', 'message'));
+        return response()->json(['success' => false, 'message' => 'auth error']);
     }
 
 
