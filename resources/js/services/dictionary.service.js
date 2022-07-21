@@ -14,9 +14,9 @@ const addWord = data => request({url: 'api/word', method: 'post', data: data});
 
 const removeWord = (dictionary_id, word_id) => request({url: `api/dictionary/${dictionary_id}/word/${word_id}`, method: 'delete'});
 
-const createUserDictionary = (dictionary_id, user_id) => request({ url: `api/user/${user_id}/dictionary/${dictionary_id}`, method: 'put' });
+const addUserDictionary = (data) => request({url: `api/user/addUserDictionary`, method: 'post', data: data});
 
 const deleteUserDictionary = (dictionary_id, user_id) => request({ url: `api/user/${user_id}/dictionary/${dictionary_id}`, method: 'delete' });
 
 
-export { getDictionaries, getDictionaryOne, addDictionary, addWord, removeWord, destroyDictionary, getDictionaryWithRatings, createUserDictionary, deleteUserDictionary}
+export { getDictionaries, getDictionaryOne, addDictionary, addWord, removeWord, destroyDictionary, getDictionaryWithRatings, addUserDictionary, deleteUserDictionary}

@@ -9,9 +9,9 @@ use App\Http\Resources\DictionaryResource;
 use App\Http\Resources\DictionaryWordsResource;
 use App\Models\Dictionary;
 use App\Models\DictionaryWord;
+use App\Services\DictionaryService;
 use Illuminate\Http\JsonResponse,
     Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Support\Facades\DB;
 
 class DictionaryController extends Controller
 {
@@ -49,7 +49,6 @@ class DictionaryController extends Controller
 
     public function destroyDictionaryWord(int $dictionary_id, int $word_id): JsonResponse
     {
-
         $word = DictionaryWord::where('dictionary_id', $dictionary_id)
             ->where('word_id', $word_id)
             ->get()->first();
@@ -63,21 +62,6 @@ class DictionaryController extends Controller
 
     public function getDictionaryWithRatings(int $dictionary_id, int $user_id): DictionaryWordsResource
     {
-        $dictionary = Dictionary::with('creator')->findOrFail($dictionary_id);
-        $wordsWithRating = DB::table('dictionaries')
-            ->join('dictionary_word', 'dictionaries.id', '=', 'dictionary_word.dictionary_id')
-            ->join('words', 'dictionary_word.word_id', '=', 'words.id')
-            ->join('ratings', 'words.id', '=', 'ratings.word_id')
-            ->select(
-                'words.*',
-                'ratings.rating'
-            )
-            ->where('dictionaries.id', '=', $dictionary_id)
-            ->where('ratings.user_id', '=', $user_id)
-            ->orderBy('words.id')
-            ->get();
-        $dictionary->words = $wordsWithRating;
-        return new DictionaryWordsResource($dictionary);
-
+        return DictionaryService::getDictionaryWithRatings($dictionary_id, $user_id);
     }
 }

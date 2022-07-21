@@ -26,7 +26,7 @@ Route::name('user.')->prefix('user')->group(function () {
 
     Route::put('/{user_id}/task/{dictionary_id}', [UserController::class, 'updateTask'])->name('user_put_task');
     Route::get('/{user_id}/task/{dictionary_id?}', [UserController::class, 'task'])->name('user_get_task');
-    Route::put('/{user_id}/dictionary/{dictionary_id}', [UserController::class, 'createUserDictionary'])->name('create_user_dictionary');
+    Route::post('/addUserDictionary', [UserController::class, 'addUserDictionary'])->name('add_user_dictionary');
     Route::delete('/{user_id}/dictionary/{dictionary_id}', [UserController::class, 'destroyUserDictionary'])->name('destroy_user_dictionary');
 });
 
