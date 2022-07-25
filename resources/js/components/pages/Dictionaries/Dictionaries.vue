@@ -40,7 +40,6 @@ export default {
 
     computed: {
         ...mapState({
-            state: state => state,
             dictionaries: state => state.dictionaries.dictionariesList,
         }),
     },

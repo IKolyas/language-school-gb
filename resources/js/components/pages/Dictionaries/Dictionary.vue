@@ -47,12 +47,11 @@
 </template>
 
 <script>
-import {mapGetters, mapState} from "vuex";
+import {mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
 import {
     addUserDictionary,
     deleteUserDictionary,
-    destroyDictionary,
     removeWord
 } from "../../../services/dictionary.service";
 
@@ -78,17 +77,14 @@ export default {
         isThisUserCreator() {
             return this.dictionary.creator_id === this.user.id;
         },
-        ...mapGetters('user', {
-            dictionaries: 'dictionaries',
-        }),
         userHasDictionary() {
-            let has = false;
+            let userHasDictionary = false;
             this.user.dictionaries.some(dictionary => {
                 if (dictionary.id === this.dictionaryId) {
-                    has = true;
+                    userHasDictionary = true;
                 }
             })
-            return has;
+            return userHasDictionary;
         }
     },
     mounted() {
@@ -105,8 +101,7 @@ export default {
             this.$store.dispatch('dictionaries/fetchDictionary', {id: this.dictionaryId});
         },
         destroyDictionary() {
-            destroyDictionary(this.dictionaryId);
-            this.$store.dispatch('dictionaries/fetchDictionaries');
+            this.$store.dispatch('dictionaries/fetchDestroyDictionary', {id: this.dictionaryId});
             this.$router.push({
                 name: 'dictionaries'
             });

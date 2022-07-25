@@ -1,4 +1,9 @@
-import {getDictionaries, getDictionaryOne, getDictionaryWithRatings} from '../../../services/dictionary.service';
+import {
+    destroyDictionary,
+    getDictionaries,
+    getDictionaryOne,
+    getDictionaryWithRatings
+} from '../../../services/dictionary.service';
 
 const state = () => ({
     dictionary: {},
@@ -42,8 +47,16 @@ const actions = {
             const data = await getDictionaryWithRatings(payload.dictionary_id, payload.user_id);
             commit('setDictionaryWithRating', data);
         } catch (e) {
-            console.error('setDictionary', e);
+            console.error('setDictionaryWithRating', e);
         }
+    },
+    async fetchDestroyDictionary({commit}, payload) {
+        try {
+            await destroyDictionary(payload.id);
+        } catch (e) {
+            console.error('destroyDictionary', e);
+        }
+        this.$store.dispatch('dictionaries/fetchDictionaries')
     },
     // async addWord({commit}, payload) {
     //     try {
