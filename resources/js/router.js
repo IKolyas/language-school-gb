@@ -30,7 +30,7 @@ const routes = [
     {
         name: 'account',
         path: '/account',
-        redirect: { name: 'dictionariesNew' },
+        redirect: { name: 'accountDictionaries' },
         component: Account,
         children: [
             {
@@ -39,8 +39,8 @@ const routes = [
                 component: () => import('./components/pages/account/Details'),
             },
             {
-                name: 'dictionariesNew',
-                path: 'dictionaries_new',
+                name: 'accountDictionaries',
+                path: 'account_dictionaries',
                 component: () => import('./components/pages/account/Dictionaries'),
             },
             {
