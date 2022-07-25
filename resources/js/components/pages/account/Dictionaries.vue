@@ -3,7 +3,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" v-for="dictionary in dictionaries">
             <router-link
-                :to="{name: 'myDictionaryOne', params: { id: dictionary.id }}"
+                :to="{name: 'myDictionary', params: { id: dictionary.id }}"
             >
                 <div class="card h-100">
                     <img src="http://placekitten.com/300/150" class="card-img-top" alt="">
