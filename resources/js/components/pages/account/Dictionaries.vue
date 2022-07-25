@@ -8,9 +8,7 @@
                 <div class="card h-100">
                     <img src="http://placekitten.com/300/150" class="card-img-top" alt="">
                     <div class="card-body">
-
                         <h5 class="card-title">{{ dictionary.dictionary_name }}</h5>
-
                         <p class="card-text">Словарь создал {{ dictionary.creator }}</p>
                     </div>
                     <div class="card-footer">
@@ -35,7 +33,6 @@ import {mapGetters} from 'vuex';
 
 export default {
     name: "Dictionaries",
-
     computed: {
         ...mapGetters('user', {
             dictionaries: 'dictionaries',

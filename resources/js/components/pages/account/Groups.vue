@@ -9,7 +9,8 @@
                     <p class="card-text">{{ group.description }}</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Преподаватель: {{ group.teacher }} {{group.academic_degree}}</small>
+                    <small class="text-muted">Преподаватель: {{ group.teacher }}<br>
+                        Должность: {{group.academic_degree}}</small>
                 </div>
             </div>
         </div>
