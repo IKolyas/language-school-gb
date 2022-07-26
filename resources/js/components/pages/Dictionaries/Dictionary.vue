@@ -50,7 +50,6 @@
 import {mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
 import {
-    addUserDictionary,
     deleteUserDictionary,
     removeWord
 } from "../../../services/dictionary.service";
@@ -101,14 +100,13 @@ export default {
             this.$store.dispatch('dictionaries/fetchDictionary', {id: this.dictionaryId});
         },
         destroyDictionary() {
-            this.$store.dispatch('dictionaries/fetchDestroyDictionary', {id: this.dictionaryId});
+            this.$store.dispatch('dictionaries/actionDestroyDictionary', {id: this.dictionaryId});
             this.$router.push({
                 name: 'dictionaries'
             });
         },
         addToMyDictionaries() {
-            addUserDictionary({user_id: this.user.id, dictionary_id: this.dictionaryId});
-            this.$store.dispatch('user/fetchUser', {id: this.user.id});
+            this.$store.dispatch('dictionaries/actionAddToMyDictionaries', {user_id: this.user.id, dictionary_id: this.dictionaryId})
             this.$router.push({
                 name: 'account'
             });

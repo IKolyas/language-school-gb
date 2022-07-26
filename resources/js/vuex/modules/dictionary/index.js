@@ -1,4 +1,5 @@
 import {
+    addUserDictionary,
     destroyDictionary,
     getDictionaries,
     getDictionaryOne,
@@ -50,14 +51,22 @@ const actions = {
             console.error('setDictionaryWithRating', e);
         }
     },
-    async fetchDestroyDictionary({commit}, payload) {
+    async actionDestroyDictionary({commit, dispatch}, payload) {
         try {
             await destroyDictionary(payload.id);
         } catch (e) {
             console.error('destroyDictionary', e);
         }
-        this.$store.dispatch('dictionaries/fetchDictionaries')
+        dispatch('fetchDictionaries');
     },
+    async actionAddToMyDictionaries({commit, dispatch}, payload) {
+        try {
+            await addUserDictionary({user_id: payload.user_id, dictionary_id: payload.dictionary_id});
+        } catch (e) {
+            console.error('addToMyDictionaries', e);
+        }
+        dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
+    }
     // async addWord({commit}, payload) {
     //     try {
     //         commit('addWord', payload);

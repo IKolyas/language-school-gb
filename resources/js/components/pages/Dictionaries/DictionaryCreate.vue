@@ -60,9 +60,11 @@ export default {
     },
     methods: {
         onSubmitDictionary() {
+            console.log({dictionary_name: this.dictionary_name, creator_id: this.user.id})
             addDictionary({dictionary_name: this.dictionary_name, creator_id: this.user.id}).then((data) => {
+                this.$store.dispatch('dictionaries/fetchDictionaries');
                 this.$router.push({
-                    name: 'dictionaryOne',
+                    name: 'dictionary',
                     params: {
                         id: data.dictionary
                     }
