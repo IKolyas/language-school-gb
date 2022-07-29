@@ -15,10 +15,15 @@
             </div>
         </div>
         <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
-
-        <button type="button" class="btn btn-primary" v-if="userHasDictionary && !addFormActive" @click="removeFromMyDictionaries">Удалить из своих
-            словарей
-        </button>
+        <div v-if="userHasDictionary && !addFormActive">
+            <button type="button" class="btn btn-primary" @click="removeFromMyDictionaries">Удалить из своих
+                словарей
+            </button>
+            <router-link
+                :to="{name: 'dictionaryProgress', params: { id: id }}">
+                <button type="button" class="btn btn-primary">Посмотреть прогресс</button>
+            </router-link>
+        </div>
         <button type="button" class="btn btn-primary" v-else-if="!addFormActive"
                 @click="addToMyDictionaries">Добавить словарь к себе
         </button>
@@ -49,10 +54,6 @@
 <script>
 import {mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
-import {
-    deleteUserDictionary,
-    removeWord
-} from "../../../services/dictionary.service";
 
 export default {
     name: "DictionaryOne",
@@ -87,7 +88,7 @@ export default {
         }
     },
     mounted() {
-        if(this.dictionaryId !== +this.$route.params.id) {
+        if (this.dictionaryId !== +this.$route.params.id) {
             this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
         }
     },
@@ -96,8 +97,11 @@ export default {
             this.addFormActive = !this.addFormActive;
         },
         removeWord(wordId) {
-            removeWord(wordId);
-            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.dictionaryId});
+            this.$store.dispatch('dictionaries/actionRemoveWord', {
+                word_id: wordId,
+                dictionary_id: this.dictionaryId,
+                user_id: this.user.id
+            });
         },
         destroyDictionary() {
             this.$store.dispatch('dictionaries/actionDestroyDictionary', {id: this.dictionaryId});
@@ -106,14 +110,19 @@ export default {
             });
         },
         addToMyDictionaries() {
-            this.$store.dispatch('dictionaries/actionAddToMyDictionaries', {user_id: this.user.id, dictionary_id: this.dictionaryId})
+            this.$store.dispatch('dictionaries/actionAddToMyDictionaries', {
+                user_id: this.user.id,
+                dictionary_id: this.dictionaryId
+            })
             this.$router.push({
                 name: 'account'
             });
         },
         removeFromMyDictionaries() {
-            deleteUserDictionary(this.dictionaryId, this.user.id);
-            this.$store.dispatch('user/fetchUser', {id: this.user.id});
+            this.$store.dispatch('dictionaries/actionRemoveFromMyDictionaries', {
+                user_id: this.user.id,
+                dictionary_id: this.dictionaryId
+            })
             this.$router.push({
                 name: 'account'
             });

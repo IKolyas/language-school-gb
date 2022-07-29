@@ -41,13 +41,11 @@
                 <td>{{ word.word }}</td>
                 <td>{{ word.translation }}</td>
                 <td>{{ word.rating }}</td>
-                <!--                TODO удаление слов-->
                 <td>
                     <button class="btn btn-primary" @click="removeWord(word.id)">X</button>
                 </td>
             </tr>
             </tbody>
-            >
         </table>
     </div>
 </template>
@@ -55,7 +53,6 @@
 <script>
 import {mapGetters, mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
-import {deleteUserDictionary, destroyDictionary, removeWord} from "../../../services/dictionary.service";
 
 export default {
     name: "DictionaryOne",
@@ -107,18 +104,16 @@ export default {
             this.addFormActive = !this.addFormActive;
         },
         removeWord(wordId) {
-            removeWord(this.$route.params.id, wordId);
-            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
+            this.$store.dispatch('dictionaries/actionRemoveWord', {word_id: wordId, dictionary_id: this.dictionaryId, user_id: this.user.id});
         },
         destroyDictionary() {
-            destroyDictionary(this.dictionaryId);
+            this.$store.dispatch('dictionaries/actionDestroyDictionary', {id: this.dictionaryId});
             this.$router.push({
                 name: 'dictionaries'
             });
         },
         removeFromMyDictionaries() {
-            deleteUserDictionary(this.$route.params.id, this.user.id);
-            this.$store.dispatch('user/fetchUser', {id: this.user.id});
+            this.$store.dispatch('dictionaries/actionRemoveFromMyDictionaries', {user_id: this.user.id, dictionary_id: this.dictionaryId})
             this.$router.push({
                 name: 'account'
             });
