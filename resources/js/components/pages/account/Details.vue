@@ -52,8 +52,8 @@
             </div>
             <div class="mb-3">
                 About you
-                <input type="textarea" class="form-control" value="current user info" style="height: 100px"
-                       placeholder="tell about yourself">
+                <texterea class="form-control" value="current user info" style="height: 100px"
+                          placeholder="tell about yourself"></texterea>
             </div>
             <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
@@ -74,9 +74,11 @@ export default {
 
     methods: {
         onSubmit() {
+            //TODO сделать обновление данных пользователя
             alert("Новые данные сохранены");
         },
         changePassword() {
+            //TODO сделать смену пароля?
             alert("Появляется форма смены пароля");
         }
     }

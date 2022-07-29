@@ -4,13 +4,13 @@ import Home from './components/pages/Home';
 import Practice from "./components/pages/Practice";
 import Login from "./components/pages/auth/Login";
 import Register from "./components/pages/auth/Register";
-import DictionaryOne from "./components/pages/Dictionaries/DictionaryOne";
+import Dictionary from "./components/pages/Dictionaries/Dictionary";
 import Dictionaries from "./components/pages/Dictionaries/Dictionaries";
 import Account from "./components/pages/account/Index";
 import AccountGroups from './components/pages/account/Groups';
 import AccountAchievements from './components/pages/account/Achievements';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
-import MyDictionaryOne from "./components/pages/Dictionaries/MyDictionaryOne";
+import DictionaryProgress from "./components/pages/Dictionaries/DictionaryProgress";
 
 const routes = [
     {name: 'home', path: '/', component: Home},
@@ -30,7 +30,7 @@ const routes = [
     {
         name: 'account',
         path: '/account',
-        redirect: { name: 'dictionariesNew' },
+        redirect: { name: 'accountDictionaries' },
         component: Account,
         children: [
             {
@@ -39,8 +39,8 @@ const routes = [
                 component: () => import('./components/pages/account/Details'),
             },
             {
-                name: 'dictionariesNew',
-                path: 'dictionaries_new',
+                name: 'accountDictionaries',
+                path: 'account_dictionaries',
                 component: () => import('./components/pages/account/Dictionaries'),
             },
             {
@@ -56,8 +56,8 @@ const routes = [
         ]
     },
     {name: 'dictionaries', path: '/dictionaries', component: Dictionaries},
-    {name: 'dictionaryOne', path: '/dictionaryOne/:id', component: DictionaryOne, props: true},
-    {name: 'myDictionaryOne', path: '/myDictionaryOne/:id', component: MyDictionaryOne, props: true},
+    {name: 'dictionary', path: '/dictionary/:id', component: Dictionary, props: true},
+    {name: 'dictionaryProgress', path: '/dictionaryProgress/:id', component: DictionaryProgress, props: true},
     {name: 'dictionaryCreate', path: '/dictionaryCreate', component: DictionaryCreate},
 ];
 

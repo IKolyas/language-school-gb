@@ -1,4 +1,11 @@
-import {getDictionaries, getDictionaryOne, getDictionaryWithRatings} from '../../../services/dictionary.service';
+import {
+    addDictionary,
+    addUserDictionary, addWord, deleteUserDictionary,
+    destroyDictionary,
+    getDictionaries,
+    getDictionaryOne,
+    getDictionaryWithRatings, removeWord
+} from '../../../services/dictionary.service';
 
 const state = () => ({
     dictionary: {},
@@ -15,9 +22,6 @@ const mutations = {
     setDictionaryWithRating(state, dictionary) {
         state.dictionary = dictionary.data;
     },
-    // addWord(state, payload) {
-    //     state.dictionary.words.push({id: payload.id, word: payload.word, translation: payload.translation})
-    // }
 }
 
 const actions = {
@@ -42,16 +46,59 @@ const actions = {
             const data = await getDictionaryWithRatings(payload.dictionary_id, payload.user_id);
             commit('setDictionaryWithRating', data);
         } catch (e) {
-            console.error('setDictionary', e);
+            console.error('setDictionaryWithRating', e);
         }
     },
-    // async addWord({commit}, payload) {
-    //     try {
-    //         commit('addWord', payload);
-    //     } catch(e) {
-    //         console.error('addWord', e)
-    //     }
-    // }
+    async actionDestroyDictionary({commit, dispatch}, payload) {
+        try {
+            await destroyDictionary(payload.id);
+        } catch (e) {
+            console.error('destroyDictionary', e);
+        }
+        dispatch('fetchDictionaries');
+    },
+    async actionAddToMyDictionaries({commit, dispatch}, payload) {
+        try {
+            await addUserDictionary({user_id: payload.user_id, dictionary_id: payload.dictionary_id});
+        } catch (e) {
+            console.error('addToMyDictionaries', e);
+        }
+        dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
+    },
+    async actionRemoveFromMyDictionaries({commit, dispatch}, payload) {
+        try {
+            await deleteUserDictionary(payload.user_id, payload.dictionary_id);
+        } catch (e) {
+            console.error('removeFromMyDictionaries', e);
+        }
+        dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
+    },
+    async actionRemoveWord({commit, dispatch}, payload) {
+        try {
+            await removeWord(payload.dictionary_id, payload.word_id);
+        } catch (e) {
+            console.error('removeWord', e);
+        }
+        dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
+    },
+    async addWord({commit, dispatch}, payload) {
+        try {
+            await addWord({word: payload.word, translation: payload.translation, dictionary_id: payload.dictionary_id})
+        } catch (e) {
+            console.error('addWord', e)
+        }
+        dispatch("fetchDictionary", {id: payload.dictionary_id});
+    },
+    async addDictionary({commit, dispatch}, payload) {
+        let data = {};
+        try {
+            data = await addDictionary({dictionary_name: payload.dictionary_name, creator_id: payload.creator_id})
+        } catch (e) {
+            console.error('addDictionary', e)
+        }
+        dispatch("fetchDictionaries");
+        return Promise.resolve(data);
+    }
 }
 
 const getters = {}

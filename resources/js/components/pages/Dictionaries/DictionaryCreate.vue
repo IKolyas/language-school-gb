@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import {addDictionary} from "../../../services/dictionary.service";
 import {mapState} from "vuex";
 
 export default {
@@ -60,9 +59,12 @@ export default {
     },
     methods: {
         onSubmitDictionary() {
-            addDictionary({dictionary_name: this.dictionary_name, creator_id: this.user.id}).then((data) => {
+            this.$store.dispatch('dictionaries/addDictionary', {
+                dictionary_name: this.dictionary_name,
+                creator_id: this.user.id
+            }).then((data) => {
                 this.$router.push({
-                    name: 'dictionaryOne',
+                    name: 'dictionary',
                     params: {
                         id: data.dictionary
                     }
