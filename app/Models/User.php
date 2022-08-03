@@ -69,4 +69,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Rating::class, 'user_id');
     }
+
+    public function statistics()
+    {
+        return $this->hasOne(Statistics::class);
+    }
 }

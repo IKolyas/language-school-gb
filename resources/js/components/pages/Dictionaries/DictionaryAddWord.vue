@@ -36,7 +36,8 @@ export default {
     },
     methods: {
         onSubmitWord() {
-            this.$store.dispatch('dictionaries/addWord', {word: this.word, translation: this.translation, dictionary_id: this.$route.params.id});
+            this.$store.dispatch('dictionaries/addWord', {word: this.word, translation: this.translation, dictionary_id: this.$route.params.id, user_id: 3});
+            //TODO User_Id из авторизации
             this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
             this.word = '';
             this.translation = '';

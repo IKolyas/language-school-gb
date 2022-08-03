@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\UserController,
     App\Http\Controllers\Api\DictionaryController,
     App\Http\Controllers\Api\WordController;
+use App\Http\Controllers\Api\StatisticsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,10 +38,15 @@ Route::name('dictionary.')->prefix('dictionary')->group(function () {
     Route::delete('/{dictionary_id}/word/{word_id}', [DictionaryController::class, 'destroyDictionaryWord']);
 });
 
+Route::name('statistics')->prefix('statistics')->group(function () {
+    Route::get('/{user_id}', [StatisticsController::class, 'getStatistics']);
+    Route::put('/{user_id}', [StatisticsController::class, 'saveStatistics']);
+});
+
 Route::apiResource('word', WordController::class);
-//Route::name('word.')->prefix('word')->group(function () {
-//
-//});
+Route::name('word.')->prefix('word')->group(function () {
+    Route::get('/all/{user_id}', [WordController::class, 'getAllUserWords']);
+});
 
 
 

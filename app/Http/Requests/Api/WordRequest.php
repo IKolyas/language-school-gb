@@ -13,13 +13,14 @@ class WordRequest extends FormRequest
         return true;
     }
 
-    #[ArrayShape(['word' => "string", 'translation' => "string", 'dictionary_id' => 'integer'])]
+    #[ArrayShape(['word' => "string", 'translation' => "string", 'dictionary_id' => 'integer', 'user_id' => 'integer'])]
     public function rules(): array
     {
         return [
             'word' => 'required|string|max:255',
             'translation' => 'required|string|max:255',
             'dictionary_id' => 'required|integer',
+            'user_id' => 'required|integer',
         ];
     }
 }

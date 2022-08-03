@@ -14,17 +14,10 @@
                 </div>
             </div>
         </div>
-        <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
-
-        <button type="button" class="btn btn-primary" v-if="userHasDictionary && !addFormActive"
-                @click="removeFromMyDictionaries">Удалить из своих
-            словарей
-        </button>
-
-        <div v-if="!addFormActive && isThisUserCreator">
-            <button type="button" class="btn btn-primary" @click="toggleAddForm">Добавить слова</button>
-            <button type="button" class="btn btn-primary" @click="destroyDictionary">Уничтожить словарь</button>
-        </div>
+        <router-link
+            :to="{name: 'dictionary', params: { id: id }}">
+            <button type="button" class="btn btn-primary">Назад</button>
+        </router-link>
         <table class="table">
             <thead>
             <tr>
@@ -93,10 +86,16 @@ export default {
         //TODO Здесь костыль, дважды вызывается fetchUser если эта страница загружается первой.
         if (this.user.id === '') {
             this.$store.dispatch('user/fetchUser', {id: 3}).then(() => {
-                this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
+                this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {
+                    dictionary_id: this.$route.params.id,
+                    user_id: this.user.id
+                });
             });
         } else {
-            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {dictionary_id: this.$route.params.id, user_id: this.user.id});
+            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {
+                dictionary_id: this.$route.params.id,
+                user_id: this.user.id
+            });
         }
     },
     methods: {
@@ -104,7 +103,11 @@ export default {
             this.addFormActive = !this.addFormActive;
         },
         removeWord(wordId) {
-            this.$store.dispatch('dictionaries/actionRemoveWord', {word_id: wordId, dictionary_id: this.dictionaryId, user_id: this.user.id});
+            this.$store.dispatch('dictionaries/actionRemoveWord', {
+                word_id: wordId,
+                dictionary_id: this.dictionaryId,
+                user_id: this.user.id
+            });
         },
         destroyDictionary() {
             this.$store.dispatch('dictionaries/actionDestroyDictionary', {id: this.dictionaryId});
@@ -113,7 +116,10 @@ export default {
             });
         },
         removeFromMyDictionaries() {
-            this.$store.dispatch('dictionaries/actionRemoveFromMyDictionaries', {user_id: this.user.id, dictionary_id: this.dictionaryId})
+            this.$store.dispatch('dictionaries/actionRemoveFromMyDictionaries', {
+                user_id: this.user.id,
+                dictionary_id: this.dictionaryId
+            })
             this.$router.push({
                 name: 'account'
             });
