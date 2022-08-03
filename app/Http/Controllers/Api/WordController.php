@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\WordRequest;
 use App\Models\DictionaryWord;
+use App\Models\Rating;
 use App\Models\Word;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,9 +25,14 @@ class WordController extends Controller
         $word = $validated['word'];
         $translation = $validated['translation'];
         $dictionary_id = $validated['dictionary_id'];
+        $user_id = $validated['user_id'];
 
         $newWord = Word::firstOrCreate(
             ['translation' => $translation, 'word' => $word],
+        );
+        Rating::firstOrCreate(
+            ['user_id' => $user_id, 'word_id' => $newWord->id],
+            ['rating' => 0]
         );
 
         DictionaryWord::create(['word_id' => $newWord->id, 'dictionary_id' => $dictionary_id]);
@@ -48,5 +54,10 @@ class WordController extends Controller
     {
         if(Word::destroy($id)) return response()->json(['success' => true, 'word' => $id]);
         return response()->json(['success' => false, 'word' => $id]);
+    }
+
+    public function getAllUserWords(int $user_id)
+    {
+        return Rating::where('user_id', $user_id)->get();
     }
 }

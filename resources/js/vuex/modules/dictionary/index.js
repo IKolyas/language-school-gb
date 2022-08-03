@@ -83,7 +83,7 @@ const actions = {
     },
     async addWord({commit, dispatch}, payload) {
         try {
-            await addWord({word: payload.word, translation: payload.translation, dictionary_id: payload.dictionary_id})
+            await addWord({word: payload.word, translation: payload.translation, dictionary_id: payload.dictionary_id, user_id: payload.user_id});
         } catch (e) {
             console.error('addWord', e)
         }

@@ -9,7 +9,6 @@ class Rating extends Model
     protected $fillable = [
         'word_id',
         'user_id',
-        'dictionary_id',
         'rating'
     ];
 

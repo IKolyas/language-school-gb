@@ -9,8 +9,8 @@ export default {
         token: '',
         tasks: {},
         photo: '',
-        statistics: {}
-
+        statistics: {},
+        userWords: [],
     })
-    
+
 }

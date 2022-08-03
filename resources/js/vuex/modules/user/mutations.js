@@ -20,5 +20,8 @@ export default {
         state.dictionaries = [];
         state.tasks = {};
         state.groups = [];
+    },
+    setUserWords(state, payload) {
+        state.userWords = payload;
     }
 }

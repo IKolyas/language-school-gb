@@ -1,4 +1,5 @@
 import {getUser} from '../../../services/auth.service';
+import {getAllUserWords} from "../../../services/statistics.service";
 
 export default {
     login(e) {
@@ -67,10 +68,19 @@ export default {
 
     async fetchUser({commit}, payload) {
         try {
-            const { data } = await getUser(payload.id)
+            const {data} = await getUser(payload.id)
             commit('setCurrentUser', data)
         } catch (e) {
             console.error('fetchUser', e);
         }
-    }
+    },
+
+    async fetchUsersWords({commit}, payload) {
+        try {
+            const data = await getAllUserWords(payload.user_id);
+            commit("setUserWords", data);
+        } catch (e) {
+            console.error('fetchUsersWords', e);
+        }
+    },
 }
