@@ -55,7 +55,8 @@ class UserController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             $user = auth()->guard('web')->user();
             $success = true;
-            return response()->json(compact('success', 'user'));
+            $token = $user->createToken('AuthToken')->plainTextToken;
+            return response()->json(compact('success', 'user', 'token'));
         }
         return response()->json(['success' => false, 'message' => 'auth error']);
     }
