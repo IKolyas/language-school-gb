@@ -25,7 +25,6 @@
                 <th scope="col">Слово на русском</th>
                 <th scope="col">Word in English</th>
                 <th scope="col">Текущий рейтинг</th>
-                <th scope="col">Удалить?</th>
             </tr>
             </thead>
             <tbody>
@@ -34,9 +33,6 @@
                 <td>{{ word.word }}</td>
                 <td>{{ word.translation }}</td>
                 <td>{{ word.rating }}</td>
-                <td>
-                    <button class="btn btn-primary" @click="removeWord(word.id)">X</button>
-                </td>
             </tr>
             </tbody>
         </table>
@@ -83,48 +79,12 @@ export default {
         }
     },
     mounted() {
-        //TODO Здесь костыль, дважды вызывается fetchUser если эта страница загружается первой.
-        if (this.user.id === '') {
-            this.$store.dispatch('user/fetchUser', {id: 3}).then(() => {
-                this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {
-                    dictionary_id: this.$route.params.id,
-                    user_id: this.user.id
-                });
-            });
-        } else {
             this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {
                 dictionary_id: this.$route.params.id,
-                user_id: this.user.id
+                //TODO Get User_id
+                user_id: 3
             });
-        }
     },
-    methods: {
-        toggleAddForm() {
-            this.addFormActive = !this.addFormActive;
-        },
-        removeWord(wordId) {
-            this.$store.dispatch('dictionaries/actionRemoveWord', {
-                word_id: wordId,
-                dictionary_id: this.dictionaryId,
-                user_id: this.user.id
-            });
-        },
-        destroyDictionary() {
-            this.$store.dispatch('dictionaries/actionDestroyDictionary', {id: this.dictionaryId});
-            this.$router.push({
-                name: 'dictionaries'
-            });
-        },
-        removeFromMyDictionaries() {
-            this.$store.dispatch('dictionaries/actionRemoveFromMyDictionaries', {
-                user_id: this.user.id,
-                dictionary_id: this.dictionaryId
-            })
-            this.$router.push({
-                name: 'account'
-            });
-        }
-    }
 }
 </script>
 
