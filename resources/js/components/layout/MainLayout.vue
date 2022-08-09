@@ -1,14 +1,14 @@
 <template>
-  <AppHeader />
-  <div class="container">
-	  <router-view />
-  </div>
+    <div class="container">
+        <AppHeader/>
+        <router-view/>
+    </div>
 </template>
 
 <script>
 import AppHeader from '../partials/AppHeader'
 export default {
-  components: { AppHeader }
+    components: {AppHeader}
 }
 </script>
 

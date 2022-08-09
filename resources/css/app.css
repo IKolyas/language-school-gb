@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway:wght@300;400&family=Sacramento&family=Source+Sans+Pro&display=swap');
+/*font-family: 'Open Sans', sans-serif;*/
+/*font-family: 'Raleway', sans-serif;*/
+/*font-family: 'Sacramento', cursive;*/
+/*font-family: 'Source Sans Pro', sans-serif;*/
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 34px 50px;
+    align-items: center;
+}
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 934px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    padding: 0 50px;
+    align-items: center;
+    margin: 0;
+}
+.main-nav__link {
+color: black;
+}
+.main-nav__link_active {
+    color: black;
+    border-bottom: 2px solid #3B6CE9;
+    position: relative;
+}
+.main-nav__link_active::before {
+    display: block;
+    width: 5px;
+    height: 5px;
+    background-color: #3B6CE9;
+    content: "";
+    position: absolute;
+    transform: rotate(45deg);
+    top: 22px;
+}
+.login-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+    border: 2px dashed #9747FF;
+    margin: 0;
+}
+.login-group__item {
+    padding: 5px;
+}
+.login-group__button {
+    padding: 12px 30px;
+    color: #3B6CE9;
+    border: 1px solid #3B6CE9;
+    border-radius: 10px;
+}
+.user-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px dashed #9747FF;
+    border-radius: 10px;
+    position: relative;
+}
+.user-menu__name {
+    padding: 0 10px;
+}
+.user-menu__avatar {
+    border-radius: 50%;
+}
+.user-menu__dropdown-toggle {
+    width: 0;
+    height: 0;
+    content: '';
+    border: 5px solid transparent; border-top: 5px solid black;
+    margin-top: 5px;
+}
+.user-menu__options-list {
+    position: absolute;
+    top: 80px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
