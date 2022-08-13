@@ -2,13 +2,15 @@
     <div class="container">
         <AppHeader/>
         <router-view/>
+        <AppFooter/>
     </div>
 </template>
 
 <script>
 import AppHeader from '../partials/AppHeader'
+import AppFooter from "../partials/AppFooter";
 export default {
-    components: {AppHeader}
+    components: {AppFooter, AppHeader}
 }
 </script>
 

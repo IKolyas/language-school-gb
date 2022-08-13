@@ -10,6 +10,7 @@
     padding: 34px 50px;
     align-items: center;
 }
+
 .main-nav {
     display: flex;
     justify-content: space-between;
@@ -21,14 +22,17 @@
     align-items: center;
     margin: 0;
 }
+
 .main-nav__link {
-color: black;
+    color: black;
 }
+
 .main-nav__link_active {
     color: black;
     border-bottom: 2px solid #3B6CE9;
     position: relative;
 }
+
 .main-nav__link_active::before {
     display: block;
     width: 5px;
@@ -39,6 +43,7 @@ color: black;
     transform: rotate(45deg);
     top: 22px;
 }
+
 .login-group {
     display: flex;
     justify-content: space-between;
@@ -47,41 +52,265 @@ color: black;
     border: 2px dashed #9747FF;
     margin: 0;
 }
+
 .login-group__item {
     padding: 5px;
 }
+
 .login-group__button {
     padding: 12px 30px;
     color: #3B6CE9;
     border: 1px solid #3B6CE9;
     border-radius: 10px;
 }
+
 .user-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    border: 1px dashed #9747FF;
     border-radius: 10px;
     position: relative;
 }
+
 .user-menu__name {
     padding: 0 10px;
 }
+
 .user-menu__avatar {
     border-radius: 50%;
+    border: 2px solid #3B6CE9;
 }
+
 .user-menu__dropdown-toggle {
     width: 0;
     height: 0;
     content: '';
-    border: 5px solid transparent; border-top: 5px solid black;
+    border: 5px solid transparent;
+    border-top: 5px solid #3B6CE9;
     margin-top: 5px;
 }
+
 .user-menu__options-list {
     position: absolute;
     top: 80px;
-    border: 1px solid black;
-    border-radius: 20px;
+    border: 1px solid #3B6CE9;
+    border-radius: 5px;
+    width: 200px;
+    box-shadow: 0 4px 4px 0 rgba(59, 108, 233, 0.3);
+    background-color: #FFF;
+    z-index: 2;
+    padding: 20px;
+    margin: 0;
+    text-align: center;
 }
 
+.user-menu__options-item {
+    border-bottom: 2px solid #3B6CE9;
+    padding: 10px 0;
+    position: relative;
+}
+
+.user-menu__options-item::before{
+    display: block;
+    width: 5px;
+    height: 5px;
+    background-color: #3B6CE9;
+    content: "";
+    position: absolute;
+    transform: rotate(45deg);
+    top: 42px;
+}
+
+.user-menu__options-link {
+    color: #000;
+    font-family: Raleway, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.21em;
+}
+
+.main-logo {
+    margin-bottom: 20px;
+}
+
+.promo {
+    background-image: url(../img/video-call.png);
+    background-repeat: no-repeat;
+    background-position: 80%, 50%;
+    background-size: 34%;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.promo__features-link {
+    position: absolute;
+    content: url("../img/arrows-down-icon.svg");
+    width: 100px;
+    height: 100px;
+    padding: 20px;
+    top: 83%;
+    left: 40%
+}
+
+.promo__features-link:hover {
+    padding: 0;
+}
+
+.promo__tagline {
+    font-family: Raleway, sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+    text-align: center;
+    width: 500px;
+}
+
+.promo__button {
+    width: 270px;
+    height: 50px;
+    border: 1px solid #043FD6;
+    border-radius: 5px;
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 23px;
+    letter-spacing: 0.21em;
+    text-align: center;
+}
+
+.promo__button:hover {
+    background-color: rgba(59, 108, 233, 0.18);
+}
+
+.promo__button:active {
+    background-color: rgba(59, 108, 233, 0.32);
+}
+
+.promo__button_move-right {
+    margin-left: 110px;
+}
+
+.features {
+    padding: 50px;
+    background-image: url(../img/man-with-notebook.png);
+    background-repeat: no-repeat;
+    background-position: top 100px left 60px;
+    background-size: 30%;
+}
+
+.features__top {
+    padding-left: 400px;
+    min-height: 370px;
+}
+
+.features__title {
+    font-family: Sacramento, cursive;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 58px;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.features__description {
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 38px;
+    letter-spacing: 0.025em;
+    text-align: left;
+}
+
+.features__subtitle {
+    font-family: Sacramento, cursive;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 47px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.features__list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.features__list-item {
+    text-align: center;
+    width: 170px;
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 23px;
+    letter-spacing: 0.025em;
+}
+
+.main-footer {
+    background-color: #3660CC;
+    padding: 50px 80px;
+    display: flex;
+}
+
+.main-footer__logo {
+    margin-top: 50px;
+}
+
+.main-footer__navigation {
+    margin-top: 70px;
+    margin-left: 100px;
+}
+
+.navigation {
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.05em;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.main-footer__contacts {
+    margin-left: auto;
+    margin-top: 30px;
+}
+
+.contacts {
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0.05em;
+    text-align: right;
+    color: #FFF;
+}
+
+.contacts__button {
+    border: 1px solid #FFFFFF;
+    background-color: #3660CC;
+    color: #FFF;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.contacts__button:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.contacts__button:active {
+    background-color: rgba(255, 255, 255, 0.80);
+    color: #3660CC;
+}
+
+.contacts__phone {
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0.05em;
+    text-align: left;
+    margin-bottom: 20px;
+}
