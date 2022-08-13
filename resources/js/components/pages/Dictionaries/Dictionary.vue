@@ -38,6 +38,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Слово на русском</th>
                 <th scope="col">Word in English</th>
+                <th scope="col" v-if="addFormActive">Удалить</th>
             </tr>
             </thead>
             <tbody>
@@ -45,6 +46,9 @@
                 <th scope="row">{{ index }}</th>
                 <td>{{ word.word }}</td>
                 <td>{{ word.translation }}</td>
+                <td v-if="addFormActive">
+                    <button class="btn btn-primary" @click="removeWord(word.id)">X</button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -85,7 +89,7 @@ export default {
                 }
             })
             return userHasDictionary;
-        }
+        },
     },
     mounted() {
         if (this.dictionaryId !== +this.$route.params.id) {

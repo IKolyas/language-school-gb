@@ -29,3 +29,5 @@ Homestead.json
 .idea
 .vscode
 /public/js/app.js.LICENSE.txt
+/public/css/
+/public/
