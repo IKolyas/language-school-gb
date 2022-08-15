@@ -111,7 +111,7 @@
     position: relative;
 }
 
-.user-menu__options-item::before{
+.user-menu__options-item::before {
     display: block;
     width: 5px;
     height: 5px;
@@ -146,7 +146,7 @@
 
 .promo__features-link {
     position: absolute;
-    content: url("../img/arrows-down-icon.svg");
+    content: url("../img/icons/arrows-down-icon.svg");
     width: 100px;
     height: 100px;
     padding: 20px;
@@ -314,3 +314,128 @@
     text-align: left;
     margin-bottom: 20px;
 }
+
+/*enter-page*/
+
+.enter-page {
+    min-height: 1013px;
+    padding-top: 97px;
+    padding-left: 700px;
+    padding-right: 100px;
+    background-image: url("../img/presentation.png");
+    background-repeat: no-repeat;
+    background-position: top 100px left 50px;
+    background-size: 45%;
+    text-align: center;
+}
+
+.enter-page__heading {
+    font-family: Sacramento, cursive;
+    font-size: 36px;
+}
+
+.enter-page__form {
+    margin-bottom: 15px;
+}
+
+.enter-form__input {
+    border: 2px solid rgba(59, 108, 233, 1);
+    height: 46px;
+    width: 522px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 50px;
+    background-repeat: no-repeat;
+    background-position: top 5px left 10px;
+    font-family: Sacramento, cursive;
+    font-size: 20px;
+}
+
+.enter-form__input:hover, .enter-form__input:focus {
+    border-width: 4px;
+}
+
+.enter-form__input_email {
+    background-image: url("../img/icons/user-icon.png");
+}
+
+.enter-form__input_password {
+    background-image: url("../img/icons/lock-icon.png");
+}
+
+.enter-form__additions {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+
+.enter-form__checkbox {
+    width: 15px;
+    height: 15px;
+    margin-right: 15px;
+}
+
+.enter-form__text {
+    font-family: Sacramento, cursive;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.enter-form__button {
+    height: 45px;
+    width: 94px;
+    border-radius: 10px;
+    padding: 12px 30px;
+    border: 1px solid #3B6CE9;
+    background-color: #FFF;
+}
+
+.enter-form__button:hover {
+    background-color: rgba(59, 108, 233, 0.12);
+}
+
+.enter-form__button:active {
+    background-color: rgba(59, 108, 233, 0.24);
+}
+
+.enter-page__social-networks {
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+.social-networks {
+    display: flex;
+    width: 350px;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.social-networks__link {
+    display: block;
+    font-size: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url("../img/icons/vk-round-icon.png");
+}
+
+.social-networks__link_ok {
+    background-image: url("../img/icons/ok-icon.png");
+}
+
+.social-networks__link_gmail {
+    background-image: url("../img/icons/gmail-icon.png");
+}
+
+.social-networks__link_yandex {
+    background-image: url("../img/icons/yandex-icon.png");
+}
+
+.social-networks__link_appstore {
+    background-image: url("../img/icons/appstore-icon.png");
+}
+
+
+
+
+
