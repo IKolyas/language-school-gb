@@ -1,60 +1,43 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-
-                <div class="alert alert-danger" role="alert" v-if="error !== null">
-                    {{ error }}
-                </div>
-
-                <div class="card card-default">
-                    <div class="card-header">Регистрация</div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group row my-2">
-                                <label for="name" class="col-sm-4 col-form-label text-md-right">Имя</label>
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" v-model="name" required
-                                           autofocus autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="form-group row my-2">
-                                <label for="lastname" class="col-sm-4 col-form-label text-md-right">Фамилия</label>
-                                <div class="col-md-6">
-                                    <input id="lastname" type="text" class="form-control" v-model="lastname" required
-                                           autofocus autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group row my-2">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail</label>
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" v-model="email" required
-                                           autofocus autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group row my-2">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Пароль</label>
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" v-model="password"
-                                           required autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group row mb-0 my-2">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary" @click="handleSubmit">
-                                        Зарегистрироваться
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <main class="register-page">
+        <div class="alert alert-danger" role="alert" v-if="error !== null">
+            {{ error }}
+        </div>
+        <img src="../../../../img/register-logo.png" alt="Language school project logotype"
+             class="register-page__logo" width="401" height="69">
+        <h1 class="register-page__heading">Добро пожаловать!</h1>
+        <div class="register-page__column-wrapper">
+            <div class="register-page__column">
+                <form class="register-page__form register-form">
+                    <label for="name" class="register-form__label">Имя пользователя</label>
+                    <input id="name" type="text" class="primary-input register-form__input" v-model="name" required
+                           autofocus autocomplete="off" placeholder="введите имя">
+                    <label for="lastname" class="register-form__label">Фамилия</label>
+                    <input id="lastname" type="text" class="primary-input register-form__input" v-model="lastname" required
+                           autofocus autocomplete="off" placeholder="введите фамилию">
+                    <label for="email" class="register-form__label">E-Mail</label>
+                    <input id="email" type="email" class="primary-input register-form__input" v-model="email" required
+                           autofocus autocomplete="off" placeholder="введите email">
+                    <label for="password" class="register-form__label">Пароль</label>
+                    <input id="password" type="password" class="primary-input register-form__input" v-model="password"
+                           required autocomplete="off" placeholder="введите пароль">
+                    <label for="password-submit" class="register-form__label">Подтверждение пароля</label>
+                    <input id="password-submit" type="password" class="primary-input register-form__input register-form__input_last-input" v-model="passwordSubmit"
+                           required autocomplete="off" placeholder="повторите пароль">
+                    <button type="submit" class="register-for__submit-button" @click="handleSubmit">
+                        Зарегистрироваться
+                    </button>
+                </form>
+            </div>
+            <div class="register-page__column register-page__column_right">
+                <ul class="register-page__authorization-options authorization-options">
+                    <li class="authorization-options__item authorization-options__item_google">Продолжить с Google</li>
+                    <li class="authorization-options__item authorization-options__item_apple">Продолжить с Apple</li>
+                    <li class="authorization-options__item authorization-options__item_vk">Продолжить с Вконтакте</li>
+                </ul>
             </div>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
@@ -66,6 +49,7 @@ export default {
             lastname: "",
             email: "",
             password: "",
+            passwordSubmit: "",
             error: null
         }
     },
