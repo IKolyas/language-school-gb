@@ -1,45 +1,50 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-
-                <div class="alert alert-danger" role="alert" v-if="error !== null">
-                    {{ error }}
-                </div>
-
-                <div class="card card-default">
-                    <div class="card-header">Вход</div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group row my-2">
-                                <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail</label>
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" v-model="email" required
-                                           autofocus autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group row my-2">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Пароль</label>
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" v-model="password"
-                                           required autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group row my-2 mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary" @click="handleSubmit">
-                                        Войти
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <main class="enter-page">
+        <div class="alert alert-danger" role="alert" v-if="error !== null">
+            {{ error }}
         </div>
-    </div>
+        <img src="../../../../img/main-logo.png" alt="Language school project logotype" width="555"
+             class="enter-page__logo">
+        <h1 class="enter-page__heading">Вход</h1>
+        <form class="enter-page__form enter-form">
+            <input type="email" class="primary-input enter-form__input enter-form__input_email" v-model="email" required
+                   autofocus autocomplete="off" placeholder="Имя">
+            <input type="password" class="primary-input enter-form__input enter-form__input_password" v-model="password"
+                   required autocomplete="off" placeholder="Пароль">
+            <div class="enter-form__additions">
+                <div>
+                    <input type="checkbox" class="enter-form__checkbox" checked id="rememberMe">
+                    <label for="rememberMe" class="enter-form__text">Запомнить меня</label>
+                </div>
+                <a href="" class="enter-form__text enter-form__link">Забыли пароль?</a>
+            </div>
+            <button type="submit" class="enter-form__button" @click="handleSubmit">
+                Вход
+            </button>
+        </form>
+        <p class="enter-page__text">с помощью аккаунта в социальных сетях</p>
+        <ul class="enter-page__social-networks social-networks">
+            <li class="social-networks__item">
+                <a href="" class="social-networks__link social-networks__link_vk">VK</a>
+            </li>
+            <li class="social-networks__item">
+                <a href="" class="social-networks__link social-networks__link_ok">OK</a>
+            </li>
+            <li class="social-networks__item">
+                <a href="" class="social-networks__link social-networks__link_gmail">Gmail</a>
+            </li>
+            <li class="social-networks__item">
+                <a href="" class="social-networks__link social-networks__link_yandex">Yandex</a>
+            </li>
+            <li class="social-networks__item">
+                <a href="" class="social-networks__link social-networks__link_appstore">AppStore</a>
+            </li>
+        </ul>
+        <p class="enter-page__text">
+            Нет аккаунта?
+            <a href="" class="enter-form__link">Зарегистрируйтесь!</a>
+        </p>
+    </main>
 </template>
 
 <script>

@@ -206,7 +206,7 @@
 }
 
 .features__title {
-    font-family: Sacramento, cursive;
+    font-family: 'Raleway', sans-serif;
     font-size: 32px;
     font-weight: 400;
     line-height: 58px;
@@ -224,7 +224,7 @@
 }
 
 .features__subtitle {
-    font-family: Sacramento, cursive;
+    font-family: 'Raleway', sans-serif;
     font-size: 25px;
     font-weight: 400;
     line-height: 47px;
@@ -330,7 +330,7 @@
 }
 
 .enter-page__heading {
-    font-family: Sacramento, cursive;
+    font-family: 'Raleway', sans-serif;
     font-size: 36px;
 }
 
@@ -338,21 +338,25 @@
     margin-bottom: 15px;
 }
 
-.enter-form__input {
+.primary-input {
     border: 2px solid rgba(59, 108, 233, 1);
     height: 46px;
     width: 522px;
     border-radius: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 10px 50px;
-    background-repeat: no-repeat;
-    background-position: top 5px left 10px;
-    font-family: Sacramento, cursive;
+    font-family: 'Raleway', sans-serif;
     font-size: 20px;
+    padding: 10px;
 }
 
-.enter-form__input:hover, .enter-form__input:focus {
+.enter-form__input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 50px;
+    background-repeat: no-repeat;
+    background-position: top 5px left 10px;
+}
+
+.primary-input:hover, .primary-input:focus {
     border-width: 4px;
 }
 
@@ -377,7 +381,7 @@
 }
 
 .enter-form__text {
-    font-family: Sacramento, cursive;
+    font-family: 'Raleway', sans-serif;
     font-size: 13px;
     font-weight: 400;
 }
@@ -435,7 +439,94 @@
     background-image: url("../img/icons/appstore-icon.png");
 }
 
+/*Register-page*/
+.register-page {
+    min-height: 1013px;
+}
 
+.register-page__logo {
+    margin-bottom: 14px;
+}
 
+.register-page__heading {
+    font-family: 'Raleway', sans-serif;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.register-page__column-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.register-page__column {
+    width: 570px;
+    padding: 20px;
+}
+
+.register-form__label {
+    font-family: Open Sans, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 19px;
+}
+
+.register-form__input {
+    margin-bottom: 19px;
+}
+
+.register-for__submit-button {
+    width: 419px;
+    border: 3px solid #3B6CE9;
+    border-radius: 10px;
+    padding: 12px 30px;
+    color: #3B6CE9;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 36px;
+    text-align: center;
+    margin-left: 50px;
+    margin-top: 50px;
+    background-color: #FFF;
+}
+
+.register-page__column_right {
+    padding-top: 500px;
+    background-image: url("../img/registration.png");
+    background-repeat: no-repeat;
+    background-position: top 50px left 50px;
+    background-size: 75%;
+}
+
+.authorization-options__item {
+    width: 473px;
+    height: 64px;
+    border-radius: 40px;
+    margin-bottom: 35px;
+    text-align: center;
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    background-repeat: no-repeat;
+    background-position: top 17px left 20px;
+    padding: 10px;
+}
+
+.authorization-options__item_google {
+    background-image: url("../img/icons/google-icon.png");
+    background-color: #F1F1F1;
+}
+
+.authorization-options__item_apple {
+    background-image: url("../img/icons/apple-icon.png");
+    background-color: #0A0A0A;
+    color: #FFF;
+}
+
+.authorization-options__item_vk {
+    background-image: url("../img/icons/vk-square-icon.png");
+    background-color: #567FBD;
+    color: #FFF;
+}
 
 
