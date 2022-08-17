@@ -1,65 +1,53 @@
 <template>
-    <button class="btn btn-primary" @click="updateStatistics">Нажать когда закончил тренировку</button>
-    <!--    TODO этот метод надо вызывать когда заклнчил тренировку-->
-    <h2 class="my-4">Достижения</h2>
-    <p>Начал заниматься {{ startDay }}</p>
-    <p>Последний раз занимался {{ lastTrainingDay }}</p>
-    <ul class="nav nav-pills d-flex flex-wrap justify-content-between achivement-list">
-        <li class="nav-item">
-            <div class="card bg-info" style="width: 180px">
-                <div class="card-body text-center">
-                    <p class="card-text">занимаешься</p>
-                    <h3 class="card-title">{{ trainingDays }}</h3>
-                    <p class="card-text">дня</p>
-                </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <div class="card bg-info" style="width: 180px">
-                <div class="card-body text-center">
-                    <p class="card-text">занимаешься</p>
-                    <h3 class="card-title">{{ trainingDaysStrike }}</h3>
-                    <p class="card-text">дней подряд</p>
-                </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <div class="card bg-info" style="width: 180px">
-                <div class="card-body text-center">
-                    <p class="card-text">максимально</p>
-                    <h3 class="card-title">{{ maxTrainingDaysStrike }}</h3>
-                    <p class="card-text"> дней подряд</p>
-                </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <div class="card bg-success" style="width: 180px">
-                <div class="card-body text-center">
-                    <p class="card-text">В твоих словарях</p>
-                    <h3 class="card-title">{{ userWordsTotalCount }}</h3>
-                    <p class="card-text">слов</p>
-                </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <div class="card bg-success" style="width: 180px">
-                <div class="card-body text-center">
-                    <p class="card-text">В процессе изучения</p>
-                    <h3 class="card-title">{{ userWordsInProgressCount }}</h3>
-                    <p class="card-text">слов</p>
-                </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <div class="card bg-warning" style="width: 180px">
-                <div class="card-body text-center">
-                    <p class="card-text">Изучено</p>
-                    <h3 class="card-title">{{userWordsLearnedCount}}</h3>
-                    <p class="card-text">слов</p>
-                </div>
-            </div>
-        </li>
-    </ul>
+    <section class="achievements-page">
+        <h2 class="visually-hidden">Достижения</h2>
+        <ul class="achievements-page__top bottom-marked">
+            <li class="achievements-page__top-item">
+                <p class="achievements-page__top-text">Дата начала занятий:</p>
+                <span class="achievements-page__top-date">{{ startDay }}</span>
+            </li>
+            <li class="achievements-page__top-item">
+                <p class="achievements-page__top-text">Последний раз занимался:</p>
+                <span class="achievements-page__top-date">{{ lastTrainingDay }}</span>
+            </li>
+        </ul>
+        <ul class="achievements-page__achievements-list achievements-list">
+            <li class="achievements-list__item achievement-card achievement-card_training-days achievement-card_green-shadow">
+                <p class="achievement-card__text">
+                    Занимаешься <span class="achievement-card__number">{{ trainingDays }}</span> дней
+                </p>
+            </li>
+            <li class="achievements-list__item achievement-card achievement-card_training-days-strike achievement-card_green-shadow">
+                <p class="achievement-card__text">
+                    Занимаешься <span class="achievement-card__number">{{ trainingDaysStrike }}</span> дней подряд
+                </p>
+            </li>
+            <li class="achievements-list__item achievement-card achievement-card_max-training-days-strike achievement-card_green-shadow">
+                <p class="achievement-card__text">
+                    Максимально <span class="achievement-card__number">{{ maxTrainingDaysStrike }}</span> дней подряд
+                </p>
+            </li>
+            <li class="achievements-list__item achievement-card achievement-card_user-words-total-count achievement-card_yellow-shadow">
+                <p class="achievement-card__text">
+                    В твоих словарях <span class="achievement-card__number">{{ userWordsTotalCount }}</span> слов
+                </p>
+            </li>
+            <li class="achievements-list__item achievement-card achievement-card_user-words-in-progress-count achievement-card_yellow-shadow">
+                <p class="achievement-card__text">
+                    В процессе изучения <span class="achievement-card__number">{{ userWordsInProgressCount }}</span>
+                    слов
+                </p>
+            </li>
+            <li class="achievements-list__item achievement-card achievement-card_user-words-learned-count achievement-card_yellow-shadow">
+                <p class="achievement-card__text">
+                    Изучено <span class="achievement-card__number">{{ userWordsLearnedCount }}</span> слов
+                </p>
+            </li>
+        </ul>
+        <button class="btn btn-primary" @click="updateStatistics">Нажать когда закончил тренировку</button>
+        (Этой кнопки потом не будет)
+        <!--    TODO этот метод надо вызывать когда закончил тренировку, здесь убрать-->
+    </section>
 </template>
 
 <script>

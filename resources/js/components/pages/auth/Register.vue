@@ -24,7 +24,7 @@
                     <label for="password-submit" class="register-form__label">Подтверждение пароля</label>
                     <input id="password-submit" type="password" class="primary-input register-form__input register-form__input_last-input" v-model="passwordSubmit"
                            required autocomplete="off" placeholder="повторите пароль">
-                    <button type="submit" class="register-for__submit-button" @click="handleSubmit">
+                    <button type="submit" class="register-form__submit-button" @click="handleSubmit">
                         Зарегистрироваться
                     </button>
                 </form>
