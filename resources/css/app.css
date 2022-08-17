@@ -27,13 +27,11 @@
     color: black;
 }
 
-.main-nav__link_active {
-    color: black;
-    border-bottom: 2px solid #3B6CE9;
+.bottom-marked {
     position: relative;
 }
 
-.main-nav__link_active::before {
+.bottom-marked::before {
     display: block;
     width: 5px;
     height: 5px;
@@ -41,7 +39,21 @@
     content: "";
     position: absolute;
     transform: rotate(45deg);
-    top: 22px;
+    bottom: -2px;
+}
+
+.bottom-marked::after {
+    display: block;
+    height: 1px;
+    background-color: #3B6CE9;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.main-nav__link_active {
+    color: black;
 }
 
 .login-group {
@@ -82,13 +94,17 @@
     border: 2px solid #3B6CE9;
 }
 
-.user-menu__dropdown-toggle {
+.dropdown-toggle-mark {
     width: 0;
     height: 0;
     content: '';
     border: 5px solid transparent;
-    border-top: 5px solid #3B6CE9;
+    border-top: 5px solid #000;
     margin-top: 5px;
+}
+
+.user-menu__dropdown-toggle {
+    border-top: 5px solid #3B6CE9;
 }
 
 .user-menu__options-list {
@@ -106,20 +122,7 @@
 }
 
 .user-menu__options-item {
-    border-bottom: 2px solid #3B6CE9;
     padding: 10px 0;
-    position: relative;
-}
-
-.user-menu__options-item::before {
-    display: block;
-    width: 5px;
-    height: 5px;
-    background-color: #3B6CE9;
-    content: "";
-    position: absolute;
-    transform: rotate(45deg);
-    top: 42px;
 }
 
 .user-menu__options-link {
@@ -404,8 +407,7 @@
 }
 
 .enter-page__social-networks {
-    margin: auto;
-    margin-bottom: 40px;
+    margin: auto auto 40px;
 }
 
 .social-networks {
@@ -476,7 +478,7 @@
     margin-bottom: 19px;
 }
 
-.register-for__submit-button {
+.register-form__submit-button {
     width: 419px;
     border: 3px solid #3B6CE9;
     border-radius: 10px;
@@ -529,4 +531,211 @@
     color: #FFF;
 }
 
+/*Account-page*/
+.account-page {
+    display: flex;
+    justify-content: space-between;
+}
 
+.account-navbar {
+    width: 260px;
+    background: linear-gradient(180deg, rgba(31, 159, 217, 0.24) 0%, rgba(133, 69, 247, 0.24) 100%);
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    min-height: 900px;
+    flex-shrink: 0;
+}
+
+.account-navbar__avatar {
+    border-radius: 50%;
+    margin: 0 auto 11px;
+}
+
+.account-navbar__username {
+    font-family: Raleway, sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.account-navbar__username::before {
+    left: 10%
+}
+
+.account-navbar__username::after {
+    width: 80%;
+    left: 10%;
+}
+
+.account-navigation {
+    width: 214px;
+    margin: 0;
+    padding: 0;
+}
+
+.account-navigation__item {
+    margin-bottom: 30px;
+}
+
+.account-navigation__item-link {
+    font-family: Raleway, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #000;
+}
+
+.account-navigation__item-link_active {
+    color: #3B6CE9;
+}
+
+.dropdown-account {
+    position: relative;
+    padding: 10px 10px 10px 20px;
+    background-image: url("../img/icons/question-mark-icon.png");
+    background-position: left 40px top 5px;
+    background-repeat: no-repeat;
+    font-family: Raleway, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dropdown-account__dropdown-toggle-mark {
+    position: absolute;
+    top: 16px;
+    right: 35px;
+}
+
+.dropdown-account__list {
+    width: 184px;
+    padding: 36px 10px 16px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 4px rgba(59, 108, 233, 0.3);
+    border-radius: 10px;
+    margin: 10px 0 0;
+    font-family: Raleway, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.dropdown-account__item {
+    margin-bottom: 25px;
+}
+
+.dropdown-account__link {
+    color: #000;
+}
+
+.dropdown-account__link:hover, .dropdown-account__link:active {
+    color: #3B6CE9;
+}
+
+/*Achievements-page*/
+.achievements-page {
+    min-height: 900px;
+    background-image: url("../img/achivements-background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.achievements-page__top {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 70px 40px;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.achievements-page__top::before {
+    left: 185px;
+}
+
+.achievements-page__top::after {
+    width: 660px;
+    left: 185px;
+}
+
+.achievements-page__top-item {
+    width: 400px;
+    height: 112px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 5px 5px rgba(59, 108, 233, 0.45);
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+}
+
+.achievements-page__top-text {
+    font-family: Raleway, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.achievements-page__top-date {
+    font-family: Raleway, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #3B6CE9;
+}
+
+.achievements-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.achievements-list__item {
+    margin-bottom: 20px;
+}
+
+.achievement-card {
+    width: 307px;
+    height: 200px;
+    background-color: #FFFFFF;
+    box-shadow: 0 5px 5px 5px rgba(40, 125, 64, 0.45);
+    border-radius: 10px;
+    padding-top: 140px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: top 20px center;
+}
+
+.achievement-card_yellow-shadow {
+    box-shadow: 0 5px 5px 5px rgba(196, 180, 41, 0.45);
+}
+
+.achievement-card__text {
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.achievement-card__number {
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #CA0000;
+}
+
+.achievement-card_training-days {
+    background-image: url("../img/icons/cup-icon.png");
+}
+
+.achievement-card_training-days-strike {
+    background-image: url("../img/icons/chart-icon.png");
+}
+
+.achievement-card_max-training-days-strike {
+    background-image: url("../img/icons/reward-icon.png");
+}
+
+.achievement-card_user-words-total-count {
+    background-image: url("../img/icons/dictionary-icon.png");
+}
+
+.achievement-card_user-words-in-progress-count {
+    background-image: url("../img/icons/book-with-hand-icon.png");
+}
+
+.achievement-card_user-words-learned-count {
+    background-image: url("../img/icons/letters-icon.png");
+}
