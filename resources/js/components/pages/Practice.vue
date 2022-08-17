@@ -2,7 +2,7 @@
 	<div>
 		<AppLoader v-if="loading"/>
 		<div v-else>
-			<h2 class="h2 mb-3">{{`Время практиковаться со словарём ${dictionaryName}!`}}</h2>
+			<h2 class="h2 mb-3">{{`Время практиковаться со словарём '${dictionaryName}'!`}}</h2>
 
 			<button
 				v-if="!isPractice"

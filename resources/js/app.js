@@ -21,6 +21,7 @@ app.component('AppLoader', AppLoader)
 
 
 app.config.globalProperties.$axios = axios;
+axios.defaults.headers.common['Authorization'] = `Bearer ${store.getters['user/token']}`;
 app.mount('#app'); // Vue Instance - Root component
 
 if (window.Cypress) {

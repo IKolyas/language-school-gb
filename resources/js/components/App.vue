@@ -18,7 +18,7 @@ export default {
 	components: { MainLayout },
 
     created() {
-        this.$store.dispatch('user/fetchUser', {id: 3});
+
     },
 }
 </script>

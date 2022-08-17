@@ -27,10 +27,10 @@
         </ul>
         <ul class="login-group" v-if="!isAuth">
             <li class="login-group__item">
-                <button class="login-group__button">Войти</button>
+                <router-link tag="button" to="login" class="login-group__button">Войти</router-link>
             </li>
             <li class="login-group__item">
-                <button class="login-group__button">Регистрация</button>
+                <router-link tag="button" to="register" class="login-group__button">Регистрация</router-link>
             </li>
         </ul>
         <div class="user-menu" v-else @click="toggleAuthMenu">
@@ -47,9 +47,9 @@
                 </li>
                 <li class="user-menu__options-item">
                     <!--                    TODO logout router-link-->
-                    <router-link :to="{name: 'account'}" class="user-menu__options-link">
+                    <span class="user-menu__options-link" @click="userLogout">
                         Выйти
-                    </router-link>
+                    </span>
                 </li>
                 <li class="user-menu__options-item">
                     <router-link :to="{name: 'account'}" class="user-menu__options-link">
@@ -75,7 +75,7 @@ export default {
     },
     computed: {
         ...mapGetters('user', {
-            isAuth: 'isAuth',
+            isAuth: 'authenticated',
             name: 'name',
             lastname: 'lastname',
             email: 'email',
@@ -87,6 +87,13 @@ export default {
             logout: 'user/logout',
             fetchUser: 'user/fetchUser'
         }),
+        userLogout() {
+            this.$axios.post('/api/user/logout').then((response) => {
+                if (!response.data.success) return alert(response.data.message);
+            }).catch(data => {
+                return alert(data.message);
+            }).finally(() => this.logout())
+        },
         toggleAuthMenu() {
             this.AuthMenuIsActive = !this.AuthMenuIsActive;
         },
@@ -94,4 +101,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.user-menu__options-link:hover {
+    cursor: pointer;
+    color: blue;
+}
+</style>

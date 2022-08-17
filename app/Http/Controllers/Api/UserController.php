@@ -46,25 +46,24 @@ class UserController extends Controller
     {
 
         $validated = $request->validated();
-
         $credentials = [
             'email' => $validated['email'],
             'password' => $validated['password'],
         ];
 
-        if (Auth::guard('web')->attempt($credentials)) {
-            $user = auth()->guard('web')->user();
+        if(Auth::attempt($credentials)){
             $success = true;
-            $token = $user->createToken('AuthToken')->plainTextToken;
+            $token = Auth::user()->createToken('LaravelSanctumAuth')->plainTextToken;
+            $user = Auth::user();
             return response()->json(compact('success', 'user', 'token'));
         }
         return response()->json(['success' => false, 'message' => 'auth error']);
     }
 
-
     public function logout(): JsonResponse
     {
         try {
+            auth()->user()->tokens()->delete();
             Session::flush();
             $success = true;
             $message = 'Successfully logged out';
@@ -150,7 +149,7 @@ class UserController extends Controller
         return response()->json(['success' => true, '$newDictionaryWord' => $newDictionaryUser->id]);
     }
 
-    public function createUserRating(int $user_id, int $word_id)
+    public function createUserRating(int $user_id, int $word_id): JsonResponse
     {
         $newRating = Rating::firstOrCreate(
             ['user_id' => $user_id, 'word_id' => $word_id],

@@ -6,7 +6,7 @@
         <img src="../../../../img/main-logo.png" alt="Language school project logotype" width="555"
              class="enter-page__logo">
         <h1 class="enter-page__heading">Вход</h1>
-        <form class="enter-page__form enter-form">
+        <div class="enter-page__form enter-form">
             <input type="email" class="primary-input enter-form__input enter-form__input_email" v-model="email" required
                    autofocus autocomplete="off" placeholder="Имя">
             <input type="password" class="primary-input enter-form__input enter-form__input_password" v-model="password"
@@ -18,10 +18,10 @@
                 </div>
                 <a href="" class="enter-form__text enter-form__link">Забыли пароль?</a>
             </div>
-            <button type="submit" class="enter-form__button" @click="handleSubmit">
+            <button type="submit" class="enter-form__button" @click="login">
                 Вход
             </button>
-        </form>
+        </div>
         <p class="enter-page__text">с помощью аккаунта в социальных сетях</p>
         <ul class="enter-page__social-networks social-networks">
             <li class="social-networks__item">
@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
     name: "Login",
     data() {
@@ -58,35 +60,25 @@ export default {
         }
     },
     methods: {
-        handleSubmit(e) {
-            e.preventDefault()
-            if (this.password.length > 0) {
-                this.$axios.get('/sanctum/csrf-cookie').then(() => {
-                    this.$axios.post('api/login', {
-                        email: this.email,
-                        password: this.password
+        ...mapActions({signIn: 'user/login'}),
+        login() {
+            this.$axios.get('/sanctum/csrf-cookie').then(() => {
+                this.$axios.post('api/user/login', {email: this.email, password: this.password})
+                    .then((response) => {
+                        if (!response.data.success) return alert(response.data.message);
+
+                        this.$store.dispatch('user/fetchUser', {id: response.data.user.id});
+                        this.signIn(response.data.token, response.data.user)
                     })
-                        .then(response => {
-                            console.log(response.data)
-                            if (response.data.success) {
-                                this.$router.go('/')
-                            } else {
-                                this.error = response.data.message
-                            }
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
-                })
-            }
-        }
+                    .catch((data) => {
+                        alert(data)
+                    })
+                    .finally(() => {
+                    })
+            })
+
+        },
     },
-    beforeRouteEnter(to, from, next) {
-        if (window.Laravel.isAuth) {
-            return next('practice');
-        }
-        next();
-    }
 }
 </script>
 

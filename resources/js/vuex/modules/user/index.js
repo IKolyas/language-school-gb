@@ -3,7 +3,7 @@ import getters from './getters';
 import mutations from './mutations';
 
 const state = () => ({
-    isAuth: true,
+    authenticated: false,
     localStorage: {}, //Копия localstorage. Отслеживаем и меняем.
     id: '',
     name: '',

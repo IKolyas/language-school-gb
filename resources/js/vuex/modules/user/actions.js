@@ -1,28 +1,25 @@
 import {getUser} from '../../../services/auth.service';
 import {getAllUserWords} from "../../../services/statistics.service";
+import router from "../../../router";
 
 export default {
-    login(e) {
-        e.preventDefault()
-        if (this.password.length > 0) {
-            this.$axios.get('/sanctum/csrf-cookie').then(() => {
-                this.$axios.post('api/login', {
-                    email: this.email,
-                    password: this.password
-                })
-                    .then(response => {
-                        console.log(response.data)
-                        if (response.data.success) {
-                            this.$router.go('/')
-                        } else {
-                            this.error = response.data.message
-                        }
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-            })
-        }
+    login({commit}, token, user) {
+        commit('setAuthenticated', true);
+        commit('setToken', token);
+        router.push({name: 'home'});
+    },
+    logout({commit}) {
+        commit('setUser', {});
+        commit('setCurrentUser', {});
+        commit('setAuthenticated', false);
+        router.push({name: 'home'});
+    },
+
+    async isAuth({commit, state}) {
+        await window.axios.post('/api/user/auth').then((response) => {
+            if (!response.data.success) return commit('setAuthenticated', false);
+            commit('setAuthenticated', true);
+        }).then(() => state.authenticated)
     },
 
     register(e) {
@@ -47,23 +44,6 @@ export default {
                     });
             })
         }
-    },
-
-    logout(e) {
-        e.preventDefault()
-        this.$axios.get('/sanctum/csrf-cookie').then(() => {
-            this.$axios.post('/api/logout')
-                .then(response => {
-                    if (response.data.success) {
-                        window.location.href = "/"
-                    } else {
-                        console.log(response)
-                    }
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
-        })
     },
 
     async fetchUser({commit}, payload) {
