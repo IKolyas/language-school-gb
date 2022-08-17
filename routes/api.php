@@ -17,13 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::apiResource('user', UserController::class)->middleware('auth:sanctum');
 
-
-Route::apiResource('user', UserController::class);
 Route::name('user.')->prefix('user')->group(function () {
     Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
-    Route::post('login', [UserController::class, 'login']);
+    Route::post('login', [UserController::class, 'login'])->name('login');
     Route::post('register', [UserController::class, 'register']);
+
+    Route::post('auth', function () {
+        return response()->json(['success' => boolval(auth()->guard('api')->user())]);
+    })->name('get_auth_user');
 
     Route::put('/{user_id}/task/{dictionary_id}', [UserController::class, 'updateTask'])->name('user_put_task');
     Route::get('/{user_id}/task/{dictionary_id?}', [UserController::class, 'task'])->name('user_get_task');

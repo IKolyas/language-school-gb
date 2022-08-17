@@ -23,5 +23,14 @@ export default {
     },
     setUserWords(state, payload) {
         state.userWords = payload;
+    },
+    setAuthenticated(state, value) {
+        state.authenticated = value;
+    },
+    setToken(state, token) {
+        state.token = token;
+    },
+    setUser(state, value) {
+        state.user = value;
     }
 }
