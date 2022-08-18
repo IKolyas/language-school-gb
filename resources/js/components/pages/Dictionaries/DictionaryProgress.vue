@@ -37,6 +37,7 @@
             </tbody>
         </table>
     </div>
+    <button type="button" class="btn btn-primary" @click="updateRatings">обновить рейтинги</button>
 </template>
 
 <script>
@@ -76,6 +77,21 @@ export default {
                 }
             })
             return has;
+        }
+    },
+    methods: {
+        updateRatings() {
+            //Используй массив слов после тренировки, важны только id и rating) Пример:
+            let words = [
+                {id: 8, rating: 7},
+                {id: 9, rating: 3},
+                {id: 10, rating: 7}
+            ];
+            this.$store.dispatch('dictionaries/updateDictionaryRating', {
+                words: words,
+                user_id: 3,
+                dictionary_id: this.$route.params.id,
+            })
         }
     },
     mounted() {

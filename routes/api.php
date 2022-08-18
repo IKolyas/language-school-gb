@@ -49,6 +49,7 @@ Route::name('statistics')->prefix('statistics')->group(function () {
 Route::apiResource('word', WordController::class);
 Route::name('word.')->prefix('word')->group(function () {
     Route::get('/all/{user_id}', [WordController::class, 'getAllUserWords']);
+    Route::put('/{user_id}/updateRating', [WordController::class, 'updateRating']);
 });
 
 

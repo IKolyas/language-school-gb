@@ -4,7 +4,7 @@ import {
     destroyDictionary,
     getDictionaries,
     getDictionaryOne,
-    getDictionaryWithRatings, removeWord
+    getDictionaryWithRatings, removeWord, updateRatings,
 } from '../../../services/dictionary.service';
 
 const state = () => ({
@@ -49,6 +49,19 @@ const actions = {
             console.error('setDictionaryWithRating', e);
         }
     },
+
+    async updateDictionaryRating({commit, dispatch}, payload) {
+        try {
+            await updateRatings(payload.user_id, {words: payload.words});
+        } catch (e) {
+            console.error('updateDictionaryRating', e);
+        }
+        dispatch('fetchDictionaryWithRating', {
+            dictionary_id: payload.dictionary_id,
+            user_id: payload.user_id
+        });
+    },
+
     async actionDestroyDictionary({commit, dispatch}, payload) {
         try {
             await destroyDictionary(payload.id);
@@ -83,7 +96,12 @@ const actions = {
     },
     async addWord({commit, dispatch}, payload) {
         try {
-            await addWord({word: payload.word, translation: payload.translation, dictionary_id: payload.dictionary_id, user_id: payload.user_id});
+            await addWord({
+                word: payload.word,
+                translation: payload.translation,
+                dictionary_id: payload.dictionary_id,
+                user_id: payload.user_id
+            });
         } catch (e) {
             console.error('addWord', e)
         }

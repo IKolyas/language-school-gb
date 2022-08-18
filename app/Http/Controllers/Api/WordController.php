@@ -9,6 +9,7 @@ use App\Models\Rating;
 use App\Models\Word;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WordController extends Controller
 {
@@ -59,5 +60,21 @@ class WordController extends Controller
     public function getAllUserWords(int $user_id)
     {
         return Rating::where('user_id', $user_id)->get();
+    }
+
+    public function updateRating(Request $request, $user_id)
+    {
+        $caseString = 'case word_id';
+        $ids = '';
+        foreach ($request->words as $word) {
+            $id = $word['id'];
+            $rating = $word['rating'];
+            $caseString .= " when $id then $rating";
+            $ids .= " $id,";
+        }
+        $ids = trim($ids, ',');
+
+        $result = DB::update("update ratings set rating = $caseString end where word_id in ($ids) and user_id = $user_id");
+        return $result;
     }
 }
