@@ -72,6 +72,7 @@ class WordController extends Controller
             $caseString .= " when $id then $rating";
             $ids .= " $id,";
         }
+
         $ids = trim($ids, ',');
 
         $result = DB::update("update ratings set rating = $caseString end where word_id in ($ids) and user_id = $user_id");
