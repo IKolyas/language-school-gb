@@ -6,7 +6,7 @@
         <img src="../../../../img/main-logo.png" alt="Language school project logotype" width="555"
              class="enter-page__logo">
         <h1 class="enter-page__heading">Вход</h1>
-        <div class="enter-page__form enter-form">
+        <form class="enter-page__form enter-form" @submit.prevent="login">
             <input type="email" class="primary-input enter-form__input enter-form__input_email" v-model="email" required
                    autofocus autocomplete="off" placeholder="Имя">
             <input type="password" class="primary-input enter-form__input enter-form__input_password" v-model="password"
@@ -21,7 +21,7 @@
             <button type="submit" class="enter-form__button" @click="login">
                 Вход
             </button>
-        </div>
+        </form>
         <p class="enter-page__text">с помощью аккаунта в социальных сетях</p>
         <ul class="enter-page__social-networks social-networks">
             <li class="social-networks__item">

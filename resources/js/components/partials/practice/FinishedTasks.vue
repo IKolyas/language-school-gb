@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <p class="practice-result">
 	  Вы ответили на {{ successCount }} правильно из {{ count }}
-  </div>
+  </p>
 </template>
 
 <script>

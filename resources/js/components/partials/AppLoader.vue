@@ -18,7 +18,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+    name: 'AppLoader'
+}
 </script>
 
 <style lang="scss" scoped>
