@@ -1,56 +1,57 @@
 <template>
-	<div>
-		<AppLoader v-if="loading"/>
-		<div v-else>
-			<h2 class="h2 mb-3">{{`Время практиковаться со словарём '${dictionaryName}'!`}}</h2>
+    <main class="practice-page">
+        <AppLoader v-if="loading"/>
+        <div v-else>
+            <h2 class="practice-page__heading">Время практиковаться со словарём!</h2>
+            <p class="practice-page__dictionary-name">'{{ dictionaryName }}'</p>
 
-			<button
-				v-if="!isPractice"
-				class="btn btn-outline-info mb-3"
-				@click="onStartedPractice"
-			>Начать тренировку
-			</button>
+            <button
+                class="practice-page__start-button"
+                v-if="!isPractice"
+                @click="onStartedPractice"
+            >Начать тренировку
+            </button>
 
-			<div v-if="isPractice || isFinished" class="border p-3 mb-3 pos-r">
-				<div class="score">
-					<p>{{currentTask.successCounter}} / 5</p>
-				</div>
+            <div v-if="isPractice || isFinished" class="practice-page__practice practice">
+                <div class="practice__score" v-if="isPractice">
+                    <p>{{ currentTask.successCounter }} / 5</p>
+                </div>
+                <p class="practice__question" v-if="isPractice">Выберите верный вариант:</p>
 
-				<VTask
-					v-if="isPractice"
-					@onAnswerClick="onAnswerClick"
-				/>
-				<FinishedTasks v-else-if="isFinished"/>
-			</div>
-
-			<div
-				v-if="isPractice"
-				class="d-flex justify-content-center"
-			>
-				<button
-					v-if="!hasCheckAnswer"
-					class="btn btn-outline-info"
-					:class="{'disabled': !isActiveAnswer}"
-					@click="onCheckAnswer(currentTask)"
-				>
-					Проверить
-				</button>
-				<button
-					v-else
-					class="btn btn-outline-info"
-					@click="onNextTask"
-				>
-					Продолжить
-				</button>
-				<button
-					class="btn btn-outline-info ms-3"
-					@click="onFinishedTask"
-				>
-					Закончить тренировку
-				</button>
-			</div>
-		</div>
-	</div>
+                <VTask
+                    v-if="isPractice"
+                    @onAnswerClick="onAnswerClick"
+                />
+                <FinishedTasks v-else-if="isFinished"/>
+                <div
+                    v-if="isPractice"
+                    class="practice__controls"
+                >
+                    <button
+                        v-if="!hasCheckAnswer"
+                        class="practice-controls__button practice-controls__button_check"
+                        :class="{'disabled': !isActiveAnswer}"
+                        @click="onCheckAnswer(currentTask)"
+                    >
+                        Проверить
+                    </button>
+                    <button
+                        v-else
+                        class="practice-controls__button practice-controls__button_continue"
+                        @click="onNextTask"
+                    >
+                        Продолжить
+                    </button>
+                    <button
+                        class="practice-controls__button practice-controls__button_finish"
+                        @click="onFinishedTask"
+                    >
+                        Закончить тренировку
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
 </template>
 
 <script>
@@ -59,6 +60,7 @@ import {getDictionaryOne} from '../../services/dictionary.service';
 import {updateUserTask} from '../../services/auth.service';
 import {collectQuestions} from '../../use/practice/useCollectAnswers';
 import VTask from '../partials/practice/VTask';
+import AppLoader from "../partials/AppLoader";
 import FinishedTasks from '../partials/practice/FinishedTasks';
 import {useRoute} from 'vue-router';
 
@@ -146,8 +148,7 @@ export default {
                 try {
                     const {data} = await getDictionaryOne(dictionaryId.value);
                     currentDictionary.value = data;
-                }
-                catch (e) {
+                } catch (e) {
                     console.error(e);
                 } finally {
                     loading.value = false;
@@ -214,8 +215,7 @@ export default {
 
                 try {
                     updateUserTask(userId, dictionaryId.value, postData)
-                }
-                catch (e) {
+                } catch (e) {
                     console.log('error', e);
                 }
             }
@@ -279,6 +279,7 @@ export default {
         };
     },
     components: {
+        AppLoader,
         FinishedTasks,
         VTask,
     },
@@ -286,16 +287,4 @@ export default {
 </script>
 
 <style lang="scss">
-.btn-outline-info.disabled, .btn-outline-info:disabled {
-  color: gray;
-  border-color: gray;
-}
-
-.pos-r {
-  position: relative;
-}
-.score {
-  position: absolute;
-  right: 20px;
-}
 </style>
