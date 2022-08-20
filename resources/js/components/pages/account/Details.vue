@@ -1,5 +1,5 @@
 <template>
-    <div class="position-absolute top-0 start-30">
+    <div >
         <div class="d-flex flex-wrap justify-content-between py-3 mb-4 border-bottom">
             <span class="fs-4">Настройте свой профиль</span>
         </div>
@@ -52,8 +52,8 @@
             </div>
             <div class="mb-3">
                 About you
-                <texterea class="form-control" value="current user info" style="height: 100px"
-                          placeholder="tell about yourself"></texterea>
+                <textarea class="form-control" style="height: 100px"
+                          placeholder="tell about yourself"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Save changes</button>
         </form>

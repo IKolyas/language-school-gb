@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class="home-page">
         <section class="promo">
             <h1 class="promo__title, visually-hidden">Language school project</h1>
             <img src="../../../img/main-logo.png" width="555" alt="Language school project logotype" class="main-logo">

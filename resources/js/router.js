@@ -6,7 +6,7 @@ import Login from "./components/pages/auth/Login";
 import Register from "./components/pages/auth/Register";
 import Dictionary from "./components/pages/Dictionaries/Dictionary";
 import Dictionaries from "./components/pages/Dictionaries/Dictionaries";
-import Account from "./components/pages/account/Index";
+import Account from "./components/pages/account/Account";
 import AccountGroups from './components/pages/account/Groups';
 import AccountAchievements from './components/pages/account/Achievements';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";

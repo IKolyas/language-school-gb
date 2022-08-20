@@ -46,9 +46,7 @@
                 </ul>
             </div>
         </nav>
-        <div class="">
-            <router-view/>
-        </div>
+        <router-view class="account-page__content"/>
     </main>
 </template>
 

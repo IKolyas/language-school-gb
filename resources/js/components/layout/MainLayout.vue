@@ -1,10 +1,8 @@
 <template>
     <div class="container">
         <AppHeader/>
-        <div class="main-content">
-            <AppLoader v-if="isLoading"/>
-            <router-view/>
-        </div>
+        <AppLoader v-if="isLoading"/>
+        <router-view/>
         <AppFooter/>
     </div>
 </template>
@@ -23,8 +21,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .main-content {
-        min-height: calc(100vh - 450px);
-        position: relative;
-    }
 </style>
