@@ -544,7 +544,7 @@
     border-radius: 10px;
     text-align: center;
     padding: 15px;
-    min-height: 900px;
+    min-height: 800px;
     flex-shrink: 0;
 }
 
@@ -630,33 +630,36 @@
     color: #3B6CE9;
 }
 
+.account-page__content {
+    max-width: 1036px;
+}
+
 /*Achievements-page*/
 .achievements-page {
-    min-height: 900px;
     background-image: url("../img/achivements-background.png");
     background-size: contain;
     background-repeat: no-repeat;
+    padding-right: 80px;
 }
 
 .achievements-page__top {
     display: flex;
     justify-content: space-between;
-    padding: 20px 70px 40px;
-    position: relative;
+    padding: 20px 80px 40px;
     margin-bottom: 40px;
 }
 
 .achievements-page__top::before {
-    left: 185px;
+    left: 150px;
 }
 
 .achievements-page__top::after {
-    width: 660px;
-    left: 185px;
+    width: 620px;
+    left: 150px;
 }
 
 .achievements-page__top-item {
-    width: 400px;
+    width: 350px;
     height: 112px;
     background: #FFFFFF;
     box-shadow: 0 5px 5px 5px rgba(59, 108, 233, 0.45);
@@ -680,8 +683,9 @@
 
 .achievements-list {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
+    padding: 0 30px;
 }
 
 .achievements-list__item {
@@ -689,7 +693,7 @@
 }
 
 .achievement-card {
-    width: 307px;
+    width: 270px;
     height: 200px;
     background-color: #FFFFFF;
     box-shadow: 0 5px 5px 5px rgba(40, 125, 64, 0.45);
@@ -845,6 +849,7 @@
     color: white;
     background-color: #3B6CE9;
 }
+
 .answer-list__answer-item:hover {
     color: white;
     background-color: #3B6CE9;
@@ -896,4 +901,112 @@
     font-family: Source Sans Pro, sans-serif;
     font-size: 36px;
     font-weight: 400;
+}
+
+/*Dictionaries-page*/
+
+.dictionaries-page {
+
+}
+
+.dictionaries-page__search-form {
+    width: 828px;
+    margin: 0 auto 30px auto;
+}
+
+.search-form {
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.search-form__input {
+    width: 700px;
+    padding: 10px 30px 10px 78px;
+    border-radius: 10px 0 0 10px;
+    background: url("../img/icons/search-blue-pink-icon.png") no-repeat 30px 10px, linear-gradient(180deg, #CBE6F6 0%, #E0D3FC 100%);
+}
+
+.search-form__submit {
+    width: 128px;
+    padding: 10px 30px;
+    background: linear-gradient(180deg, #CBE6F6 0%, #E0D3FC 100%);
+    border-radius: 0 10px 10px 0;
+    color: #3B6CE9;
+    border-left: 1px solid #3B6CE9;
+}
+
+.dictionaries-page__new-dictionary-button {
+    display: block;
+    background-color: #FFF;
+    height: 45px;
+    width: 243px;
+    border-radius: 10px;
+    padding: 8px 30px 16px;
+    color: #3B6CE9;
+    border: 3px solid #3B6CE9;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 800px;
+    text-align: center;
+}
+
+.dictionary-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+}
+
+.dictionary-list__item {
+    margin: 15px;
+}
+
+.dictionary-item {
+    min-height: 292px;
+    width: 329px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 0 #3B6CE9A1;
+    text-align: center;
+    font-family: Raleway, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.dictionary-item__image {
+    margin-bottom: 6px;
+}
+
+.dictionary-item__text {
+    color: black;
+}
+
+.dictionary-item__text_name {
+    color: #3B6CE9;
+}
+
+.dictionary-item__meta {
+    display: block;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #CDE4F7 0%, #E0D3FC 100%);
+    color: #A1A1A1;
+    padding: 10px;
+    margin: 0;
+}
+
+.user-dictionaries-page {
+    padding-right: 300px;
+}
+
+.user-dictionaries-page__links-group {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.user-dictionaries-page__link-button {
+    border: 3px solid #3B6CE9;
+    border-radius: 10px;
+    padding: 12px 30px;
+    margin-left: 10px;
 }

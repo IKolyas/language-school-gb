@@ -81,6 +81,7 @@ export default {
         },
     },
     mounted() {
+        //TODO User_id
         this.$store.dispatch('statistics/fetchStatistics', {user_id: 3});
         this.$store.dispatch('user/fetchUsersWords', {user_id: 3});
     },
