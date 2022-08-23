@@ -1,58 +1,65 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-3 card">
-                <img src="http://placekitten.com/300/150" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">{{ dictionaryName }}</h5>
-                    <p class="card-text">Словарь создал {{ creator }}</p>
-                    <p class="card-text">Языки: русский-английский</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Создан {{ creationDate }}</small>
-                    <p>Приватный\публичный</p>
-                </div>
-            </div>
-        </div>
-        <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
-        <div v-if="userHasDictionary && !addFormActive">
-            <button type="button" class="btn btn-primary" @click="removeFromMyDictionaries">Удалить из своих
-                словарей
-            </button>
-            <router-link
-                :to="{name: 'dictionaryProgress', params: { id: id }}">
-                <button type="button" class="btn btn-primary">Посмотреть прогресс</button>
+    <main class="dictionary-page">
+        <section class="dictionary-content dictionary-page__content">
+            <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
+            <router-link :to="{name: 'practice', params: {dictionaryId: id}}"
+                         class="dictionary-content__start-button dictionary-content__button"
+                         v-if="userHasDictionary">
+                Начать неистово тренироваться
             </router-link>
-        </div>
-        <button type="button" class="btn btn-primary" v-else-if="!addFormActive"
-                @click="addToMyDictionaries">Добавить словарь к себе
-        </button>
-
-        <div v-if="!addFormActive && isThisUserCreator">
-            <button type="button" class="btn btn-primary" @click="toggleAddForm">Добавить слова</button>
-            <button type="button" class="btn btn-primary" @click="destroyDictionary">Уничтожить словарь</button>
-        </div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Слово на русском</th>
-                <th scope="col">Word in English</th>
-                <th scope="col" v-if="addFormActive">Удалить</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(word, index) in words">
-                <th scope="row">{{ index }}</th>
-                <td>{{ word.word }}</td>
-                <td>{{ word.translation }}</td>
-                <td v-if="addFormActive">
-                    <button class="btn btn-primary" @click="removeWord(word.id)">X</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+            <div class="dictionary-content__buttons-group">
+                <button type="button" class="dictionary-content__button" @click="removeFromMyDictionaries"
+                        v-if="userHasDictionary && !addFormActive">Удалить из своих
+                    словарей
+                </button>
+                <button type="button" class="dictionary-content__button" v-else-if="!addFormActive"
+                        @click="addToMyDictionaries">Добавить словарь к себе
+                </button>
+                <button v-if="!addFormActive && isThisUserCreator" type="button" class="dictionary-content__button"
+                        @click="toggleAddForm">Изменить слова
+                </button>
+                <button v-if="!addFormActive && isThisUserCreator" type="button" class="dictionary-content__button"
+                        @click="destroyDictionary">Уничтожить словарь
+                </button>
+            </div>
+            <table class="dictionary-content__table dictionary-table">
+                <thead class="dictionary-table__head">
+                <tr>
+                    <th class="dictionary-table__cell dictionary-table__cell_head">#</th>
+                    <th scope="col" class="dictionary-table__cell dictionary-table__cell_head">Слово на русском</th>
+                    <th scope="col" class="dictionary-table__cell dictionary-table__cell_head">Word in English</th>
+                    <th scope="col" class="dictionary-table__cell dictionary-table__cell_head">Текущий рейтинг</th>
+                    <th scope="col" class="dictionary-table__cell dictionary-table__cell_head" v-if="addFormActive">
+                        Удалить
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="dictionary-table__body">
+                <tr v-for="(word, index) in words">
+                    <th scope="row" class="dictionary-table__cell">{{ index }}</th>
+                    <td class="dictionary-table__cell">{{ word.word }}</td>
+                    <td class="dictionary-table__cell">{{ word.translation }}</td>
+                    <td class="dictionary-table__cell">{{ word.rating }}</td>
+                    <td class="dictionary-table__cell" v-if="addFormActive">
+                        <button class="dictionary-table__delete-button" @click="removeWord(word.id)">Удалить</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <article class="dictionary-page__dictionary-card dictionary-item">
+            <div class="dictionary-item__body">
+                <img src="../../../../img/image_24.png" class="dictionary-item__image" alt="dictionary-image"
+                     width="187" height="186">
+                <h3 class="dictionary-item__title">{{ dictionaryName }}</h3>
+                <p class="dictionary-item__text">Словарь создал <span
+                    class="dictionary-item__text_name">{{ creator }}</span></p>
+                <p class="dictionary-item__meta">
+                    Создан {{ creationDate }}
+                </p>
+            </div>
+        </article>
+    </main>
 </template>
 
 <script>
@@ -93,7 +100,11 @@ export default {
     },
     mounted() {
         if (this.dictionaryId !== +this.$route.params.id) {
-            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
+            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {
+                dictionary_id: this.$route.params.id,
+                //TODO Get User_id
+                user_id: 3
+            });
         }
     },
     methods: {
