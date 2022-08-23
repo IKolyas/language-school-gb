@@ -1,27 +1,34 @@
 <template>
-    <form v-on:submit.prevent="onSubmitWord">
-        <div class="row g-2">
-            <div class="col-6">
-                <input type="text" class="form-control"  placeholder="Word in English" v-model="word">
+    <form v-on:submit.prevent="onSubmitWord" class="dictionary-content__add-word-form add-word-form">
+        <div class="add-word-form__row">
+            <div class="add-word-form__input-area">
+                <p class="add-word-form__input-label">Word in English</p>
+                <input class="add-word-form__input" type="text" placeholder="Word in English"
+                       v-model="word">
             </div>
-            <div class="col-6">
-                <input type="text" class="form-control" placeholder="Слово на русском" v-model="translation">
-            </div>
-        </div>
-
-        <div class="row g-2">
-            <div class="col-6">
-                Example sentence
-                <textarea class="form-control" rows="3">Поле пока не работает</textarea>
-            </div>
-            <div class="col-6">
-                Пример использования
-                <textarea class="form-control" rows="3">Надо ли нам эти поля?</textarea>
+            <div class="add-word-form__input-area">
+                <p class="add-word-form__input-label">Слово на русском</p>
+                <input class="add-word-form__input" type="text" placeholder="Слово на русском"
+                       v-model="translation">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Добавить слово</button>
+        <div class="add-word-form__row">
+            <div class="add-word-form__input-area">
+                <p class="add-word-form__input-label">Example sentence</p>
+                <textarea class="add-word-form__textarea" rows="2" v-model="exampleEnglish"></textarea>
+            </div>
+            <div class="add-word-form__input-area">
+                <p class="add-word-form__input-label">Пример использования</p>
+                <textarea class="add-word-form__textarea" rows="2" v-model="exampleRussian"></textarea>
+            </div>
+        </div>
+        <div class="add-word-form__row add-word-form__row_controls">
+            <button type="submit" class="dictionary-content__button">Добавить слово</button>
+            <button type="button" class="dictionary-content__button" @click="$emit('toggleAddForm')">
+                Закончить добавлять слова
+            </button>
+        </div>
     </form>
-    <button type="button" class="btn btn-primary" @click="$emit('toggleAddForm')">Закончить добавлять слова</button>
 </template>
 
 <script>
@@ -32,15 +39,23 @@ export default {
         return {
             word: '',
             translation: '',
+            exampleEnglish: '',
+            exampleRussian: '',
         }
     },
     methods: {
         onSubmitWord() {
-            this.$store.dispatch('dictionaries/addWord', {word: this.word, translation: this.translation, dictionary_id: this.$route.params.id, user_id: 3});
+            this.$store.dispatch('dictionaries/addWord', {
+                word: this.word,
+                translation: this.translation,
+                dictionary_id: this.$route.params.id,
+                user_id: 3
+            });
             //TODO User_Id из авторизации
-            this.$store.dispatch('dictionaries/fetchDictionary', {id: this.$route.params.id});
             this.word = '';
             this.translation = '';
+            this.exampleEnglish = '';
+            this.exampleRussian = '';
         }
     },
     emits: ['toggleAddForm'],

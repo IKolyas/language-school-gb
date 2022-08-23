@@ -1,19 +1,29 @@
 <template>
-    <h2 class="my-4">Группы</h2>
-    <p>Число групп, в которых вы состоите: {{groupsCount}}</p>
-        <div class="row">
-            <div class="card col-3" v-for="group in groups">
-                <img src="http://placekitten.com/300/150" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Группа номер {{group.id}} школы "{{group.school}}"</h5>
-                    <p class="card-text">{{ group.description }}</p>
+    <section class="user-groups">
+        <h2 class="visually-hidden">Ваши группы</h2>
+        <h3 class="user-groups__title">Число групп, в которых вы состоите: <span
+            class="user-groups__count">{{ groupsCount }} группы</span></h3>
+        <ul class="user-groups__groups-list groups-list">
+            <li class="groups-list__item group-item" v-for="group in groups">
+                <div class="group-item__body">
+                    <img src="http://placekitten.com/166/166" class="group-item__image" alt="group-logo" width="166"
+                         height="166">
+                    <h5 class="group-item__title">Группа номер {{ group.id }}<br> школы "{{ group.school }}"</h5>
+                    <p class="group-item__description">{{ group.description }}</p>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">Преподаватель: {{ group.teacher }}<br>
-                        Должность: {{group.academic_degree}}</small>
+                <div class="group-item__footer">
+                    <p class="group-item__footer-text">
+                        Преподаватель:
+                        <span class="group-item__footer-value">{{ group.teacher }}</span>
+                    </p>
+                    <p class="group-item__footer-text">
+                        Должность:
+                        <span class="group-item__footer-value">{{ group.academic_degree }}</span>
+                    </p>
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
+    </section>
 </template>
 
 <script>

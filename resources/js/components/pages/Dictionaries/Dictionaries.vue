@@ -13,7 +13,7 @@
                 <router-link
                     :to="{name: 'dictionary', params: { id: dictionary.id }}">
                     <div class="dictionary-item__body">
-                        <img src="http://placekitten.com/186/186" class="dictionary-item__image" alt="dictionary-image" width="186" height="186">
+                        <img src="../../../../img/image_25.png" class="dictionary-item__image" alt="dictionary-image" width="187" height="186">
                         <h3 class="dictionary-item__title">{{ dictionary.dictionary_name }}</h3>
                         <p class="dictionary-item__text">Словарь создал <span class="dictionary-item__text_name">{{ dictionary.creator }}</span></p>
                         <p class="dictionary-item__meta">

@@ -35,8 +35,13 @@ const actions = {
     },
     async fetchDictionary({commit}, payload) {
         try {
-            const data = await getDictionaryOne(payload.id);
-            commit('setDictionary', data);
+            const data = await getDictionaryWithRatings(payload.dictionary_id, payload.user_id);
+            if(data) {
+                commit('setDictionaryWithRating', data);
+            } else {
+                const data = await getDictionaryOne(payload.dictionary_id);
+                commit('setDictionary', data);
+            }
         } catch (e) {
             console.error('setDictionary', e);
         }
@@ -44,7 +49,12 @@ const actions = {
     async fetchDictionaryWithRating({commit}, payload) {
         try {
             const data = await getDictionaryWithRatings(payload.dictionary_id, payload.user_id);
-            commit('setDictionaryWithRating', data);
+            if(data) {
+                commit('setDictionaryWithRating', data);
+            } else {
+                const data = await getDictionaryOne(payload.dictionary_id);
+                commit('setDictionary', data);
+            }
         } catch (e) {
             console.error('setDictionaryWithRating', e);
         }
@@ -76,6 +86,7 @@ const actions = {
         } catch (e) {
             console.error('addToMyDictionaries', e);
         }
+        dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
         dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
     },
     async actionRemoveFromMyDictionaries({commit, dispatch}, payload) {
@@ -105,7 +116,7 @@ const actions = {
         } catch (e) {
             console.error('addWord', e)
         }
-        dispatch("fetchDictionary", {id: payload.dictionary_id});
+        dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
     },
     async addDictionary({commit, dispatch}, payload) {
         let data = {};

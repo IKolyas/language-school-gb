@@ -76,7 +76,7 @@ export default {
             return wordsInProgress.length;
         },
         userWordsLearnedCount() {
-            const wordsLearned = this.userWords.filter(word => word.rating === 5);
+            const wordsLearned = this.userWords.filter(word => word.rating >= 5);
             return wordsLearned.length;
         },
     },

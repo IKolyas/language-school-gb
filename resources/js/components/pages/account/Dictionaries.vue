@@ -1,6 +1,6 @@
 <template>
     <section class="user-dictionaries-page">
-        <h2 class="visually-hidden">Словари</h2>
+        <h2 class="visually-hidden">Ваши словари</h2>
         <div class="user-dictionaries-page__links-group">
             <router-link :to="{name: 'dictionaryCreate'}" class="user-dictionaries-page__link-button">
                 <!--TODO поменять классы кнопок-->
@@ -16,8 +16,8 @@
                 <router-link
                     :to="{name: 'dictionary', params: { id: dictionary.id }}">
                     <div class="dictionary-item__body">
-                        <img src="http://placekitten.com/186/186" class="dictionary-item__image" alt="dictionary-image"
-                             width="186" height="186">
+                        <img src="../../../../img/image_24.png" class="dictionary-item__image" alt="dictionary-image"
+                             width="187" height="186">
                         <h3 class="dictionary-item__title">{{ dictionary.dictionary_name }}</h3>
                         <p class="dictionary-item__text">Словарь создал <span
                             class="dictionary-item__text_name">{{ dictionary.creator }}</span></p>

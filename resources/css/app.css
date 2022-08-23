@@ -972,6 +972,7 @@
     font-family: Raleway, sans-serif;
     font-size: 16px;
     font-weight: 600;
+    background-color: #FFF;
 }
 
 .dictionary-item__image {
@@ -997,6 +998,8 @@
 
 .user-dictionaries-page {
     padding-right: 300px;
+    background: url('../img/my-dictionaries-background.png');
+
 }
 
 .user-dictionaries-page__links-group {
@@ -1009,4 +1012,197 @@
     border-radius: 10px;
     padding: 12px 30px;
     margin-left: 10px;
+    background-color: #FFF;
+}
+
+
+/*User-groups-page*/
+
+.user-groups {
+    background: url('../img/my-groups-background.png') no-repeat right top;
+    background-size: contain;
+    width: 1036px;
+    text-align: center;
+}
+
+.user-groups__title {
+    font-family: Raleway, sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.user-groups__count {
+    color: #3B6CE9;
+}
+
+.groups-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+}
+
+.groups-list__item {
+    margin: 15px;
+}
+
+.group-item {
+    min-height: 300px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 0 #3B6CE9A1;
+    text-align: center;
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    background-color: #FFF;
+}
+
+.group-item__image {
+    margin-bottom: 14px;
+}
+
+.group-item__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #3B6CE9;
+}
+
+.group-item__description {
+}
+
+.group-item__footer {
+    display: block;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #CDE4F7 0%, #E0D3FC 100%);
+}
+
+.group-item__footer-text {
+    margin: 0;
+    padding: 10px;
+}
+
+.group-item__footer-value {
+    color: #3B6CE9;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/*dictionary-page*/
+.dictionary-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: 800px;
+    background: url("../img/one-dictionary-background.png") no-repeat top 300px right;
+
+}
+
+.dictionary-page__content {
+    width: 900px;
+}
+
+.dictionary-content {
+    padding: 20px;
+    font-family: Source Sans Pro, sans-serif;
+}
+
+.dictionary-content__buttons-group {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.dictionary-content__button {
+    min-width: 260px;
+    border-radius: 10px;
+    padding: 12px;
+    background: linear-gradient(180deg, #CCE5F7 0%, #DBD8FB 100%);
+    font-size: 18px;
+    text-align: center;
+    color: #3B6CE9;
+}
+
+.dictionary-content__start-button {
+    display: block;
+    width: 400px;
+    height: 80px;
+    margin: 0 auto 20px auto;
+    padding-top: 20px;
+    font-size: 25px;
+}
+
+.dictionary-content__table {
+    background: linear-gradient(180deg, #CDE5F7 0%, rgba(247, 247, 247, 0) 100%);
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.dictionary-table__head {
+    font-size: 20px;
+    font-weight: 600;
+    color: #3B6CE9;
+}
+
+.dictionary-table__body {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0.05em;
+    text-align: left;
+}
+
+.dictionary-table__cell {
+    padding: 10px;
+    text-align: center;
+}
+
+.dictionary-table__delete-button {
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+    background: url("../img/icons/backet-icon.png") no-repeat;
+}
+
+.dictionary-content__add-word-form {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.add-word-form {
+    padding: 20px;
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.add-word-form__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.add-word-form__input-area {
+    width: 48%;
+}
+
+.add-word-form__input-label {
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.add-word-form__input, .add-word-form__textarea {
+    border: 3px solid #3B6CE9;
+    border-radius: 20px;
+    width: 100%;
+    padding: 7px 15px;
+}
+
+.add-word-form__row_controls {
+    padding: 0 130px;
+    justify-content: space-between;
 }
