@@ -1,4 +1,5 @@
 <template>
+    {{dictionary}}
     <main class="dictionary-page">
         <section class="dictionary-content dictionary-page__content">
             <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
@@ -36,7 +37,7 @@
                 </thead>
                 <tbody class="dictionary-table__body">
                 <tr v-for="(word, index) in words">
-                    <th scope="row" class="dictionary-table__cell">{{ index }}</th>
+                    <th scope="row" class="dictionary-table__cell">{{ index + 1 }}</th>
                     <td class="dictionary-table__cell">{{ word.word }}</td>
                     <td class="dictionary-table__cell">{{ word.translation }}</td>
                     <td class="dictionary-table__cell">{{ word.rating }}</td>
@@ -99,13 +100,11 @@ export default {
         },
     },
     mounted() {
-        if (this.dictionaryId !== +this.$route.params.id) {
-            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {
-                dictionary_id: this.$route.params.id,
-                //TODO Get User_id
-                user_id: 3
-            });
-        }
+        this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {
+            dictionary_id: this.$route.params.id,
+            //TODO Get User_id
+            user_id: 3
+        });
     },
     methods: {
         toggleAddForm() {
@@ -115,7 +114,7 @@ export default {
             this.$store.dispatch('dictionaries/actionRemoveWord', {
                 word_id: wordId,
                 dictionary_id: this.dictionaryId,
-                user_id: this.user.id
+                user_id: 3,
             });
         },
         destroyDictionary() {

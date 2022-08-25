@@ -41,7 +41,7 @@
             <div class="user-menu__dropdown-toggle dropdown-toggle-mark"></div>
             <ul class="user-menu__options-list" v-if="authMenuIsActive">
                 <li class="user-menu__options-item bottom-marked">
-                    <router-link :to="{name: 'account'}" class="user-menu__options-link">
+                    <router-link :to="{name: 'settings'}" class="user-menu__options-link">
                         Профиль
                     </router-link>
                 </li>

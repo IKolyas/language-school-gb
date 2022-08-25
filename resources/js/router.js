@@ -73,9 +73,9 @@ const routes = [
         },
         children: [
             {
-                name: 'details',
-                path: 'details',
-                component: () => import('./components/pages/account/Details'),
+                name: 'settings',
+                path: 'settings',
+                component: () => import('./components/pages/account/Settings'),
             },
             {
                 name: 'accountDictionaries',
