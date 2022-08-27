@@ -10,7 +10,6 @@ import Account from "./components/pages/account/Account";
 import AccountGroups from './components/pages/account/Groups';
 import AccountAchievements from './components/pages/account/Achievements';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
-import DictionaryProgress from "./components/pages/Dictionaries/DictionaryProgress";
 
 import store from "./vuex/store";
 
@@ -73,14 +72,14 @@ const routes = [
         },
         children: [
             {
-                name: 'details',
-                path: 'details',
-                component: () => import('./components/pages/account/Details'),
+                name: 'settings',
+                path: 'settings',
+                component: () => import('./components/pages/account/Settings'),
             },
             {
                 name: 'accountDictionaries',
                 path: 'account_dictionaries',
-                component: () => import('./components/pages/account/Dictionaries'),
+                component: () => import('./components/pages/account/MyDictionaries'),
             },
             {
                 name: 'groups',
@@ -106,15 +105,6 @@ const routes = [
         name: 'dictionary',
         path: '/dictionary/:id',
         component: Dictionary,
-        props: true,
-        meta: {
-            middleware: "auth"
-        }
-    },
-    {
-        name: 'dictionaryProgress',
-        path: '/dictionaryProgress/:id',
-        component: DictionaryProgress,
         props: true,
         meta: {
             middleware: "auth"

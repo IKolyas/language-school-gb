@@ -8,7 +8,7 @@
         <h1 class="enter-page__heading">Вход</h1>
         <form class="enter-page__form enter-form" @submit.prevent="login">
             <input type="email" class="primary-input enter-form__input enter-form__input_email" v-model="email" required
-                   autofocus autocomplete="off" placeholder="Имя">
+                   autofocus autocomplete="off" placeholder="Email">
             <input type="password" class="primary-input enter-form__input enter-form__input_password" v-model="password"
                    required autocomplete="off" placeholder="Пароль">
             <div class="enter-form__additions">

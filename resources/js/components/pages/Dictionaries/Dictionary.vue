@@ -23,7 +23,7 @@
                 </button>
             </div>
             <table class="dictionary-content__table dictionary-table">
-                <thead class="dictionary-table__head">
+                <thead class="dictionary-table__head bottom-marked">
                 <tr>
                     <th class="dictionary-table__cell dictionary-table__cell_head">#</th>
                     <th scope="col" class="dictionary-table__cell dictionary-table__cell_head">Слово на русском</th>
@@ -36,7 +36,7 @@
                 </thead>
                 <tbody class="dictionary-table__body">
                 <tr v-for="(word, index) in words">
-                    <th scope="row" class="dictionary-table__cell">{{ index }}</th>
+                    <th scope="row" class="dictionary-table__cell">{{ index + 1 }}</th>
                     <td class="dictionary-table__cell">{{ word.word }}</td>
                     <td class="dictionary-table__cell">{{ word.translation }}</td>
                     <td class="dictionary-table__cell">{{ word.rating }}</td>
@@ -47,28 +47,18 @@
                 </tbody>
             </table>
         </section>
-        <article class="dictionary-page__dictionary-card dictionary-item">
-            <div class="dictionary-item__body">
-                <img src="../../../../img/image_24.png" class="dictionary-item__image" alt="dictionary-image"
-                     width="187" height="186">
-                <h3 class="dictionary-item__title">{{ dictionaryName }}</h3>
-                <p class="dictionary-item__text">Словарь создал <span
-                    class="dictionary-item__text_name">{{ creator }}</span></p>
-                <p class="dictionary-item__meta">
-                    Создан {{ creationDate }}
-                </p>
-            </div>
-        </article>
+        <DictionaryCard :dictionary="dictionary" class="dictionary-page__dictionary-card"></DictionaryCard>
     </main>
 </template>
 
 <script>
 import {mapState} from "vuex";
 import DictionaryAddWord from "./DictionaryAddWord";
+import DictionaryCard from "./Components/DictionaryCard";
 
 export default {
     name: "DictionaryOne",
-    components: {DictionaryAddWord},
+    components: {DictionaryAddWord, DictionaryCard},
     data() {
         return {
             addFormActive: false,
@@ -84,9 +74,10 @@ export default {
             words: state => state.dictionaries.dictionary.words,
             dictionaryId: state => state.dictionaries.dictionary.id,
             user: state => state.user,
+            userId: state => state.user.id,
         }),
         isThisUserCreator() {
-            return this.dictionary.creator_id === this.user.id;
+            return this.dictionary.creator_id === this.userId;
         },
         userHasDictionary() {
             let userHasDictionary = false;
@@ -99,13 +90,10 @@ export default {
         },
     },
     mounted() {
-        if (this.dictionaryId !== +this.$route.params.id) {
-            this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {
-                dictionary_id: this.$route.params.id,
-                //TODO Get User_id
-                user_id: 3
-            });
-        }
+        this.$store.dispatch('dictionaries/fetchDictionaryWithRating', {
+            dictionary_id: this.$route.params.id,
+            user_id: this.userId
+        });
     },
     methods: {
         toggleAddForm() {
@@ -115,7 +103,7 @@ export default {
             this.$store.dispatch('dictionaries/actionRemoveWord', {
                 word_id: wordId,
                 dictionary_id: this.dictionaryId,
-                user_id: this.user.id
+                user_id: this.userId,
             });
         },
         destroyDictionary() {
@@ -126,7 +114,7 @@ export default {
         },
         addToMyDictionaries() {
             this.$store.dispatch('dictionaries/actionAddToMyDictionaries', {
-                user_id: this.user.id,
+                user_id: this.userId,
                 dictionary_id: this.dictionaryId
             })
             this.$router.push({
@@ -135,7 +123,7 @@ export default {
         },
         removeFromMyDictionaries() {
             this.$store.dispatch('dictionaries/actionRemoveFromMyDictionaries', {
-                user_id: this.user.id,
+                user_id: this.userId,
                 dictionary_id: this.dictionaryId
             })
             this.$router.push({

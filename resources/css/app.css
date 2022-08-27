@@ -62,7 +62,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 15px;
-    border: 2px dashed #9747FF;
     margin: 0;
 }
 
@@ -122,17 +121,21 @@
     text-align: center;
 }
 
-.user-menu__options-item {
-    padding: 10px 0;
-}
-
 .user-menu__options-link {
+    display: block;
+    padding: 10px 0;
     color: #000;
     font-family: Raleway, sans-serif;
     font-size: 15px;
     font-weight: 500;
     line-height: 18px;
     letter-spacing: 0.21em;
+}
+
+.user-menu__options-link:hover {
+    cursor: pointer;
+    color: blue;
+    font-size: 18px;
 }
 
 .main-logo {
@@ -580,8 +583,8 @@
 
 .account-navigation__item-link {
     font-family: Raleway, sans-serif;
-    font-size: 15px;
-    font-weight: 300;
+    font-size: 20px;
+    font-weight: 400;
     color: #000;
 }
 
@@ -1140,6 +1143,7 @@
     width: 100%;
     text-align: center;
     border-collapse: collapse;
+    margin-bottom: 40px;
 }
 
 .dictionary-table__head {
@@ -1205,4 +1209,101 @@
 .add-word-form__row_controls {
     padding: 0 130px;
     justify-content: space-between;
+}
+
+.settings-page {
+    width: 100%;
+    padding: 20px;
+    font-family: Raleway, sans-serif;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #3B6CE9;
+}
+
+.settings-page__heading {
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.settings-page__avatar {
+    border-radius: 50%;
+    margin-bottom: 40px;
+}
+
+.settings-form__row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background: linear-gradient(180deg, #CBE6F6 0%, #E0D3FC 100%);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px 40px;
+}
+
+.setting-form__group {
+    text-align: center;
+    width: 100%;
+}
+
+.settings-form__label {
+    padding: 0 20px;
+}
+
+.settings-form__file-input, .settings-form__input {
+    background: #FFFFFF;
+    border: 2px solid #3B6CE9;
+    border-radius: 20px;
+    padding: 10px 20px;
+    position: relative;
+    margin-left: 20px;
+    width: 95%;
+}
+
+.settings-form__file-input:after {
+    content: 'Выберите файл';
+    display: block;
+    background: #3B6CE9;
+    color: #FFF;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    border-radius: 10px;
+    padding: 5px 15px 9px;
+    box-sizing: border-box;
+}
+
+.setting-form__checkbox {
+    position: relative;
+    width: 0;
+    height: 0;
+}
+
+.setting-form__checkbox::after, .setting-form__checkbox:checked::after {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #FFF;
+    display: block;
+    content: '';
+    border: 1px solid #3B6CE9;
+    border-radius: 3px;
+}
+
+.setting-form__checkbox:checked::after {
+    background-image: url("../img/icons/checkbox-icon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.setting-form__button {
+    min-width: 300px;
+    border-radius: 10px;
+    padding: 10px;
+    background: linear-gradient(180deg, #CCE5F7 0%, #DBD8FB 100%);
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    color: #3B6CE9;
 }

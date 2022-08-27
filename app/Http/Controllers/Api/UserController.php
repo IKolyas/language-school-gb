@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\UserDictionaryRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Resources\UserResource;
-use App\Models\Dictionary;
 use App\Models\DictionaryUser;
-use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
@@ -138,24 +136,9 @@ class UserController extends Controller
 
         $newDictionaryUser = DictionaryUser::create(['user_id' => $user_id, 'dictionary_id' => $dictionary_id]);
 
-        $words = Dictionary::find($dictionary_id)->words;
-
-        foreach ($words as $word) {
-            $this->createUserRating($user_id, $word->id);
-        }
-
         if (!$newDictionaryUser) return response()->json(['status' => 'error', 'message' => "Error create: $dictionary_id"]);
 
         return response()->json(['success' => true, '$newDictionaryWord' => $newDictionaryUser->id]);
-    }
-
-    public function createUserRating(int $user_id, int $word_id): JsonResponse
-    {
-        $newRating = Rating::firstOrCreate(
-            ['user_id' => $user_id, 'word_id' => $word_id],
-            ['rating' => 0]
-        );
-        return response()->json(['success' => true, 'ratingId' => $newRating->id]);
     }
 
     public function destroyUserDictionary(int $user_id, int $dictionary_id): JsonResponse

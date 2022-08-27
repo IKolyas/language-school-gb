@@ -2,7 +2,8 @@
     <header class="main-header">
         <ul class="main-nav">
             <li class="main-nav__item">
-                <router-link tag="a" :to="{name: 'home'}" class="main-nav__link" active-class="main-nav__link_active bottom-marked">
+                <router-link tag="a" :to="{name: 'home'}" class="main-nav__link"
+                             active-class="main-nav__link_active bottom-marked">
                     Главная
                 </router-link>
             </li>
@@ -41,7 +42,7 @@
             <div class="user-menu__dropdown-toggle dropdown-toggle-mark"></div>
             <ul class="user-menu__options-list" v-if="authMenuIsActive">
                 <li class="user-menu__options-item bottom-marked">
-                    <router-link :to="{name: 'account'}" class="user-menu__options-link">
+                    <router-link :to="{name: 'settings'}" class="user-menu__options-link">
                         Профиль
                     </router-link>
                 </li>
@@ -101,8 +102,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-menu__options-link:hover {
-    cursor: pointer;
-    color: blue;
-}
+
 </style>
