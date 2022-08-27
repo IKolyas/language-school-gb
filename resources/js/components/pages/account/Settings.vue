@@ -12,7 +12,7 @@
             <div class="settings-form__row">
                 <div class="setting-form__group">
                     <label for="email" class="settings-form__label">Email address</label><br>
-                    <input type="email" class="settings-form__input" id="email" :value="userInfo.email">
+                    <input type="email" class="settings-form__input" id="email" :value="email">
                 </div>
                 <div class="setting-form__group">
                     <label class="settings-form__label" for="notifyCheckbox">Sent me notifications</label><br>
@@ -23,12 +23,12 @@
                 <div class="setting-form__group">
                     <label for="name">Your name</label>
                     <input type="text" class="settings-form__input" id="name" placeholder="name"
-                           :value="userInfo.name">
+                           :value="name">
                 </div>
                 <div class="setting-form__group">
                     <label for="lastname">Your lastname</label>
                     <input type="text" class="settings-form__input" id="lastname" placeholder="lastname"
-                           :value="userInfo.lastname">
+                           :value="lastname">
                 </div>
             </div>
             <div class="settings-form__row">
@@ -49,7 +49,9 @@ export default {
 
     computed: {
         ...mapState({
-            userInfo: state => state.user
+            email: state => state.user.email,
+            name: state => state.user.name,
+            lastname: state => state.user.lastname,
         })
     },
 

@@ -10,22 +10,9 @@
                 Найти словарь
             </router-link>
         </div>
-
         <ul class="user-dictionaries-page__dictionaries-list dictionary-list">
-            <li class="dictionary-list__item dictionary-item" v-for="dictionary in dictionaries">
-                <router-link
-                    :to="{name: 'dictionary', params: { id: dictionary.id }}">
-                    <div class="dictionary-item__body">
-                        <img src="../../../../img/image_24.png" class="dictionary-item__image" alt="dictionary-image"
-                             width="187" height="186">
-                        <h3 class="dictionary-item__title">{{ dictionary.dictionary_name }}</h3>
-                        <p class="dictionary-item__text">Словарь создал <span
-                            class="dictionary-item__text_name">{{ dictionary.creator }}</span></p>
-                        <p class="dictionary-item__meta">
-                            Создан {{ dictionary.created_at }}
-                        </p>
-                    </div>
-                </router-link>
+            <li v-for="dictionary in dictionaries">
+                <DictionaryCard :dictionary="dictionary" class="dictionary-list__item"></DictionaryCard>
             </li>
         </ul>
     </section>
@@ -33,9 +20,11 @@
 
 <script>
 import {mapGetters} from 'vuex';
+import DictionaryCard from "../Dictionaries/Components/DictionaryCard";
 
 export default {
     name: "Dictionaries",
+    components: {DictionaryCard},
     computed: {
         ...mapGetters('user', {
             dictionaries: 'dictionaries',
