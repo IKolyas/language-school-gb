@@ -27,23 +27,20 @@ export default {
 $color_main: #6699ff;
 
 .wrap-spinner__small {
-    //background: #2ca02c;
     display: flex;
-    //height: 100%;
-    padding: 50px 0;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fdfdfd;
-    opacity: .8;
     z-index: 1000;
+    background-color: #fdfdfd;
+    opacity: .5;
 }
 
 .lds-spinner {
-    display: inline-block;
-    position: relative;
     width: 80px;
     height: 80px;
 }

@@ -15,7 +15,7 @@ const state = () => ({
     dictionaries: [],
     photo: '',
     statistics: {},
-    userWords: [],
+    userWords: []
 })
 
 const userModule = {

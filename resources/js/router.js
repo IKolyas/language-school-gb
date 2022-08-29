@@ -11,6 +11,7 @@ import AccountGroups from './components/pages/account/Groups';
 import AccountAchievements from './components/pages/account/Achievements';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
 import DictionaryProgress from "./components/pages/Dictionaries/DictionaryProgress";
+import Arena from "./components/pages/dictionary_war/Arena";
 
 import store from "./vuex/store";
 
@@ -31,6 +32,15 @@ const routes = [
         meta: {
             middleware: "guest",
             title: `PracticeTest`
+        }
+    },
+    {
+        name: 'dictionaryWar',
+        path: '/dictionary-war',
+        component: Arena,
+        meta: {
+            middleware: "auth",
+            title: `DictionaryWar`
         }
     },
     {

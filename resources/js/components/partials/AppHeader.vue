@@ -1,5 +1,10 @@
 <template>
     <header class="main-header">
+        <div class="arena-message"
+             v-if="userArena.owner">
+            {{ userArena.owner.name }} приглашает Вас в игру
+            <router-link :to="{name: 'dictionaryWar', params: {id: userArena.owner.id, name: userArena.owner.name}}">Принять</router-link>
+        </div>
         <ul class="main-nav">
             <li class="main-nav__item">
                 <router-link tag="a" :to="{name: 'home'}" class="main-nav__link" active-class="main-nav__link_active bottom-marked">
@@ -22,6 +27,12 @@
                 <router-link tag="a" :to="{name: 'dictionaries'}" class="main-nav__link"
                              active-class="main-nav__link_active bottom-marked">
                     Словари
+                </router-link>
+            </li>
+            <li class="main-nav__item">
+                <router-link tag="a" :to="{name: 'dictionaryWar'}" class="main-nav__link"
+                             active-class="main-nav__link_active bottom-marked">
+                    Арена
                 </router-link>
             </li>
         </ul>
@@ -70,6 +81,7 @@ export default {
     data() {
         return {
             authMenuIsActive: false,
+            arena: {}
         }
     },
     computed: {
@@ -79,6 +91,9 @@ export default {
             lastname: 'lastname',
             email: 'email',
         }),
+        userArena: function () {
+            return this.arena;
+        }
     },
     methods: {
         ...mapMutations({}),
@@ -97,6 +112,16 @@ export default {
             this.authMenuIsActive = !this.authMenuIsActive;
         },
     },
+
+    created() {
+        if (this.$store.getters['user/authenticated']) {
+            console.log('arena.' + this.$store.getters['user/id']);
+            window.Echo.channel('arena.' + this.$store.getters['user/id']).listen('Arena', (e) => {
+                this.arena = e.arena
+                console.log(e)
+            })
+        }
+    }
 }
 </script>
 
@@ -104,5 +129,19 @@ export default {
 .user-menu__options-link:hover {
     cursor: pointer;
     color: blue;
+}
+.arena-message {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e5e5e5;
+    border: 1px solid #1a2226;
+    font-weight: 400;
+    position: fixed;
+    top: 98px;
+    right: 19%;
+    border-radius: 10px;
 }
 </style>

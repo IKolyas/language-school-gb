@@ -18,7 +18,7 @@
                 </div>
                 <a href="" class="enter-form__text enter-form__link">Забыли пароль?</a>
             </div>
-            <button type="submit" class="enter-form__button" @click="login">
+            <button type="submit" class="enter-form__button">
                 Вход
             </button>
         </form>
@@ -67,8 +67,10 @@ export default {
                     .then((response) => {
                         if (!response.data.success) return alert(response.data.message);
 
-                        this.$store.dispatch('user/fetchUser', {id: response.data.user.id});
                         this.signIn(response.data.token, response.data.user)
+
+                        this.$store.dispatch('user/fetchUser', {id: response.data.user.id});
+
                     })
                     .catch((data) => {
                         alert(data)
