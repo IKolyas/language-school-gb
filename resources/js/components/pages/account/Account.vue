@@ -2,12 +2,12 @@
     <main class="account-page">
         <h1 class="visually-hidden">Личный кабинет пользователя</h1>
         <nav class="account-page__sidebar account-navbar">
-            <img src="http://placekitten.com/100/100" class="account-navbar__avatar" alt="avatar" width="32"
-                 height="32">
+            <img src="http://placekitten.com/100/100" class="account-navbar__avatar" alt="avatar" width="120"
+                 height="120">
             <p class="account-navbar__username bottom-marked">{{ user.name }} {{ user.lastname }}</p>
             <ul class="account-navbar__navigation account-navigation">
                 <li class="account-navigation__item">
-                    <router-link :to="{name: 'details'}" class="account-navigation__item-link"
+                    <router-link :to="{name: 'settings'}" class="account-navigation__item-link"
                                  active-class="account-navigation__item-link_active">Настройки
                     </router-link>
                 </li>

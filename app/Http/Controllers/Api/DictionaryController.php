@@ -9,6 +9,7 @@ use App\Http\Resources\DictionaryResource;
 use App\Http\Resources\DictionaryWordsResource;
 use App\Models\Dictionary;
 use App\Models\DictionaryWord;
+use App\Models\Rating;
 use App\Services\DictionaryService;
 use Illuminate\Http\JsonResponse,
     Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -62,6 +63,20 @@ class DictionaryController extends Controller
 
     public function getDictionaryWithRatings(int $dictionary_id, int $user_id): DictionaryWordsResource
     {
+        $words = Dictionary::find($dictionary_id)->words;
+
+        foreach ($words as $word) {
+            $this->createUserRating($user_id, $word->id);
+        }
         return DictionaryService::getDictionaryWithRatings($dictionary_id, $user_id);
+    }
+
+    public function createUserRating(int $user_id, int $word_id): JsonResponse
+    {
+        $newRating = Rating::firstOrCreate(
+            ['user_id' => $user_id, 'word_id' => $word_id],
+            ['rating' => 0]
+        );
+        return response()->json(['success' => true, 'ratingId' => $newRating->id]);
     }
 }

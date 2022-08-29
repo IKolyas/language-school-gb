@@ -55,13 +55,14 @@ export default {
             words: state => state.dictionaries.dictionary.words,
             dictionaryId: state => state.dictionaries.dictionary.id,
             user: state => state.user,
+            userId: state => state.user.id,
         }),
     },
     methods: {
         onSubmitDictionary() {
             this.$store.dispatch('dictionaries/addDictionary', {
                 dictionary_name: this.dictionary_name,
-                creator_id: this.user.id
+                creator_id: this.userId
             }).then((data) => {
                 this.$router.push({
                     name: 'dictionary',
