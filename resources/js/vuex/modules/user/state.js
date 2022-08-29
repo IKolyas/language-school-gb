@@ -11,7 +11,8 @@ export default {
         photo: '',
         statistics: {},
         userWords: [],
-        authenticated: false
+        authenticated: false,
+        user: {}
     })
 
 }
