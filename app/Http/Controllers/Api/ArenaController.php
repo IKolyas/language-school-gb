@@ -57,6 +57,7 @@ class ArenaController extends Controller
             if(!in_array($user_id, $users)) $users[] = $user_id;
         } else {
             $users = [];
+            $users[] = $user_id;
         }
 
 
@@ -64,7 +65,7 @@ class ArenaController extends Controller
 
         UserActiveArena::dispatch(json_encode($users));
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'users' => json_encode($users)]);
 
 
     }
