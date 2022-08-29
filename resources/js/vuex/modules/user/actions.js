@@ -1,4 +1,4 @@
-import {getUser} from '../../../services/auth.service';
+import {getUser, updateUser} from '../../../services/auth.service';
 import {getAllUserWords} from "../../../services/statistics.service";
 import router from "../../../router";
 
@@ -61,6 +61,17 @@ export default {
             commit("setUserWords", data);
         } catch (e) {
             console.error('fetchUsersWords', e);
+        }
+    },
+
+    async updateUser({commit, dispatch}, payload) {
+        try {
+            const data = await updateUser(payload.user_id, payload.data);
+            if (data.success) {
+                dispatch('fetchUser', {id: payload.user_id});
+            }
+        } catch (e) {
+            console.error('updateUser', e);
         }
     },
 }
