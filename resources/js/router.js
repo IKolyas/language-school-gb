@@ -10,7 +10,7 @@ import Account from "./components/pages/account/Account";
 import AccountGroups from './components/pages/account/Groups';
 import AccountAchievements from './components/pages/account/Achievements';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
-// import DictionaryProgress from "./components/pages/Dictionaries/DictionaryProgress";
+//import DictionaryProgress from "./components/pages/Dictionaries/DictionaryProgress";
 import Arena from "./components/pages/dictionary_war/Arena";
 
 
