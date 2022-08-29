@@ -33,6 +33,8 @@
 
 <script>
 
+import {mapState} from "vuex";
+
 export default {
     name: "DictionaryAddWord",
     data() {
@@ -43,15 +45,19 @@ export default {
             exampleRussian: '',
         }
     },
+    computed: {
+        ...mapState({
+            userId: state => state.user.id,
+        }),
+    },
     methods: {
         onSubmitWord() {
             this.$store.dispatch('dictionaries/addWord', {
                 word: this.word,
                 translation: this.translation,
                 dictionary_id: this.$route.params.id,
-                user_id: 3
+                user_id: this.userId
             });
-            //TODO User_Id из авторизации
             this.word = '';
             this.translation = '';
             this.exampleEnglish = '';

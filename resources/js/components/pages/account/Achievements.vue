@@ -64,6 +64,7 @@ export default {
             startDay: state => state.statistics.statistics.created_at,
             lastTrainingDay: state => state.statistics.statistics.updated_at,
             userWords: state => state.user.userWords,
+            userId: state => state.user.id,
         }),
         strike() {
 
@@ -81,13 +82,12 @@ export default {
         },
     },
     mounted() {
-        //TODO User_id
-        this.$store.dispatch('statistics/fetchStatistics', {user_id: 3});
-        this.$store.dispatch('user/fetchUsersWords', {user_id: 3});
+        this.$store.dispatch('statistics/fetchStatistics', {user_id: this.userId});
+        this.$store.dispatch('user/fetchUsersWords', {user_id: this.userId});
     },
     methods: {
         updateStatistics() {
-            this.$store.dispatch('statistics/saveStatistics', {user_id: 3});
+            this.$store.dispatch('statistics/saveStatistics', {user_id: this.userId});
         }
     }
 }

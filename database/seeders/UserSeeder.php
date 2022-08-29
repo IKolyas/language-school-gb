@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use App\Models\User;
 
 class UserSeeder extends Seeder
@@ -23,6 +21,12 @@ class UserSeeder extends Seeder
                 'name' => 'Admin',
                 'lastname' => 'Admin',
                 'email' => 'admin@admin.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name' => 'Misha',
+                'lastname' => 'Cheglok',
+                'email' => 'cheglokm@yandex.ru',
                 'password' => Hash::make('password'),
             ],
             [
