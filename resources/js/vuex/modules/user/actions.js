@@ -47,7 +47,7 @@ export default {
     },
 
     fetchUser({commit}, payload) {
-        axios.get(`api/user/${payload.id}`).then((response) => {
+        axios.get(`/api/user/${payload.id}`).then((response) => {
             console.log(response.data.data)
             commit('setCurrentUser', response.data.data)
         })

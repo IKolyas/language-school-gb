@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{env('APP_NAME')}}</title>
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
 @if (Auth::check())
