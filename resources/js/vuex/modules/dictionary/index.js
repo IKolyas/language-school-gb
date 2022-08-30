@@ -25,23 +25,24 @@ const mutations = {
 }
 
 const actions = {
-    async fetchDictionaries({commit}) {
+    fetchDictionaries({commit}) {
         try {
-            getDictionaries.then(data => {
-                commit('setDictionaries', data);
-            });
+            const data = getDictionaries()
+            data.then((response) => {
+                commit('setDictionaries', response);
+            })
         } catch (e) {
             console.error('setDictionaries', e);
         }
     },
-    async fetchDictionary({commit}, payload) {
+    fetchDictionary({commit}, payload) {
         try {
-            getDictionaryWithRatings(payload.dictionary_id, payload.user_id).then((data) => {
-                if(data) {
-                    commit('setDictionaryWithRating', data);
+            getDictionaryWithRatings(payload.dictionary_id, payload.user_id).then((response) => {
+                if(response) {
+                    commit('setDictionaryWithRating', response);
                 } else {
-                    getDictionaryOne(payload.dictionary_id).then(data => {
-                        commit('setDictionary', data);
+                    getDictionaryOne(payload.dictionary_id).then(response => {
+                        commit('setDictionary', response);
                     });
                 }
             });
@@ -51,12 +52,12 @@ const actions = {
     },
     fetchDictionaryWithRating({commit}, payload) {
         try {
-            getDictionaryWithRatings(payload.dictionary_id, payload.user_id).then((data) => {
-                if(data) {
-                    commit('setDictionaryWithRating', data);
+            getDictionaryWithRatings(payload.dictionary_id, payload.user_id).then((response) => {
+                if(response) {
+                    commit('setDictionaryWithRating', response);
                 } else {
-                    getDictionaryOne(payload.dictionary_id).then(data => {
-                        commit('setDictionary', data);
+                    getDictionaryOne(payload.dictionary_id).then(response => {
+                        commit('setDictionary', response);
                     });
                 }
             });
@@ -67,9 +68,7 @@ const actions = {
 
     updateDictionaryRating({commit, dispatch}, payload) {
         try {
-            updateRatings(payload.user_id, {words: payload.words}).then((data) => {
-                console.log(data)
-            });
+            updateRatings(payload.user_id, {words: payload.words}).then();
         } catch (e) {
             console.error('updateDictionaryRating', e);
         }
@@ -110,7 +109,7 @@ const actions = {
     },
     async actionRemoveWord({commit, dispatch}, payload) {
         try {
-            removeWord(payload.dictionary_id, payload.word_id).then(data => console.log(data));
+            removeWord(payload.dictionary_id, payload.word_id).then();
         } catch (e) {
             console.error('removeWord', e);
         }
@@ -123,7 +122,7 @@ const actions = {
                 translation: payload.translation,
                 dictionary_id: payload.dictionary_id,
                 user_id: payload.user_id
-            }).then(data => console.log(data));
+            }).then();
         } catch (e) {
             console.error('addWord', e)
         }
@@ -132,7 +131,7 @@ const actions = {
     addDictionary({commit, dispatch}, payload) {
         let data = {};
         try {
-            addDictionary({dictionary_name: payload.dictionary_name, creator_id: payload.creator_id}).then(data => console.log(data));
+            addDictionary({dictionary_name: payload.dictionary_name, creator_id: payload.creator_id}).then();
         } catch (e) {
             console.error('addDictionary', e)
         }
