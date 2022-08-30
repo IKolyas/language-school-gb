@@ -82,20 +82,22 @@ const actions = {
     },
     async actionAddToMyDictionaries({commit, dispatch}, payload) {
         try {
-            await addUserDictionary({user_id: payload.user_id, dictionary_id: payload.dictionary_id});
+            await addUserDictionary({user_id: payload.user_id, dictionary_id: payload.dictionary_id}).then(() => {
+                dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
+                dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
+            });
         } catch (e) {
             console.error('addToMyDictionaries', e);
         }
-        dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
-        dispatch('user/fetchUser', {id: payload.user_id});
     },
     async actionRemoveFromMyDictionaries({commit, dispatch}, payload) {
         try {
-            await deleteUserDictionary(payload.user_id, payload.dictionary_id);
+            await deleteUserDictionary(payload.user_id, payload.dictionary_id).then(() => {
+                dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
+            });
         } catch (e) {
             console.error('removeFromMyDictionaries', e);
         }
-        dispatch('user/fetchUser', {id: payload.user_id});
     },
     async actionRemoveWord({commit, dispatch}, payload) {
         try {
