@@ -87,7 +87,7 @@ const actions = {
             console.error('addToMyDictionaries', e);
         }
         dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
-        dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
+        dispatch('user/fetchUser', {id: payload.user_id});
     },
     async actionRemoveFromMyDictionaries({commit, dispatch}, payload) {
         try {
@@ -95,7 +95,7 @@ const actions = {
         } catch (e) {
             console.error('removeFromMyDictionaries', e);
         }
-        dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
+        dispatch('user/fetchUser', {id: payload.user_id});
     },
     async actionRemoveWord({commit, dispatch}, payload) {
         try {
