@@ -64,7 +64,8 @@ export default {
                     email: this.email,
                     about: this.about,
                 }
-            })
+            });
+            alert('Настройки сохранены');
         },
         updateName(e) {
             this.$store.commit('user/updateName', e.target.value);
