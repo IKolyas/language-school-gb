@@ -25,44 +25,50 @@ const mutations = {
 }
 
 const actions = {
-    async fetchDictionaries({commit}) {
+    fetchDictionaries({commit}) {
         try {
-            const data = await getDictionaries();
-            commit('setDictionaries', data);
+            const data = getDictionaries()
+            data.then((response) => {
+                commit('setDictionaries', response);
+            })
         } catch (e) {
             console.error('setDictionaries', e);
         }
     },
-    async fetchDictionary({commit}, payload) {
+    fetchDictionary({commit}, payload) {
         try {
-            const data = await getDictionaryWithRatings(payload.dictionary_id, payload.user_id);
-            if(data) {
-                commit('setDictionaryWithRating', data);
-            } else {
-                const data = await getDictionaryOne(payload.dictionary_id);
-                commit('setDictionary', data);
-            }
+            getDictionaryWithRatings(payload.dictionary_id, payload.user_id).then((response) => {
+                if(response) {
+                    commit('setDictionaryWithRating', response);
+                } else {
+                    getDictionaryOne(payload.dictionary_id).then(response => {
+                        commit('setDictionary', response);
+                    });
+                }
+            });
         } catch (e) {
             console.error('setDictionary', e);
         }
     },
-    async fetchDictionaryWithRating({commit}, payload) {
+    fetchDictionaryWithRating({commit}, payload) {
         try {
-            const data = await getDictionaryWithRatings(payload.dictionary_id, payload.user_id);
-            if(data) {
-                commit('setDictionaryWithRating', data);
-            } else {
-                const data = await getDictionaryOne(payload.dictionary_id);
-                commit('setDictionary', data);
-            }
+            getDictionaryWithRatings(payload.dictionary_id, payload.user_id).then((response) => {
+                if(response) {
+                    commit('setDictionaryWithRating', response);
+                } else {
+                    getDictionaryOne(payload.dictionary_id).then(response => {
+                        commit('setDictionary', response);
+                    });
+                }
+            });
         } catch (e) {
             console.error('setDictionaryWithRating', e);
         }
     },
 
-    async updateDictionaryRating({commit, dispatch}, payload) {
+    updateDictionaryRating({commit, dispatch}, payload) {
         try {
-            await updateRatings(payload.user_id, {words: payload.words});
+            updateRatings(payload.user_id, {words: payload.words}).then();
         } catch (e) {
             console.error('updateDictionaryRating', e);
         }
@@ -72,56 +78,60 @@ const actions = {
         });
     },
 
-    async actionDestroyDictionary({commit, dispatch}, payload) {
+    actionDestroyDictionary({commit, dispatch}, payload) {
         try {
-            await destroyDictionary(payload.id);
+            destroyDictionary(payload.id).then(() => {
+                dispatch('fetchDictionaries');
+            });
         } catch (e) {
             console.error('destroyDictionary', e);
         }
-        dispatch('fetchDictionaries');
+
     },
-    async actionAddToMyDictionaries({commit, dispatch}, payload) {
+    actionAddToMyDictionaries({commit, dispatch}, payload) {
         try {
-            await addUserDictionary({user_id: payload.user_id, dictionary_id: payload.dictionary_id});
+            addUserDictionary({user_id: payload.user_id, dictionary_id: payload.dictionary_id}).then(() => {
+                dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
+                dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
+            });
         } catch (e) {
             console.error('addToMyDictionaries', e);
         }
-        dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
-        dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
     },
-    async actionRemoveFromMyDictionaries({commit, dispatch}, payload) {
+    actionRemoveFromMyDictionaries({commit, dispatch}, payload) {
         try {
-            await deleteUserDictionary(payload.user_id, payload.dictionary_id);
+            deleteUserDictionary(payload.user_id, payload.dictionary_id).then(() => {
+                dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
+            });
         } catch (e) {
             console.error('removeFromMyDictionaries', e);
         }
-        dispatch('user/fetchUser', {id: payload.user_id}, {root: true});
     },
     async actionRemoveWord({commit, dispatch}, payload) {
         try {
-            await removeWord(payload.dictionary_id, payload.word_id);
+            removeWord(payload.dictionary_id, payload.word_id).then();
         } catch (e) {
             console.error('removeWord', e);
         }
         dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
     },
-    async addWord({commit, dispatch}, payload) {
+    addWord({commit, dispatch}, payload) {
         try {
-            await addWord({
+            addWord({
                 word: payload.word,
                 translation: payload.translation,
                 dictionary_id: payload.dictionary_id,
                 user_id: payload.user_id
-            });
+            }).then();
         } catch (e) {
             console.error('addWord', e)
         }
         dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
     },
-    async addDictionary({commit, dispatch}, payload) {
+    addDictionary({commit, dispatch}, payload) {
         let data = {};
         try {
-            data = await addDictionary({dictionary_name: payload.dictionary_name, creator_id: payload.creator_id})
+            addDictionary({dictionary_name: payload.dictionary_name, creator_id: payload.creator_id}).then();
         } catch (e) {
             console.error('addDictionary', e)
         }

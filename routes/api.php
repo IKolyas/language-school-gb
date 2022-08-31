@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ArenaController;
 use App\Http\Controllers\Api\UserController,
     App\Http\Controllers\Api\DictionaryController,
     App\Http\Controllers\Api\WordController;
@@ -51,6 +52,11 @@ Route::name('word.')->prefix('word')->group(function () {
     Route::get('/all/{user_id}', [WordController::class, 'getAllUserWords']);
     Route::put('/{user_id}/updateRating', [WordController::class, 'updateRating']);
 });
+
+Route::get('/arena/create-arena', [ArenaController::class, 'createRoom'])->middleware('auth:sanctum');
+Route::get('/arena/next-step', [ArenaController::class, 'nextStep'])->middleware('auth:sanctum');
+Route::get('/arena/get-users', [ArenaController::class, 'getUsers'])->middleware('auth:sanctum');
+Route::get('/arena/users-active', [ArenaController::class, 'userIsActive'])->middleware('auth:sanctum');
 
 
 

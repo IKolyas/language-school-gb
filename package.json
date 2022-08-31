@@ -12,9 +12,11 @@
     },
     "devDependencies": {
         "axios": "^0.25",
+        "laravel-echo": "^1.13.1",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
+        "pusher-js": "^7.4.0",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.52.3",
         "sass-loader": "^12.6.0",
@@ -31,5 +33,9 @@
     },
     "overrides": {
         "autoprefixer": "10.4.5"
+    },
+    "engines": {
+        "node": "16.15.1",
+        "npm": "8.11.0"
     }
 }

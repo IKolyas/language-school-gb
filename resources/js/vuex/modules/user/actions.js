@@ -46,13 +46,11 @@ export default {
         }
     },
 
-    async fetchUser({commit}, payload) {
-        try {
-            const {data} = await getUser(payload.id)
-            commit('setCurrentUser', data)
-        } catch (e) {
-            console.error('fetchUser', e);
-        }
+    fetchUser({commit}, payload) {
+        axios.get(`/api/user/${payload.id}`).then((response) => {
+            console.log(response.data.data)
+            commit('setCurrentUser', response.data.data)
+        })
     },
 
     async fetchUsersWords({commit}, payload) {
