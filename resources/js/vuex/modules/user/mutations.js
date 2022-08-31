@@ -32,5 +32,14 @@ export default {
     },
     setUser(state, value) {
         state.user = value;
-    }
+    },
+    updateName(state, value) {
+        state.name = value;
+    },
+    updateLastname(state, value) {
+        state.lastname = value;
+    },
+    updateEmail(state, value) {
+        state.email = value;
+    },
 }

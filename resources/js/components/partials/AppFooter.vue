@@ -1,6 +1,6 @@
 <template>
     <footer class="main-footer">
-        <img src="../../../img/footer-logo.png" alt="" class="main-footer__logo" width="207" height="117">
+        <img src="../../../img/main-logo.png" alt="" class="main-footer__logo" width="207" height="117">
         <ul class="main-footer__navigation navigation">
             <li class="navigation__item">Практика</li>
             <li class="navigation__item">Мои достижения</li>

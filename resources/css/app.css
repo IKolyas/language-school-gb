@@ -10,6 +10,7 @@
     justify-content: space-between;
     padding: 34px 50px;
     align-items: center;
+    background: rgba(202, 230, 246, 0.27) 0;
 }
 
 .main-nav {
@@ -143,26 +144,27 @@
 }
 
 .promo {
-    background-image: url(../img/video-call.png);
-    background-repeat: no-repeat;
-    background-position: 80%, 50%;
-    background-size: 34%;
+    background: url('../img/promo-background.png')no-repeat right 120px bottom/60%, linear-gradient(180deg, rgba(202, 230, 246, 0.27) 0%, rgba(162, 117, 249, 0.53) 100%);
     position: relative;
-    padding-bottom: 50px;
+    padding: 50px;
 }
 
 .promo__features-link {
+    display: block;
     position: absolute;
-    content: url("../img/icons/arrows-down-icon.svg");
-    width: 100px;
-    height: 100px;
+    content: '';
+    width: 80px;
+    height: 80px;
     padding: 20px;
-    top: 83%;
-    left: 40%
+    bottom: 15px;
+    left: 45%;
+    background: url("../img/icons/four-arrows-down-icon.png") no-repeat center center;
+    background-size: 80%;
+    transition: 0.2s;
 }
 
 .promo__features-link:hover {
-    padding: 0;
+    background-size: 100%
 }
 
 .promo__tagline {
@@ -185,6 +187,15 @@
     line-height: 23px;
     letter-spacing: 0.21em;
     text-align: center;
+    animation: background-animation 3s infinite linear;
+    background: linear-gradient(90deg, rgba(202, 230, 246, 0.27) 0%, rgba(162, 117, 249, 0.53) 50%, rgba(202, 230, 246, 0.27) 100%);
+    background-position: 0 0;
+}
+
+@keyframes background-animation {
+    100% {
+        background-position: 270px 0;
+    }
 }
 
 .promo__button:hover {
@@ -201,14 +212,14 @@
 
 .features {
     padding: 50px;
-    background-image: url(../img/man-with-notebook.png);
+    background-image: url('../img/features-background.png');
     background-repeat: no-repeat;
-    background-position: top 100px left 60px;
+    background-position: top 100px right 60px;
     background-size: 30%;
 }
 
 .features__top {
-    padding-left: 400px;
+    padding-right: 400px;
     min-height: 370px;
 }
 
@@ -246,6 +257,7 @@
 }
 
 .features__list-item {
+    padding-top: 100px;
     text-align: center;
     width: 170px;
     font-family: Raleway, sans-serif;
@@ -255,10 +267,31 @@
     letter-spacing: 0.025em;
 }
 
+.features__list-item_pulse {
+    background: url('../img/icons/pulse-icon.png') top center no-repeat;
+}
+
+.features__list-item_book {
+    background: url('../img/icons/book-icon.png') top center no-repeat;
+}
+
+.features__list-item_hat {
+    background: url('../img/icons/hat-icon.png') top center no-repeat;
+}
+
+.features__list-item_thumbs-up {
+    background: url('../img/icons/thumbs-up-icon.png') top center no-repeat;
+}
+
+.features__list-item_gear {
+    background: url('../img/icons/gear-icon.png') top center no-repeat;
+}
+
 .main-footer {
-    background-color: #3660CC;
+    background: linear-gradient(180deg, rgba(90, 200, 225, 0.87) 0%, #CDB7FA 100%);
     padding: 50px 80px;
     display: flex;
+    color: #0061FE;
 }
 
 .main-footer__logo {
@@ -277,7 +310,6 @@
     line-height: 28px;
     letter-spacing: 0.05em;
     text-align: left;
-    color: #FFFFFF;
 }
 
 .main-footer__contacts {
@@ -292,7 +324,6 @@
     line-height: 21px;
     letter-spacing: 0.05em;
     text-align: right;
-    color: #FFF;
 }
 
 .contacts__button {
@@ -329,7 +360,7 @@
     padding-top: 97px;
     padding-left: 700px;
     padding-right: 100px;
-    background-image: url("../img/presentation.png");
+    background-image: url("../img/enter-page-background.png");
     background-repeat: no-repeat;
     background-position: top 100px left 50px;
     background-size: 45%;
@@ -339,6 +370,7 @@
 .enter-page__heading {
     font-family: 'Raleway', sans-serif;
     font-size: 36px;
+    color: #2A79F8;
 }
 
 .enter-page__form {
@@ -448,6 +480,10 @@
 /*Register-page*/
 .register-page {
     min-height: 1013px;
+    background-image: url("../img/register-page-background.png");
+    background-repeat: no-repeat;
+    background-position: top 90px right;
+    background-size: 90%;
 }
 
 .register-page__logo {
@@ -459,6 +495,7 @@
     font-size: 36px;
     text-align: center;
     margin-bottom: 60px;
+    color: #2A79F8;
 }
 
 .register-page__column-wrapper {
@@ -498,10 +535,6 @@
 
 .register-page__column_right {
     padding-top: 500px;
-    background-image: url("../img/registration.png");
-    background-repeat: no-repeat;
-    background-position: top 50px left 50px;
-    background-size: 75%;
 }
 
 .authorization-options__item {
@@ -1001,7 +1034,7 @@
 
 .user-dictionaries-page {
     padding-right: 300px;
-    background: url('../img/my-dictionaries-background.png');
+    background: url('../img/my-dictionaries-background.png') top right no-repeat;
 
 }
 
@@ -1306,4 +1339,15 @@
     font-weight: 600;
     text-align: center;
     color: #3B6CE9;
+    box-sizing: border-box;
+    height: 60px;
+}
+
+.setting-form__button:hover {
+    border: 1px solid #3B6CE9;
+}
+
+.setting-form__button:active {
+    background: #3B6CE9;
+    color: #FFF
 }

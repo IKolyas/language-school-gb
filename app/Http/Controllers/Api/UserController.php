@@ -159,17 +159,24 @@ class UserController extends Controller
         return new UserResource(User::with('dictionaries')->findOrFail($id));
     }
 
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $user_id)
     {
-//        $validated = $request->validated();
-//        $dictionary = Dictionary::where('id', $id)->firstOrFail();
-//        $dictionary->update($validated);
-//        return response()->json(['success' => true, 'dictionary' => $dictionary->id]);
+        $user = User::findOrFail($user_id);
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        if ($user->save()) {
+            $success = true;
+            $message = 'Данные пользователя успешно обновлены!';
+        } else {
+            $success = false;
+            $message = 'Ошибка при обновлении данных пользователя!';
+        }
+        return response()->json(compact('success', 'message'));
     }
 
     public function destroy(int $id)
     {
-//        if(Dictionary::destroy($id)) return response()->json(['success' => true, 'dictionary' => $id]);
-//        return response()->json(['success' => false, 'dictionary' => $id]);
+
     }
 }
