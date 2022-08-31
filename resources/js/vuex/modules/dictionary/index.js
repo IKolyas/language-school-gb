@@ -128,10 +128,10 @@ const actions = {
         }
         dispatch('fetchDictionaryWithRating', {dictionary_id: payload.dictionary_id, user_id: payload.user_id});
     },
-    addDictionary({commit, dispatch}, payload) {
+    async addDictionary({commit, dispatch}, payload) {
         let data = {};
         try {
-            addDictionary({dictionary_name: payload.dictionary_name, creator_id: payload.creator_id}).then();
+            data = await addDictionary({dictionary_name: payload.dictionary_name, creator_id: payload.creator_id})
         } catch (e) {
             console.error('addDictionary', e)
         }
