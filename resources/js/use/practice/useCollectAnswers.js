@@ -55,10 +55,10 @@ function setAnswers (words, basic, count = 5) {
 
 function typeAnswers(currentTask) {
 	let lang = 'original'
-	if (Number(currentTask.successCounter) === 1) {
+	if (Number(currentTask.rating) === 1) {
 		lang = 'translation'
 	}
-	if (Number(currentTask.successCounter) === 3) {
+	if (Number(currentTask.rating) === 3) {
 		lang = 'translation'
 	}
 
@@ -80,8 +80,8 @@ export function collectQuestions (tasks, currentTask) {
 		throw new Error('dictionaries are not on Array')
 	}
 
-	let allAnswers
-	currentTask = typeAnswers(currentTask)
+	let allAnswers;
+	currentTask = typeAnswers(currentTask);
 
 	if (currentTask.type === 'translation') {
 		allAnswers = getAllAnswers(tasks, 'original')
@@ -89,7 +89,7 @@ export function collectQuestions (tasks, currentTask) {
 		allAnswers = getAllAnswers(tasks)
 	}
 
-	const answers = setAnswers(allAnswers, currentTask.translation, 5)
+	const answers = setAnswers(allAnswers, currentTask.translation, 3)
 
 	return {
 		...currentTask,
