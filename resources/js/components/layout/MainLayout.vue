@@ -1,10 +1,8 @@
 <template>
-    <div class="container">
-        <AppHeader/>
-        <AppLoader v-if="isLoading"/>
-        <router-view/>
-        <AppFooter/>
-    </div>
+	<AppHeader/>
+<!--	<AppLoader v-if="isLoading"/>-->
+	<router-view/>
+	<AppFooter/>
 </template>
 
 <script>
