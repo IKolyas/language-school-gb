@@ -7,7 +7,7 @@
 
             <button
                 class="practice-page__start-button"
-                v-if="!isPractice"
+                v-if="!isPractice && !isFinished"
                 @click="onStartedPractice"
             >Начать тренировку
             </button>
@@ -56,8 +56,6 @@
 
 <script>
 import {onBeforeMount, onMounted, provide, ref, computed} from 'vue';
-import {getDictionaryWithRatings} from '../../services/dictionary.service';
-import {updateUserTask} from '../../services/auth.service';
 import {collectQuestions} from '../../use/practice/useCollectAnswers';
 import VTask from '../partials/practice/VTask';
 import AppLoader from "../partials/AppLoader";
@@ -76,21 +74,18 @@ const testDictionary = {
             word: 'слово',
             translation: 'word',
             rating: 4,
-            // answers: ['word', 'words', 'would', 'write']
         },
         {
             id: 2,
             word: 'символ',
             translation: 'symbol',
             rating: 4,
-            // answers: ['word', 'words', 'symbol', 'write']
         },
         {
             id: 3,
             word: 'число',
             translation: 'number',
             rating: 4,
-            // answers: ['word', 'words', 'would', 'number']
         },
 
         {
@@ -98,35 +93,30 @@ const testDictionary = {
             word: 'мир',
             translation: 'world',
             rating: 0,
-            // answers: ['word', 'words', 'would', 'write']
         },
         {
             id: 5,
             word: 'голубь',
             translation: 'pigeon',
             rating: 0,
-            // answers: ['word', 'words', 'would', 'write']
         },
         {
             id: 6,
             word: 'звезда',
             translation: 'star',
             rating: 0,
-            // answers: ['word', 'words', 'would', 'write']
         },
         {
             id: 7,
             word: 'земля',
             translation: 'ground',
             rating: 0,
-            // answers: ['word', 'words', 'would', 'write']
         },
         {
             id: 8,
             word: 'море',
             translation: 'sea',
             rating: 0,
-            // answers: ['word', 'words', 'would', 'write']
         },
     ],
 };
@@ -158,7 +148,6 @@ export default {
 
         const count = ref(0);
         const successCount = ref(0);
-        // const maxCount = 10;
         const finishResults = ref(null);
 
         const isFinished = ref(false);
@@ -175,29 +164,24 @@ export default {
             if (repeatsCount.value > unlearnedWords.length) {
                 repeatsCount.value = unlearnedWords.length;
             }
-            console.log(unlearnedWords)
 
             for (let i = 0; i < repeatsCount.value; i++) {
                 wordsInStudies.value.push(unlearnedWords.shift());
             }
-            console.log('wordsInStudies', wordsInStudies.value);
         };
 
-        onMounted(async () => {
+        onMounted(() => {
             if (!dictionaryId.value) {
                 isPracticeTest.value = true;
             }
 
             if (!isPracticeTest.value) {
-                try {
-                    const {data} = await getDictionaryWithRatings(dictionaryId.value, userId.value);
-                    currentDictionary.value = data;
-                } catch (e) {
-                    console.error(e);
-                } finally {
-                    loading.value = false;
-                }
-
+                store.dispatch("dictionaries/fetchDictionaryWithRating", {
+                    dictionary_id: dictionaryId.value,
+                    user_id: userId.value
+                })
+                currentDictionary.value = store.getters['dictionaries/dictionary'];
+                loading.value = false;
             } else {
                 currentDictionary.value = testDictionary;
                 loading.value = false;
@@ -210,12 +194,12 @@ export default {
 
         const onStartedPractice = () => {
             count.value = 0;
+            successCount.value = 0;
             isPractice.value = true;
             wordsInStudies.value.length = 0;
             fillStudiedWord(currentDictionary.value.words);
             onNextTask();
         };
-
 
         const onNextTask = () => {
             if (wordsInStudies.value.length === 0) {
@@ -225,7 +209,6 @@ export default {
             resetValues();
             currentTask.value = wordsInStudies.value.shift();
             currentTask.value = collectQuestions(tasks, currentTask.value);
-            return currentTask.value;
         };
 
         const onAnswerClick = word => isActiveAnswer.value = word;
@@ -233,14 +216,13 @@ export default {
         const onCheckAnswer = (task) => {
             if (task.rating === 1 || task.rating === 3) {
                 let tempWord = task.word
-                task =  {
+                task = {
                     id: task.id,
                     word: task.translation,
                     translation: tempWord,
                     rating: task.rating,
                 }
             }
-            console.log('task', task)
             const answer = isActiveAnswer.value.toLowerCase().trim();
             const translation = currentTask.value.translation.toLowerCase().trim();
 
@@ -255,45 +237,33 @@ export default {
 
             if (task.rating < numberSuccessAnswer) {
                 wordsInStudies.value.push(task);
-                console.log('продолжаем изучать');
             } else {
                 learnedWords.push(task);
-                console.log('слово изучено');
-                wordsInStudies.value.push(unlearnedWords.shift());
+                if (unlearnedWords.lenght) {
+                    wordsInStudies.value.push(unlearnedWords.shift());
+                }
             }
 
-            console.log('wordsInStudies', wordsInStudies.value)
             hasCheckAnswer.value = true;
             count.value++;
         };
 
         const onFinishedTask = () => {
-            console.log('learnedWords', learnedWords);
-            console.log('wordsInStudies', wordsInStudies.value);
-            console.log('unlearnedWords', unlearnedWords);
 
-            const words = {
+            const words = [
                 ...learnedWords,
                 ...wordsInStudies.value,
-                ...unlearnedWords,
-            };
-
-
-            console.log('words', words);
+            ];
 
             finishResults.value = words;
             isPractice.value = false;
             isFinished.value = true;
 
             if (!isPracticeTest.value) {
-
-                const postData = {
-                    ...currentDictionary.value,
-                    words,
-                }
-
                 try {
-                    updateUserTask(userId, dictionaryId.value, postData)
+                    store.dispatch('dictionaries/updateDictionaryRating',
+                        {words: words, user_id: userId.value, dictionary_id: dictionaryId.value});
+                    store.dispatch('statistics/saveStatistics', {user_id: userId.value});
                 } catch (e) {
                     console.log('error', e);
                 }

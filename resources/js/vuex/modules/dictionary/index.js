@@ -140,7 +140,9 @@ const actions = {
     }
 }
 
-const getters = {}
+const getters = {
+    dictionary: state => state.dictionary,
+}
 
 const dictionaryModule = {
     namespaced: true,
