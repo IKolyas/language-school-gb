@@ -260,13 +260,9 @@ export default {
             isFinished.value = true;
 
             if (!isPracticeTest.value) {
-                try {
-                    store.dispatch('dictionaries/updateDictionaryRating',
-                        {words: words, user_id: userId.value, dictionary_id: dictionaryId.value});
-                    store.dispatch('statistics/saveStatistics', {user_id: userId.value});
-                } catch (e) {
-                    console.log('error', e);
-                }
+                store.dispatch('dictionaries/updateDictionaryRating',
+                    {words: words, user_id: userId.value, dictionary_id: dictionaryId.value});
+                store.dispatch('statistics/saveStatistics', {user_id: userId.value});
             }
         };
 
