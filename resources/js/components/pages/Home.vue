@@ -4,7 +4,9 @@
             <h1 class="promo__title, visually-hidden">Language school project</h1>
             <img src="../../../img/main-logo.png" width="555" alt="Language school project logotype" class="main-logo">
             <p class="promo__tagline">начни изучать иностранные языки уже сейчас!</p>
-            <button class="promo__button promo__button_move-right" type="button">Попробовать!</button>
+            <router-link tag="a" :to="{name: 'practiceTest'}">
+                <button class="promo__button promo__button_move-right" type="button">Попробовать!</button>
+            </router-link>
             <a href="#features" class="promo__features-link"></a>
         </section>
         <section class="features" id="features">
