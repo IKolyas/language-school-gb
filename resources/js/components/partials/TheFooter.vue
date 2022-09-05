@@ -2,32 +2,50 @@
     <footer class="main-footer">
 		<div class="container">
 			<div class="main-footer__inner">
-				<img src="../../../img/main-logo.png" alt="" class="main-footer__logo" width="207" height="117">
+				<router-link to="/"><img src="../../../img/main-logo.png" alt="" class="main-footer__logo"></router-link>
 				<ul class="main-footer__navigation navigation">
-					<li class="navigation__item">Практика</li>
-					<li class="navigation__item">Мои достижения</li>
-					<li class="navigation__item">Словари</li>
-					<li class="navigation__item">Политика конфидециальности</li>
-				</ul>
-				<ul class="main-footer__contacts contacts">
-					<li class="contacts__item">
-						<button class="contacts__button" type="button">Заказать звонок</button>
+					<li
+					class="navigation__item"
+					v-for="(menu, index) in menus"
+					:key="index"
+					>
+						<router-link :to="{name: menu.linkName}" class="navigation__link" active-class="navigation__item_active bottom-marked">
+							{{ menu.text }}
+						</router-link>
 					</li>
-					<li class="contacts__item contacts__phone">
-						+7 (971) 999-99-99
-					</li>
-					<li class="contacts__item">hi@sitename.ru</li>
-					<li class="contacts__item">Адрес</li>
-					<li class="contacts__item">Режим работы</li>
 				</ul>
 			</div>
+
+			<p class="main-footer__copyright">&copy; LanguageSchool 2022</p>
 		</div>
     </footer>
 </template>
 
 <script>
 export default {
-    name: "AppFooter"
+    name: "AppFooter",
+	data() {
+		return {
+			menus: [
+				{
+					text: 'Главная',
+					linkName: 'home'
+				},
+				{
+					text: 'Практика',
+					linkName: 'practiceTest'
+				},
+				{
+					text: 'Мои достижения',
+					linkName: 'achievements'
+				},
+				// {
+				// 	text: 'Политика конфиденциальности',
+				// 	linkName: 'policy'
+				// }
+			],
+		}
+	}
 }
 </script>
 
@@ -36,18 +54,19 @@ export default {
 	background: linear-gradient(180deg, rgba(90, 200, 225, 0.87) 0%, #CDB7FA 100%);
 
 	.main-footer__inner {
-		padding: 50px 80px;
+		padding: 30px 0;
 		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		color: #0061FE;
 	}
 
 	.main-footer__logo {
-		margin-top: 50px;
+		max-width: 207px;
+		max-height: 117px;
 	}
 
 	.main-footer__navigation {
-		margin-top: 70px;
-		margin-left: 100px;
 	}
 
 	.navigation {
@@ -57,11 +76,6 @@ export default {
 		line-height: 28px;
 		letter-spacing: 0.05em;
 		text-align: left;
-	}
-
-	.main-footer__contacts {
-		margin-left: auto;
-		margin-top: 30px;
 	}
 
 	.contacts {
