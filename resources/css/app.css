@@ -5,32 +5,37 @@
 /*font-family: 'Sacramento', cursive;*/
 /*font-family: 'Source Sans Pro', sans-serif;*/
 
-.bottom-marked {
-    position: relative;
+
+html,
+body,
+#app {
+    height: 100%;
+    font-family: 'Raleway', serif;
 }
 
-.bottom-marked::before {
-    display: block;
-    width: 5px;
-    height: 5px;
-    background-color: #3B6CE9;
-    content: "";
-    position: absolute;
-    transform: rotate(45deg);
-    bottom: -2px;
+#app {
+    display: flex;
+    flex-direction: column;
 }
 
-.bottom-marked::after {
-    display: block;
-    height: 1px;
-    background-color: #3B6CE9;
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+main {
+    flex: 1 0 auto;
+}
+footer {
+    flex: 0 0 auto;
 }
 
+.container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
 
+@media (min-width: 768px) {
+    .container {
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
+}
 
 .features {
     padding: 50px;
@@ -110,128 +115,6 @@
 }
 
 /*enter-page*/
-
-.enter-page {
-    min-height: 1013px;
-    padding-top: 97px;
-    padding-left: 700px;
-    padding-right: 100px;
-    background-image: url("../img/enter-page-background.png");
-    background-repeat: no-repeat;
-    background-position: top 100px left 50px;
-    background-size: 45%;
-    text-align: center;
-}
-
-.enter-page__heading {
-    font-family: 'Raleway', sans-serif;
-    font-size: 36px;
-    color: #2A79F8;
-}
-
-.enter-page__form {
-    margin-bottom: 15px;
-}
-
-.primary-input {
-    border: 2px solid rgba(59, 108, 233, 1);
-    height: 46px;
-    width: 522px;
-    border-radius: 20px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    padding: 10px;
-}
-
-.enter-form__input {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-left: 50px;
-    background-repeat: no-repeat;
-    background-position: top 5px left 10px;
-}
-
-.primary-input:hover, .primary-input:focus {
-    border-width: 4px;
-}
-
-.enter-form__input_email {
-    background-image: url("../img/icons/user-icon.png");
-}
-
-.enter-form__input_password {
-    background-image: url("../img/icons/lock-icon.png");
-}
-
-.enter-form__additions {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 20px;
-}
-
-.enter-form__checkbox {
-    width: 15px;
-    height: 15px;
-    margin-right: 15px;
-}
-
-.enter-form__text {
-    font-family: 'Raleway', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-}
-
-.enter-form__button {
-    height: 45px;
-    width: 94px;
-    border-radius: 10px;
-    padding: 12px 30px;
-    border: 1px solid #3B6CE9;
-    background-color: #FFF;
-}
-
-.enter-form__button:hover {
-    background-color: rgba(59, 108, 233, 0.12);
-}
-
-.enter-form__button:active {
-    background-color: rgba(59, 108, 233, 0.24);
-}
-
-.enter-page__social-networks {
-    margin: auto auto 40px;
-}
-
-.social-networks {
-    display: flex;
-    width: 350px;
-    justify-content: space-between;
-    padding: 0;
-}
-
-.social-networks__link {
-    display: block;
-    font-size: 0;
-    width: 50px;
-    height: 50px;
-    background-image: url("../img/icons/vk-round-icon.png");
-}
-
-.social-networks__link_ok {
-    background-image: url("../img/icons/ok-icon.png");
-}
-
-.social-networks__link_gmail {
-    background-image: url("../img/icons/gmail-icon.png");
-}
-
-.social-networks__link_yandex {
-    background-image: url("../img/icons/yandex-icon.png");
-}
-
-.social-networks__link_appstore {
-    background-image: url("../img/icons/appstore-icon.png");
-}
 
 /*Register-page*/
 .register-page {

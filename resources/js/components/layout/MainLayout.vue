@@ -1,15 +1,15 @@
 <template>
-	<AppHeader/>
+	<TheHeader/>
 <!--	<AppLoader v-if="isLoading"/>-->
 	<router-view/>
-	<AppFooter/>
+	<TheFooter/>
 </template>
 
 <script>
-import AppHeader from '../partials/AppHeader'
-import AppFooter from "../partials/AppFooter";
+import TheHeader from '../partials/TheHeader'
+import TheFooter from "../partials/TheFooter";
 export default {
-    components: {AppFooter, AppHeader},
+    components: {TheFooter, TheHeader},
     computed: {
         isLoading: function () {
             return this.$store.getters.mainLoader;

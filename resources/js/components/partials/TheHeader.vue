@@ -7,49 +7,36 @@
 					{{ userArena.owner.name }} приглашает Вас в игру
 					<router-link :to="{name: 'dictionaryWar', params: {id: userArena.owner.id, name: userArena.owner.name}}">Принять</router-link>
 				</div>
-				<ul class="main-nav">
-					<li class="main-nav__item">
-						<router-link tag="a" :to="{name: 'home'}" class="main-nav__link"
-									 active-class="main-nav__link_active bottom-marked">
-							Главная
-						</router-link>
-					</li>
-					<li class="main-nav__item">
-						<router-link tag="a" :to="{name: 'practiceTest'}" class="main-nav__link"
-									 active-class="main-nav__link_active bottom-marked">
-							Практика
-						</router-link>
-					</li>
-					<li class="main-nav__item">
-						<router-link tag="a" :to="{name: 'achievements'}" class="main-nav__link"
-									 active-class="main-nav__link_active bottom-marked">
-							Мои достижения
-						</router-link>
-					</li>
-					<li class="main-nav__item">
-						<router-link tag="a" :to="{name: 'dictionaries'}" class="main-nav__link"
-									 active-class="main-nav__link_active bottom-marked">
-							Словари
-						</router-link>
-					</li>
-					<li class="main-nav__item">
-						<router-link tag="a" :to="{name: 'dictionaryWar'}" class="main-nav__link"
-									 active-class="main-nav__link_active bottom-marked">
-							Арена
-						</router-link>
-					</li>
-				</ul>
-				<ul class="login-group" v-if="!isAuth">
-					<li class="login-group__item">
-						<router-link tag="button" to="login" class="login-group__button">Войти</router-link>
-					</li>
-					<li class="login-group__item">
-						<router-link tag="button" to="register" class="login-group__button">Регистрация</router-link>
-					</li>
-				</ul>
+
+				<div class="header__menu menu">
+					<div @click.prevent="toggle">
+						<button
+						type="button"
+						class="menu__icon"
+						:class="{ 'active' : isOpen }"
+						>
+							<span></span>
+						</button>
+					</div>
+
+					<nav class="menu__body" :class="{ 'active' : isOpen }">
+						<ul class="menu__list">
+							<li
+							class="menu__item"
+							v-for="(menu, index) in menus"
+							:key="index"
+							>
+								<router-link :to="{name: menu.linkName}" class="menu__link" active-class="menu__link_active bottom-marked">
+									{{ menu.text }}
+								</router-link>
+							</li>
+						</ul>
+					</nav>
+				</div>
+				<router-link v-if="!isAuth" tag="button" to="login" class="btn btn-outline-primary login-btn">Войти</router-link>
 				<div class="user-menu" v-else @click="toggleAuthMenu">
 					<span class="user-menu__name">
-						{{ name }} {{ lastname }}
+						{{ userName }}
 					</span>
 					<img class="user-menu__avatar" src="https://github.com/mdo.png" alt="mdo" width="32" height="32">
 					<div class="user-menu__dropdown-toggle dropdown-toggle-mark"></div>
@@ -83,7 +70,31 @@ export default {
     data() {
         return {
             authMenuIsActive: false,
-            arena: {}
+            arena: {},
+			menus: [
+				{
+					text: 'Главная',
+					linkName: 'home'
+				},
+				{
+					text: 'Практика',
+					linkName: 'practiceTest'
+				},
+				{
+					text: 'Мои достижения',
+					linkName: 'achievements'
+				},
+				{
+					text: 'Словари',
+					linkName: 'dictionaries'
+				},
+				{
+					text: 'Арена',
+					linkName: 'dictionaryWar'
+				}
+			],
+			isOpen: false,
+			isMobile: true
         }
     },
     computed: {
@@ -95,7 +106,11 @@ export default {
         }),
         userArena: function () {
             return this.arena;
-        }
+        },
+		userName() {
+			const lastnameLetter = this.lastname.substr(0, 1).toUpperCase()
+			return `${this.name} ${lastnameLetter}.`
+		}
     },
     methods: {
         ...mapMutations({}),
@@ -113,9 +128,13 @@ export default {
         toggleAuthMenu() {
             this.authMenuIsActive = !this.authMenuIsActive;
         },
+
+		toggle() {
+			this.isOpen = !this.isOpen
+		}
     },
 
-    created() {
+	created() {
         if (this.$store.getters['user/authenticated']) {
             console.log('arena.' + this.$store.getters['user/id']);
             window.Echo.channel('arena.' + this.$store.getters['user/id']).listen('Arena', (e) => {
@@ -135,7 +154,7 @@ export default {
 	.main-header__inner {
 		display: flex;
 		justify-content: space-between;
-		padding: 34px 50px;
+		padding: 34px 0;
 		align-items: center;
 	}
 
@@ -143,27 +162,16 @@ export default {
 		margin-bottom: 20px;
 	}
 
-	.main-nav__link_active {
-		color: black;
-	}
-
-	.login-group {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 20px 15px;
-		margin: 0;
-	}
-
-	.login-group__item {
-		padding: 5px;
+	.login-btn {
+		margin-left: auto;
+		width: 120px;
 	}
 
 	.login-group__button {
-		padding: 12px 30px;
+		padding: 8px 30px;
 		color: #3B6CE9;
 		border: 1px solid #3B6CE9;
-		border-radius: 10px;
+		border-radius: 5px;
 	}
 
 	.user-menu {
@@ -228,20 +236,29 @@ export default {
 		font-size: 18px;
 	}
 
-	.main-nav {
-		display: flex;
-		justify-content: space-between;
-		width: 934px;
-		font-family: 'Raleway', sans-serif;
-		font-weight: 300;
-		font-size: 20px;
-		padding: 0 50px;
-		align-items: center;
-		margin: 0;
+	.bottom-marked {
+		position: relative;
 	}
 
-	.main-nav__link {
-		color: black;
+	.bottom-marked::before {
+		display: block;
+		width: 5px;
+		height: 5px;
+		background-color: #3B6CE9;
+		content: "";
+		position: absolute;
+		transform: rotate(45deg);
+		bottom: -2px;
+	}
+
+	.bottom-marked::after {
+		display: block;
+		height: 1px;
+		background-color: #3B6CE9;
+		content: "";
+		position: absolute;
+		bottom: 0;
+		width: 100%;
 	}
 }
 
@@ -263,5 +280,121 @@ export default {
     right: 19%;
     border-radius: 10px;
 }
+
+.header__menu {
+	width: 100%;
+
+	.menu__icon {
+		background: none;
+		//outline: none;
+		display: none;
+	}
+
+	.menu__list > li:not(:last-child) {
+		position: relative;
+		margin-right: 5%;
+	}
+	.menu__link {
+		font-weight: 300;
+		font-size: 20px;
+		line-height: 23px;
+		letter-spacing: 0.21em;
+		padding-bottom: 5px;
+		color: black;
+		border-bottom: 1px solid transparent;
+		transition: all .3s;
+
+		&.menu__link_active {
+			cursor: default;
+			user-select: none;
+		}
+
+		&:hover:not(.menu__link_active) {
+			border-bottom-color: #3B6CE9;
+			transition: all .3s;
+		}
+	}
+	@media (min-width: 1200px) {
+		.menu__list {
+			display: flex;
+			align-items: center;
+			margin-bottom: 0;
+		}
+	}
+	@media (max-width: 1199px) {
+		.menu__icon {
+			z-index: 43;
+			display: block;
+			position: relative;
+			width: 30px;
+			height: 18px;
+			cursor: pointer;
+		}
+		.menu__icon span,
+		.menu__icon::before,
+		.menu__icon::after {
+			left: 0;
+			position: absolute;
+			height: 10%;
+			width: 100%;
+			transition: all 0.3s ease 0s;
+			background-color: black;
+		}
+		.menu__icon::before,
+		.menu__icon::after {
+			content: "";
+		}
+		.menu__icon::before {
+			top: 0;
+		}
+		.menu__icon::after {
+			bottom: 0;
+		}
+		.menu__icon span {
+			top: 50%;
+			transform: scale(1) translate(0px, -50%);
+		}
+
+		.menu__icon.active span {
+			transform: scale(0) translate(0px, -50%);
+		}
+		.menu__icon.active::before {
+			top: 50%;
+			transform: rotate(-45deg) translate(0px, -50%);
+		}
+		.menu__icon.active::after {
+			bottom: 50%;
+			transform: rotate(45deg) translate(0px, 50%);
+		}
+
+		.menu__body {
+			position: fixed;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background-color: #ffffff;
+			padding: 140px 0 30px;
+			transition: left 0.3s ease 0s;
+			overflow: auto;
+			z-index: 42;
+		}
+		.menu__body.active {
+			left: 0;
+		}
+
+		.menu__list > li {
+			flex-wrap: wrap;
+			margin: 0px 0px 30px 0px;
+		}
+		.menu__list > li:last-child {
+			margin-bottom: 0;
+		}
+		.menu__link {
+			font-size: 24px;
+		}
+	}
+}
+
 
 </style>
