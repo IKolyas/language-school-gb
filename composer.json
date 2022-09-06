@@ -13,9 +13,11 @@
         "laravel-admin-ext/helpers": "^2.0",
         "laravel/framework": "^9.11",
         "laravel/sanctum": "^2.15",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "predis/predis": "^2.0",
-        "pusher/pusher-php-server": "^7.0"
+        "pusher/pusher-php-server": "^7.0",
+        "socialiteproviders/vkontakte": "^5.0"
     },
     "repositories": [
         {

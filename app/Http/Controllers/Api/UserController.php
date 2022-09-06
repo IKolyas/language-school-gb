@@ -13,6 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -178,5 +179,17 @@ class UserController extends Controller
     public function destroy(int $id)
     {
 
+    }
+
+    public function getSocialiteUser(): JsonResponse
+    {
+        $redis = Redis::connection();
+        $data = json_decode($redis->get('socialite' . csrf_token()));
+
+        if ($data) {
+            return response()->json(['success' => true, 'user' => $data->user, 'token' => $data->token]);
+        }
+
+        return response()->json(['success' => false]);
     }
 }

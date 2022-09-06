@@ -10,6 +10,7 @@ import Account from "./components/pages/account/Account";
 import AccountGroups from './components/pages/account/Groups';
 import AccountAchievements from './components/pages/account/Achievements';
 import DictionaryCreate from "./components/pages/Dictionaries/DictionaryCreate";
+import AuthSocialite from "./components/pages/auth/AuthSocialite";
 //import DictionaryProgress from "./components/pages/Dictionaries/DictionaryProgress";
 import Arena from "./components/pages/dictionary_war/Arena";
 
@@ -24,6 +25,15 @@ const routes = [
         meta: {
             middleware: "guest",
             title: `Home`
+        }
+    },
+    {
+        name: 'socialite',
+        path: '/socialite',
+        component: AuthSocialite,
+        meta: {
+            middleware: "guest",
+            title: `AuthSocialite`
         }
     },
     {

@@ -24,6 +24,7 @@ Route::name('user.')->prefix('user')->group(function () {
     Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
     Route::post('login', [UserController::class, 'login'])->name('login');
     Route::post('register', [UserController::class, 'register']);
+    Route::post('/vk/get-user', [UserController::class, 'getSocialiteUser'])->name('socialite');
 
     Route::post('auth', function () {
         return response()->json(['success' => boolval(auth()->guard('api')->user())]);
