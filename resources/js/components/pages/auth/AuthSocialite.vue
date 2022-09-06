@@ -16,7 +16,7 @@ export default {
         ...mapActions({signIn: 'user/login'}),
         vkAuth() {
             this.$axios.get('/sanctum/csrf-cookie').then(() => {
-                this.$axios.post('/api/user/vk/get-user/').then(response => {
+                this.$axios.post('/api/user/vk/get-user').then(response => {
                     if (!response.data.success) return alert(response.data.message);
                     this.signIn(response.data.token, response.data.user)
                     this.$store.dispatch('user/fetchUser', {id: response.data.user.id}).then(() => {
