@@ -158,10 +158,6 @@ export default {
 		align-items: center;
 	}
 
-	.main-logo {
-		margin-bottom: 20px;
-	}
-
 	.login-btn {
 		margin-left: auto;
 		width: 120px;
@@ -178,13 +174,13 @@ export default {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 15px;
-		border-radius: 10px;
+		margin-left: 15px;
 		position: relative;
 	}
 
 	.user-menu__name {
-		padding: 0 10px;
+		margin-right: 10px;
+		white-space: pre;
 	}
 
 	.user-menu__avatar {

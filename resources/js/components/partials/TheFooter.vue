@@ -64,6 +64,8 @@ export default {
 	.main-footer__logo {
 		max-width: 207px;
 		max-height: 117px;
+		object-fit: contain;
+		width: 100%;
 	}
 
 	.main-footer__navigation {
