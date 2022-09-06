@@ -37,84 +37,11 @@ footer {
     }
 }
 
-.features {
-    padding: 50px;
-    background-image: url('../img/features-background.png');
-    background-repeat: no-repeat;
-    background-position: top 100px right 60px;
-    background-size: 30%;
-}
 
-.features__top {
-    padding-right: 400px;
-    min-height: 370px;
-}
+.locked {
+     overflow: hidden;
+ }
 
-.features__title {
-    font-family: 'Raleway', sans-serif;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 58px;
-    letter-spacing: 0.05em;
-    text-align: center;
-}
-
-.features__description {
-    font-family: Raleway, sans-serif;
-    font-size: 20px;
-    font-weight: 300;
-    line-height: 38px;
-    letter-spacing: 0.025em;
-    text-align: left;
-}
-
-.features__subtitle {
-    font-family: 'Raleway', sans-serif;
-    font-size: 25px;
-    font-weight: 400;
-    line-height: 47px;
-    letter-spacing: 0.05em;
-    text-align: center;
-    padding-bottom: 30px;
-}
-
-.features__list {
-    display: flex;
-    justify-content: space-around;
-}
-
-.features__list-item {
-    padding-top: 100px;
-    text-align: center;
-    width: 170px;
-    font-family: Raleway, sans-serif;
-    font-size: 20px;
-    font-weight: 300;
-    line-height: 23px;
-    letter-spacing: 0.025em;
-}
-
-.features__list-item_pulse {
-    background: url('../img/icons/pulse-icon.png') top center no-repeat;
-}
-
-.features__list-item_book {
-    background: url('../img/icons/book-icon.png') top center no-repeat;
-}
-
-.features__list-item_hat {
-    background: url('../img/icons/hat-icon.png') top center no-repeat;
-}
-
-.features__list-item_thumbs-up {
-    background: url('../img/icons/thumbs-up-icon.png') top center no-repeat;
-}
-
-.features__list-item_gear {
-    background: url('../img/icons/gear-icon.png') top center no-repeat;
-}
-
-/*enter-page*/
 
 /*Register-page*/
 .register-page {
