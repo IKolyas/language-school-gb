@@ -79,18 +79,19 @@ export default {
     methods: {
         ...mapActions({signIn: 'user/login'}),
 		loginHandler() {
-			login({email: this.email, password: this.password})
+			this.$axios.post('api/user/login', {email: this.email, password: this.password})
 			.then((response) => {
 				if (!response.data.success) return alert(response.data.message);
 
 				this.signIn(response.data.token, response.data.user)
 
 				this.$store.dispatch('user/fetchUser', {id: response.data.user.id});
+
 			})
 			.catch((data) => {
 				alert(data)
 			})
-        },
+		},
     },
 }
 </script>
