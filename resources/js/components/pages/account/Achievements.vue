@@ -44,9 +44,6 @@
                 </p>
             </li>
         </ul>
-        <button class="btn btn-primary" @click="updateStatistics">Нажать когда закончил тренировку</button>
-        (Этой кнопки потом не будет)
-        <!--    TODO этот метод надо вызывать когда закончил тренировку, здесь убрать-->
     </section>
 </template>
 
