@@ -15,3 +15,6 @@ mix.js('resources/js/app.js', 'public/js').vue()
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+
+mix.copy('resources/img/', 'public/images')
+    .copy('resources/img/icons/', 'public/images/icons/')

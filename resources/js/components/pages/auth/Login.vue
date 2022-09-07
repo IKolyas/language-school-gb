@@ -25,7 +25,7 @@
         <p class="enter-page__text">с помощью аккаунта в социальных сетях</p>
         <ul class="enter-page__social-networks social-networks">
             <li class="social-networks__item">
-                <a href="" class="social-networks__link social-networks__link_vk">VK</a>
+                <a href="/socialite/auth/vk" class="social-networks__link social-networks__link_vk">VK</a>
             </li>
             <li class="social-networks__item">
                 <a href="" class="social-networks__link social-networks__link_ok">OK</a>

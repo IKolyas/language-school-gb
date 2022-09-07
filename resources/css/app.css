@@ -512,7 +512,7 @@ footer {
 }
 
 .dictionaries-page__search-form {
-    width: 828px;
+    width: 700px;
     margin: 0 auto 30px auto;
 }
 
@@ -525,7 +525,7 @@ footer {
 .search-form__input {
     width: 700px;
     padding: 10px 30px 10px 78px;
-    border-radius: 10px 0 0 10px;
+    border-radius: 10px;
     background: url("../img/icons/search-blue-pink-icon.png") no-repeat 30px 10px, linear-gradient(180deg, #CBE6F6 0%, #E0D3FC 100%);
 }
 
