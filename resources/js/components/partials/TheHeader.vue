@@ -1,5 +1,5 @@
 <template>
-    <header class="main-header">
+    <header class="main-header" :class="{'home' : $route.name === 'home'}">
 		<div class="container">
 			<div class="main-header__inner">
 				<div class="arena-message"
@@ -9,11 +9,11 @@
 				</div>
 
 				<div class="header__menu menu">
-					<div @click.prevent="toggle">
+					<div @click.prevent="toggleMenu">
 						<button
-						type="button"
-						class="menu__icon"
-						:class="{ 'active' : isOpen }"
+							type="button"
+							class="menu__icon"
+							:class="{ 'active' : isOpen }"
 						>
 							<span></span>
 						</button>
@@ -26,7 +26,12 @@
 							v-for="(menu, index) in menus"
 							:key="index"
 							>
-								<router-link :to="{name: menu.linkName}" class="menu__link" active-class="menu__link_active bottom-marked">
+								<router-link
+									:to="{name: menu.linkName}"
+									class="menu__link"
+									active-class="menu__link_active bottom-marked"
+									@click="onLink(menu.linkName)"
+								>
 									{{ menu.text }}
 								</router-link>
 							</li>
@@ -113,7 +118,7 @@ export default {
 		}
     },
     methods: {
-        ...mapMutations({}),
+        ...mapMutations({changePageLocked: 'changePageLocked'}),
         ...mapActions({
             logout: 'user/logout',
             fetchUser: 'user/fetchUser'
@@ -129,8 +134,21 @@ export default {
             this.authMenuIsActive = !this.authMenuIsActive;
         },
 
-		toggle() {
-			this.isOpen = !this.isOpen
+		toggle(payload) {
+			if (payload !== undefined) {
+				this.isOpen = payload
+			} else {
+				this.isOpen = !this.isOpen
+			}
+		},
+		toggleMenu() {
+			this.toggle()
+			this.changePageLocked()
+		},
+
+		onLink() {
+			this.toggleMenu(false)
+			this.changePageLocked(false)
 		}
     },
 
@@ -149,13 +167,23 @@ export default {
 <style lang="scss">
 
 .main-header {
-	background: rgba(202, 230, 246, 0.27) 0;
+
+	&.home {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 41;
+	}
 
 	.main-header__inner {
 		display: flex;
 		justify-content: space-between;
-		padding: 34px 0;
+		padding: 16px 0;
 		align-items: center;
+		@media (min-width: 768px) {
+			padding: 34px 0;
+		}
 	}
 
 	.login-btn {
@@ -324,6 +352,7 @@ export default {
 			position: relative;
 			width: 30px;
 			height: 18px;
+			padding: 12px;
 			cursor: pointer;
 		}
 		.menu__icon span,
@@ -370,10 +399,13 @@ export default {
 			width: 100%;
 			height: 100%;
 			background-color: #ffffff;
-			padding: 140px 0 30px;
+			padding: 70px 0 30px;
 			transition: left 0.3s ease 0s;
 			overflow: auto;
 			z-index: 42;
+			@media (min-width: 768px) {
+				padding: 140px 0 30px;
+			}
 		}
 		.menu__body.active {
 			left: 0;

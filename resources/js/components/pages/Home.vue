@@ -62,13 +62,20 @@ export default {
 <style lang="scss">
 .promo {
 	background: linear-gradient(180deg, rgba(202, 230, 246, 0.27) 0%, rgba(162, 117, 249, 0.53) 100%);
+	height: 100vh;
 
 	.promo__inner {
+		padding: 10% 50px 10%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
 		@media (min-width: 1200px) {
-			background: url('../../../img/promo-background.png')no-repeat right 120px bottom/60%;
+			background: url('../../../img/promo-background.png')no-repeat right 120px center/60%;
 			position: relative;
-			display: flex;
-			padding: 50px 50px 200px;
+			flex-direction: row;
+			justify-content: space-between;
 		}
 	}
 
@@ -76,7 +83,11 @@ export default {
 		margin-bottom: 20px;
 		object-fit: contain;
 		width: 100%;
-		max-width: 555px;
+		max-width: 350px;
+
+		@media (min-width: 1200px) {
+			max-width: 555px;
+		}
 	}
 
 	.promo__content {

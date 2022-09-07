@@ -1,5 +1,5 @@
 <template>
-	<div :class="{'locked': isPageLocked}">
+	<div class="root-container" :class="{'locked': isPageLocked}" style="height: 100%">
 		<TheHeader/>
 	<!--	<AppLoader v-if="isLoading"/>-->
 		<router-view/>
@@ -24,5 +24,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.root-container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+}
 </style>
