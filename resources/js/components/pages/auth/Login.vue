@@ -6,12 +6,12 @@
 		   </div>
 		   <div class="enter-page__inner">
 			   <div class="enter-page__img">
-				   <img src="../../../../img/main-logo.png" alt="Language school project logotype" width="555" class="enter-page__logo">
+				   <img src="../../../../img/main-logo.png" alt="Language school project logotype" class="enter-page__logo">
 			   </div>
 			   <div class="enter-page__content">
 				   <h1 class="enter-page__heading">Вход</h1>
 				   <form class="enter-page__form enter-form" @submit.prevent="loginHandler">
-					   <input type="email" class="primary-input enter-form__input enter-form__input_email" v-model="email" required
+					   <input type="email" class="primary-input enter-form__input" v-model="email" required
 							  autofocus autocomplete="off" placeholder="Email">
 					   <input type="password" class="primary-input enter-form__input enter-form__input_password" v-model="password"
 							  required autocomplete="off" placeholder="Пароль">
@@ -52,7 +52,7 @@
 				   </ul>
 				   <p class="enter-page__text">
 					   Нет аккаунта?
-					   <a href="" class="enter-form__link">Зарегистрируйтесь!</a>
+					   <router-link :to="{name: 'register'}" class="enter-form__link">Зарегистрируйтесь!</router-link>
 				   </p>
 			   </div>
 		   </div>
@@ -113,8 +113,18 @@ export default {
 		}
 	}
 
+	.enter-page__logo {
+		margin-bottom: 20px;
+		object-fit: contain;
+		width: 100%;
+		max-width: 350px;
+
+		@media (min-width: 1200px) {
+			max-width: 555px;
+		}
+	}
+
 	.enter-page__heading {
-		font-family: 'Raleway', sans-serif;
 		font-size: 36px;
 		color: #2A79F8;
 		margin-bottom: 20px;
@@ -127,25 +137,11 @@ export default {
 		margin-bottom: 15px;
 	}
 
-	.primary-input {
-		border: 2px solid rgba(59, 108, 233, 1);
-		height: 46px;
-		width: 522px;
-		border-radius: 20px;
-		font-family: 'Raleway', sans-serif;
-		font-size: 20px;
-		padding: 10px;
-	}
-
 	.enter-form__input {
 		margin-bottom: 40px;
 		padding-left: 50px;
 		background-repeat: no-repeat;
 		background-position: top 5px left 10px;
-	}
-
-	.primary-input:hover, .primary-input:focus {
-		border-width: 4px;
 	}
 
 	.enter-form__input_email {
@@ -197,7 +193,7 @@ export default {
 
 	.social-networks {
 		display: flex;
-		width: 350px;
+		max-width: 350px;
 		justify-content: space-between;
 		padding: 0;
 	}
