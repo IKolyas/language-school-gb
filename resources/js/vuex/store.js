@@ -9,24 +9,30 @@ const debug = process.env.NODE_ENV !== 'production'
 
 const store = createStore({
     strict: debug,
-    plugins:
-        debug ? [createLogger(), createPersistedState()] : [createPersistedState()]
-    ,
+    plugins: debug ? [createLogger(), createPersistedState()] : [createPersistedState()],
 
     state: {
-        mainLoader: false
+        mainLoader: false,
+        isMobile: false,
+        isPageLocked: false
     },
 
     getters: {
-       mainLoader(state) {
-           return state.mainLoader;
-       }
+        mainLoader: state => state.mainLoader,
+        isPageLocked: state => state.isPageLocked,
     },
 
     mutations: {
         setLoader(state, value) {
             state.mainLoader = value;
-        }
+        },
+        changePageLocked (state, payload) {
+            if (payload !== undefined) {
+                state.isPageLocked = payload
+            } else {
+                state.isPageLocked = !state.isPageLocked
+            }
+        },
     },
 
     actions: {

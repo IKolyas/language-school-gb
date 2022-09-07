@@ -16,9 +16,5 @@ export default {
 		}
 	},
 	components: { MainLayout },
-
-    created() {
-
-    },
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
     <main class="practice-page">
         <AppLoader v-if="loading"/>
-        <div v-else>
-            <h2 class="practice-page__heading">Время практиковаться со словарём!</h2>
-            <p class="practice-page__dictionary-name">'{{ dictionaryName }}'</p>
+        <div class="practice-page__wrap" v-else>
+            <h2 class="practice-page__heading">Время практиковаться со&nbsp;словарём!</h2>
+            <p class="practice-page__dictionary-name">{{ dictionaryName }}</p>
 
             <button
                 class="practice-page__start-button"
@@ -290,7 +290,7 @@ export default {
             hasCheckAnswer,
             hasRightAnswer,
             count,
-            dictionaryName,
+            dictionaryName: computed(() => dictionaryName.value.charAt(0).toUpperCase() + dictionaryName.value.slice(1)),
             onNextTask,
             onStartedPractice,
             onFinishedTask,
@@ -307,4 +307,179 @@ export default {
 </script>
 
 <style lang="scss">
+.practice-page {
+	text-align: center;
+
+	@media (min-width: 1200px) {
+		background-image: url("../../../img/practice-page-background.png");
+		background-repeat: no-repeat;
+		background-position: center bottom;
+		padding: 10px 80px 270px;
+	}
+
+	.practice-page__wrap {
+		padding-top: 10%;
+		padding-bottom: 10%;
+	}
+
+	.practice-page__heading {
+		font-size: 30px;
+		font-weight: 400;
+		color: #3B6CE9;
+		margin-bottom: 50px;
+		@media (min-width: 768px) {
+			font-size: 50px;
+		}
+	}
+
+	.practice-page__dictionary-name {
+		font-family: Sacramento, cursive;
+		font-size: 20px;
+		font-weight: 400;
+		@media (min-width: 768px) {
+			font-size: 40px;
+		}
+	}
+
+	.practice-page__start-button {
+		max-height: 74px;
+		max-width: 320px;
+		width: 100%;
+		border-radius: 10px;
+		border: 2px solid #3B6CE9;
+		padding: 10px 30px 14px;
+		font-size: 16px;
+		font-weight: 400;
+		background: #FFF;
+		color: #3B6CE9;
+		margin-bottom: 30px;
+		white-space: nowrap;
+
+		@media (min-width: 768px) {
+			font-size: 36px;
+			max-width: 395px;
+		}
+	}
+
+	.practice {
+		box-shadow: 0 5px 5px 5px #3B6CE973;
+		padding: 50px;
+		border-radius: 10px;
+		position: relative;
+	}
+
+	.practice__question {
+		font-family: Raleway, sans-serif;
+		font-size: 36px;
+		font-weight: 300;
+	}
+
+	.practice__score {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		font-family: Raleway, sans-serif;
+		font-size: 36px;
+		font-weight: 700;
+		color: #3B6CE9;
+	}
+
+	.current-word {
+		position: relative;
+	}
+
+	.current-word__word {
+		font-family: Raleway, sans-serif;
+		font-size: 36px;
+		font-weight: 700;
+		color: #3B6CE9;
+	}
+
+	.current-word__voice-option {
+		position: absolute;
+		top: 0;
+		right: 10px;
+		width: 200px;
+	}
+
+	.voice-action {
+		margin-left: 10px;
+	}
+
+	.answers-list {
+		display: flex;
+		justify-content: space-around;
+		padding: 30px;
+		margin-bottom: 0;
+	}
+
+	.answer-list__answer-item {
+		border: 3px solid #3B6CE9;
+		border-radius: 10px;
+		padding: 8px 52px;
+		color: #3B6CE9;
+		font-family: Source Sans Pro, sans-serif;
+		font-size: 36px;
+		font-weight: 400;
+	}
+
+	.answer-list__answer-item.active {
+		color: white;
+		background-color: #3B6CE9;
+	}
+
+	.answer-list__answer-item:hover {
+		color: white;
+		background-color: #3B6CE9;
+	}
+
+	.task-area__result {
+		height: 50px;
+		font-family: Source Sans Pro, sans-serif;
+		font-size: 30px;
+		font-weight: 400;
+	}
+
+	.task-area__success {
+		color: green;
+	}
+
+	.task-area__mistake {
+		color: red;
+	}
+
+	.practice__controls {
+		display: flex;
+		justify-content: space-around;
+		padding: 0 250px;
+	}
+
+	.practice-controls__button {
+		font-family: Source Sans Pro, sans-serif;
+		font-size: 24px;
+		font-weight: 400;
+		border-radius: 10px;
+		border: 3px solid #256C39;
+		color: #256C39;
+		padding: 8px 15px;
+		background-color: #FFF;
+	}
+
+	.practice-controls__button_finish {
+		color: #CA0000;
+		border-color: #CA0000;
+	}
+
+	.practice-controls__button.disabled, .practice-controls__button:disabled {
+		color: gray;
+		border-color: gray;
+	}
+
+	.practice-result {
+		font-family: Source Sans Pro, sans-serif;
+		font-size: 36px;
+		font-weight: 400;
+	}
+}
+
 </style>

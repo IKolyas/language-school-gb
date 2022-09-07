@@ -1,24 +1,34 @@
 <template>
-    <div class="container">
-        <AppHeader/>
-        <AppLoader v-if="isLoading"/>
-        <router-view/>
-        <AppFooter/>
-    </div>
+	<div class="root-container" :class="{'locked': isPageLocked}" style="height: 100%">
+		<TheHeader/>
+	<!--	<AppLoader v-if="isLoading"/>-->
+		<router-view/>
+		<TheFooter/>
+	</div>
 </template>
 
 <script>
-import AppHeader from '../partials/AppHeader'
-import AppFooter from "../partials/AppFooter";
+import TheHeader from '../partials/TheHeader'
+import TheFooter from "../partials/TheFooter";
 export default {
-    components: {AppFooter, AppHeader},
+    components: {TheFooter, TheHeader},
+
     computed: {
-        isLoading: function () {
+        isLoading () {
             return this.$store.getters.mainLoader;
-        }
+        },
+		isPageLocked () {
+			return this.$store.getters.isPageLocked;
+		}
     }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.root-container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+}
 </style>
