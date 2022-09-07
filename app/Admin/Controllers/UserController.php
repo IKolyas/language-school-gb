@@ -55,6 +55,7 @@ class UserController extends AdminController
         $show->field('lastname', __('Lastname'));
         $show->field('email', __('Email'));
         $show->field('email_verified_at', __('Email verified at'));
+        $show->field('tasks', __('Tasks'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
         $show->field('deleted_at', __('Deleted at'));
@@ -74,6 +75,8 @@ class UserController extends AdminController
         $form->text('name', __('Name'));
         $form->text('lastname', __('Lastname'));
         $form->email('email', __('Email'));
+//        $form->password('password', __('Passwprd'));
+        $form->textarea('tasks', __('Tasks'));
         $form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
         $form->listbox('dictionaries', __('Dictionaries'))->options(Dictionary::all()->pluck('dictionary_name', 'id'));
         $form->listbox('groups', __('Groups'))->options(Group::all()->pluck('description', 'id'));

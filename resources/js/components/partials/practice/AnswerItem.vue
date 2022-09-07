@@ -1,6 +1,6 @@
 <template>
 	<li
-		class="btn btn-outline-info me-3"
+		class="answer-list__answer-item"
 		:class="[{'active': isActiveAnswer === answer}]"
 		@click="$emit('onAnswerClick', answer)"
 	>
@@ -24,10 +24,5 @@ export default {
 </script>
 
 <style lang="scss">
-.btn-outline-info.active {
-	color: white;
-}
-.btn-outline-info:hover {
-	color: white;
-}
+
 </style>

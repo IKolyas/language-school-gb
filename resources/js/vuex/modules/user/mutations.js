@@ -20,5 +20,26 @@ export default {
         state.dictionaries = [];
         state.tasks = {};
         state.groups = [];
-    }
+    },
+    setUserWords(state, payload) {
+        state.userWords = payload;
+    },
+    setAuthenticated(state, value) {
+        state.authenticated = value;
+    },
+    setToken(state, token) {
+        state.token = token;
+    },
+    setUser(state, value) {
+        state.user = value;
+    },
+    updateName(state, value) {
+        state.name = value;
+    },
+    updateLastname(state, value) {
+        state.lastname = value;
+    },
+    updateEmail(state, value) {
+        state.email = value;
+    },
 }

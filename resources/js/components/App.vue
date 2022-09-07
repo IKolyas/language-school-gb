@@ -15,40 +15,6 @@ export default {
 			layout: computed(() => route.meta.layout || 'main')
 		}
 	},
-	components: { MainLayout }
+	components: { MainLayout },
 }
-
-
-// export default {
-//     name: "App",
-//     data() {
-//         return {
-//             user: false
-//         }
-//     },
-//     created() {
-//         if (this.$store.state.isAuth) {
-//             this.isAuth = true
-//             this.user = window.Laravel.user
-//         }
-//     },
-//     methods: {
-//         logout(e) {
-//             e.preventDefault()
-//             this.$axios.get('/sanctum/csrf-cookie').then(() => {
-//                 this.$axios.post('/api/logout')
-//                     .then(response => {
-//                         if (response.data.success) {
-//                             window.location.href = "/"
-//                         } else {
-//                             console.log(response)
-//                         }
-//                     })
-//                     .catch(function (error) {
-//                         console.error(error);
-//                     });
-//             })
-//         }
-//     },
-// }
 </script>

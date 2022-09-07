@@ -13,11 +13,15 @@ import '../styles/style.scss'
 
 import App from './components/App';
 const app = createApp(App);
+import AppLoader from './components/partials/AppLoader'
 
 app.use(router);
 app.use(store);
+app.component('AppLoader', AppLoader)
+
 
 app.config.globalProperties.$axios = axios;
+axios.defaults.headers.common['Authorization'] = `Bearer ${store.getters['user/token']}`;
 app.mount('#app'); // Vue Instance - Root component
 
 if (window.Cypress) {

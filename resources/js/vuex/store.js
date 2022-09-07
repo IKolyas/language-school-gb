@@ -1,38 +1,52 @@
-import { createStore, createLogger } from 'vuex';
+import {createStore, createLogger} from 'vuex';
 import userModule from './modules/user';
 import taskModule from './modules/task';
-
-// const laravel = window.Laravel
+import dictionaryModule from './modules/dictionary';
+import statisticsModule from "./modules/statistics";
+import createPersistedState from 'vuex-persistedstate';
 
 const debug = process.env.NODE_ENV !== 'production'
 
 const store = createStore({
-  strict: debug,
-  plugins: debug ? [createLogger()] : [],
+    strict: debug,
+    plugins: debug ? [createLogger(), createPersistedState()] : [createPersistedState()],
 
-  // state: {
-  //   // isAuth: false,
-  //   // commonState: true
-  // },
+    state: {
+        mainLoader: false,
+        isMobile: false,
+        isPageLocked: false
+    },
 
-  // mutations: {
-  //   CHANGE_AUTH (state) {
-  //     state.isAuth = laravel.isAuth
-  //   }
-  // },
+    getters: {
+        mainLoader: state => state.mainLoader,
+        isPageLocked: state => state.isPageLocked,
+    },
 
-  // actions: {
+    mutations: {
+        setLoader(state, value) {
+            state.mainLoader = value;
+        },
+        changePageLocked (state, payload) {
+            if (payload !== undefined) {
+                state.isPageLocked = payload
+            } else {
+                state.isPageLocked = !state.isPageLocked
+            }
+        },
+    },
 
-  // },
+    actions: {
+        changeLoader({commit}, value) {
+            commit('setLoader', value)
+        }
+    },
 
-  // getters: {
-
-  // },
-
-  modules: {
-    user: userModule,
-    task: taskModule
-  },
+    modules: {
+        user: userModule,
+        task: taskModule,
+        dictionaries: dictionaryModule,
+        statistics: statisticsModule
+    },
 })
 
 export default store;

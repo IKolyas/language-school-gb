@@ -1,7 +1,7 @@
 
 export default {
     state: () => ({
-        isAuth: true,
+        // isAuth: true,
         localStorage: {}, //Копия localstorage. Отслеживаем и меняем.
         name: '',
         lastname: '',
@@ -9,8 +9,10 @@ export default {
         token: '',
         tasks: {},
         photo: '',
-        statistics: {}
-
+        statistics: {},
+        userWords: [],
+        authenticated: false,
+        user: {}
     })
-    
+
 }

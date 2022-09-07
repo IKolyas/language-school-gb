@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class DictionaryUser extends Pivot
 {
-    use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'dictionary_id',
+    ];
 
+    public $timestamps = false;
 }

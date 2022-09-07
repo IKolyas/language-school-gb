@@ -1,0 +1,715 @@
+@import '~bootstrap-icons/font/bootstrap-icons';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway:wght@300;400&family=Sacramento&family=Source+Sans+Pro&display=swap');
+/*font-family: 'Open Sans', sans-serif;*/
+/*font-family: 'Raleway', sans-serif;*/
+/*font-family: 'Sacramento', cursive;*/
+/*font-family: 'Source Sans Pro', sans-serif;*/
+
+
+html,
+body,
+#app {
+    height: 100%;
+    font-family: 'Raleway', serif;
+}
+
+main {
+    flex: 1 0 auto;
+}
+footer {
+    margin-top: auto;
+    flex: 0 0 auto;
+}
+
+.container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-left: 50px !important;
+        padding-right: 50px !important;
+    }
+}
+
+
+.locked {
+     overflow: hidden;
+ }
+
+/* Forms */
+.primary-input {
+    border: 2px solid rgba(59, 108, 233, 1);
+    height: 46px;
+    max-width: 522px;
+    width: 100%;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+
+.primary-input:hover, .primary-input:focus {
+    border-width: 4px;
+}
+
+/*Register-page*/
+
+.authorization-options__item {
+    width: 473px;
+    height: 64px;
+    border-radius: 40px;
+    margin-bottom: 35px;
+    text-align: center;
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    background-repeat: no-repeat;
+    background-position: top 17px left 20px;
+    padding: 10px;
+}
+
+.authorization-options__item_google {
+    background-image: url("../img/icons/google-icon.png");
+    background-color: #F1F1F1;
+}
+
+.authorization-options__item_apple {
+    background-image: url("../img/icons/apple-icon.png");
+    background-color: #0A0A0A;
+    color: #FFF;
+}
+
+.authorization-options__item_vk {
+    background-image: url("../img/icons/vk-square-icon.png");
+    background-color: #567FBD;
+    color: #FFF;
+}
+
+/*Account-page*/
+.account-page {
+    display: flex;
+    justify-content: space-between;
+}
+
+.account-navbar {
+    width: 260px;
+    background: linear-gradient(180deg, rgba(31, 159, 217, 0.24) 0%, rgba(133, 69, 247, 0.24) 100%);
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    min-height: 800px;
+    flex-shrink: 0;
+}
+
+.account-navbar__avatar {
+    border-radius: 50%;
+    margin: 0 auto 11px;
+}
+
+.account-navbar__username {
+    font-family: Raleway, sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.account-navbar__username::before {
+    left: 10%
+}
+
+.account-navbar__username::after {
+    width: 80%;
+    left: 10%;
+}
+
+.account-navigation {
+    width: 214px;
+    margin: 0;
+    padding: 0;
+}
+
+.account-navigation__item {
+    margin-bottom: 30px;
+}
+
+.account-navigation__item-link {
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000;
+}
+
+.account-navigation__item-link_active {
+    color: #3B6CE9;
+}
+
+.dropdown-account {
+    position: relative;
+    padding: 10px 10px 10px 20px;
+    background-image: url("../img/icons/question-mark-icon.png");
+    background-position: left 40px top 5px;
+    background-repeat: no-repeat;
+    font-family: Raleway, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dropdown-account__dropdown-toggle-mark {
+    position: absolute;
+    top: 16px;
+    right: 35px;
+}
+
+.dropdown-account__list {
+    width: 184px;
+    padding: 36px 10px 16px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 4px rgba(59, 108, 233, 0.3);
+    border-radius: 10px;
+    margin: 10px 0 0;
+    font-family: Raleway, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.dropdown-account__item {
+    margin-bottom: 25px;
+}
+
+.dropdown-account__link {
+    color: #000;
+}
+
+.dropdown-account__link:hover, .dropdown-account__link:active {
+    color: #3B6CE9;
+}
+
+.account-page__content {
+    max-width: 1036px;
+}
+
+/*Achievements-page*/
+.achievements-page {
+    background-image: url("../img/achivements-background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-right: 80px;
+}
+
+.achievements-page__top {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 80px 40px;
+    margin-bottom: 40px;
+}
+
+.achievements-page__top::before {
+    left: 150px;
+}
+
+.achievements-page__top::after {
+    width: 620px;
+    left: 150px;
+}
+
+.achievements-page__top-item {
+    width: 350px;
+    height: 112px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 5px 5px rgba(59, 108, 233, 0.45);
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+}
+
+.achievements-page__top-text {
+    font-family: Raleway, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.achievements-page__top-date {
+    font-family: Raleway, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #3B6CE9;
+}
+
+.achievements-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 30px;
+}
+
+.achievements-list__item {
+    margin-bottom: 20px;
+}
+
+.achievement-card {
+    width: 270px;
+    height: 200px;
+    background-color: #FFFFFF;
+    box-shadow: 0 5px 5px 5px rgba(40, 125, 64, 0.45);
+    border-radius: 10px;
+    padding-top: 140px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: top 20px center;
+}
+
+.achievement-card_yellow-shadow {
+    box-shadow: 0 5px 5px 5px rgba(196, 180, 41, 0.45);
+}
+
+.achievement-card__text {
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.achievement-card__number {
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #CA0000;
+}
+
+.achievement-card_training-days {
+    background-image: url("../img/icons/cup-icon.png");
+}
+
+.achievement-card_training-days-strike {
+    background-image: url("../img/icons/chart-icon.png");
+}
+
+.achievement-card_max-training-days-strike {
+    background-image: url("../img/icons/reward-icon.png");
+}
+
+.achievement-card_user-words-total-count {
+    background-image: url("../img/icons/dictionary-icon.png");
+}
+
+.achievement-card_user-words-in-progress-count {
+    background-image: url("../img/icons/book-with-hand-icon.png");
+}
+
+.achievement-card_user-words-learned-count {
+    background-image: url("../img/icons/letters-icon.png");
+}
+
+
+/*Dictionaries-page*/
+
+.dictionaries-page {
+
+}
+
+.dictionaries-page__search-form {
+    width: 700px;
+    margin: 0 auto 30px auto;
+}
+
+.search-form {
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.search-form__input {
+    width: 700px;
+    padding: 10px 30px 10px 78px;
+    border-radius: 10px;
+    background: url("../img/icons/search-blue-pink-icon.png") no-repeat 30px 10px, linear-gradient(180deg, #CBE6F6 0%, #E0D3FC 100%);
+}
+
+.search-form__submit {
+    width: 128px;
+    padding: 10px 30px;
+    background: linear-gradient(180deg, #CBE6F6 0%, #E0D3FC 100%);
+    border-radius: 0 10px 10px 0;
+    color: #3B6CE9;
+    border-left: 1px solid #3B6CE9;
+}
+
+.dictionaries-page__new-dictionary-button {
+    display: block;
+    background-color: #FFF;
+    height: 45px;
+    width: 243px;
+    border-radius: 10px;
+    padding: 8px 30px 16px;
+    color: #3B6CE9;
+    border: 3px solid #3B6CE9;
+    font-family: Source Sans Pro, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 800px;
+    text-align: center;
+}
+
+.dictionary-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+}
+
+.dictionary-list__item {
+    margin: 15px;
+}
+
+.dictionary-item {
+    min-height: 292px;
+    width: 329px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 0 #3B6CE9A1;
+    text-align: center;
+    font-family: Raleway, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #FFF;
+}
+
+.dictionary-item__image {
+    margin-bottom: 6px;
+}
+
+.dictionary-item__text {
+    color: black;
+}
+
+.dictionary-item__text_name {
+    color: #3B6CE9;
+}
+
+.dictionary-item__meta {
+    display: block;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #CDE4F7 0%, #E0D3FC 100%);
+    color: #A1A1A1;
+    padding: 10px;
+    margin: 0;
+}
+
+.user-dictionaries-page {
+    padding-right: 300px;
+    background: url('../img/my-dictionaries-background.png') top right no-repeat;
+
+}
+
+.user-dictionaries-page__links-group {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.user-dictionaries-page__link-button {
+    border: 3px solid #3B6CE9;
+    border-radius: 10px;
+    padding: 12px 30px;
+    margin-left: 10px;
+    background-color: #FFF;
+}
+
+
+/*User-groups-page*/
+
+.user-groups {
+    background: url('../img/my-groups-background.png') no-repeat right top;
+    background-size: contain;
+    width: 1036px;
+    text-align: center;
+}
+
+.user-groups__title {
+    font-family: Raleway, sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.user-groups__count {
+    color: #3B6CE9;
+}
+
+.groups-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+}
+
+.groups-list__item {
+    margin: 15px;
+}
+
+.group-item {
+    min-height: 300px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 0 #3B6CE9A1;
+    text-align: center;
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    background-color: #FFF;
+}
+
+.group-item__image {
+    margin-bottom: 14px;
+}
+
+.group-item__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #3B6CE9;
+}
+
+.group-item__description {
+}
+
+.group-item__footer {
+    display: block;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #CDE4F7 0%, #E0D3FC 100%);
+}
+
+.group-item__footer-text {
+    margin: 0;
+    padding: 10px;
+}
+
+.group-item__footer-value {
+    color: #3B6CE9;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/*dictionary-page*/
+.dictionary-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-height: 800px;
+    background: url("../img/one-dictionary-background.png") no-repeat top 300px right;
+
+}
+
+.dictionary-page__content {
+    width: 900px;
+}
+
+.dictionary-content {
+    padding: 20px;
+    font-family: Source Sans Pro, sans-serif;
+}
+
+.dictionary-content__buttons-group {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.dictionary-content__button {
+    min-width: 260px;
+    border-radius: 10px;
+    padding: 12px;
+    background: linear-gradient(180deg, #CCE5F7 0%, #DBD8FB 100%);
+    font-size: 18px;
+    text-align: center;
+    color: #3B6CE9;
+}
+
+.dictionary-content__start-button {
+    display: block;
+    width: 400px;
+    height: 80px;
+    margin: 0 auto 20px auto;
+    padding-top: 20px;
+    font-size: 25px;
+}
+
+.dictionary-content__table {
+    background: linear-gradient(180deg, #CDE5F7 0%, rgba(247, 247, 247, 0) 100%);
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+.dictionary-table__head {
+    font-size: 20px;
+    font-weight: 600;
+    color: #3B6CE9;
+}
+
+.dictionary-table__body {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: 0.05em;
+    text-align: left;
+}
+
+.dictionary-table__cell {
+    padding: 10px;
+    text-align: center;
+}
+
+.dictionary-table__delete-button {
+    width: 30px;
+    height: 30px;
+    font-size: 0;
+    background: url("../img/icons/backet-icon.png") no-repeat;
+}
+
+.dictionary-content__add-word-form {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.add-word-form {
+    padding: 20px;
+    font-family: Raleway, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.add-word-form__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.add-word-form__input-area {
+    width: 48%;
+}
+
+.add-word-form__input-label {
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.add-word-form__input, .add-word-form__textarea {
+    border: 3px solid #3B6CE9;
+    border-radius: 20px;
+    width: 100%;
+    padding: 7px 15px;
+}
+
+.add-word-form__row_controls {
+    padding: 0 130px;
+    justify-content: space-between;
+}
+
+.settings-page {
+    width: 100%;
+    padding: 20px;
+    font-family: Raleway, sans-serif;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #3B6CE9;
+}
+
+.settings-page__heading {
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.settings-page__avatar {
+    border-radius: 50%;
+    margin-bottom: 40px;
+}
+
+.settings-form__row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background: linear-gradient(180deg, #CBE6F6 0%, #E0D3FC 100%);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px 40px;
+}
+
+.setting-form__group {
+    text-align: center;
+    width: 100%;
+}
+
+.settings-form__label {
+    padding: 0 20px;
+}
+
+.settings-form__file-input, .settings-form__input {
+    background: #FFFFFF;
+    border: 2px solid #3B6CE9;
+    border-radius: 20px;
+    padding: 10px 20px;
+    position: relative;
+    margin-left: 20px;
+    width: 95%;
+}
+
+.settings-form__file-input:after {
+    content: 'Выберите файл';
+    display: block;
+    background: #3B6CE9;
+    color: #FFF;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    border-radius: 10px;
+    padding: 5px 15px 9px;
+    box-sizing: border-box;
+}
+
+.setting-form__checkbox {
+    position: relative;
+    width: 0;
+    height: 0;
+}
+
+.setting-form__checkbox::after, .setting-form__checkbox:checked::after {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #FFF;
+    display: block;
+    content: '';
+    border: 1px solid #3B6CE9;
+    border-radius: 3px;
+}
+
+.setting-form__checkbox:checked::after {
+    background-image: url("../img/icons/checkbox-icon.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.setting-form__button {
+    min-width: 300px;
+    border-radius: 10px;
+    padding: 10px;
+    background: linear-gradient(180deg, #CCE5F7 0%, #DBD8FB 100%);
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    color: #3B6CE9;
+    box-sizing: border-box;
+    height: 60px;
+}
+
+.setting-form__button:hover {
+    border: 1px solid #3B6CE9;
+}
+
+.setting-form__button:active {
+    background: #3B6CE9;
+    color: #FFF
+}

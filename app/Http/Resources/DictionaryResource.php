@@ -8,7 +8,7 @@ use JetBrains\PhpStorm\ArrayShape;
 class DictionaryResource extends JsonResource
 {
 
-    #[ArrayShape(['id' => 'int', 'dictionary_name' => "string", 'creator' => "string", 'created_at' => 'string', 'words' => 'array'])]
+    #[ArrayShape(['id' => 'int', 'dictionary_name' => "string", 'creator' => "string", 'created_at' => 'string'])]
     public function toArray($request): array
     {
         return [
@@ -16,7 +16,6 @@ class DictionaryResource extends JsonResource
             'dictionary_name' => $this->dictionary_name,
             'creator' => $this->creator->name,
             'created_at' => $this->created_at,
-            'words' => WordResource::collection($this->words),
         ];
     }
 

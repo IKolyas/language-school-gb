@@ -1,4 +1,3 @@
-import {ref} from 'vue';
 import {isArray, isString} from '../../utils/checkType';
 
 const randArray = array => {
@@ -6,15 +5,29 @@ const randArray = array => {
 	return array[randNum]
 }
 
+function getAllAnswers(dictionaries, type='translation') {
+	if (!isArray(dictionaries)) {
+		throw new Error('dictionaries are not on Array')
+	}
+
+	if (type === 'original') {
+		type = 'word'
+	}
+
+	return dictionaries.map(item => item[type])
+}
+
 function shuffle(array) {
 	for (let i = array.length - 1; i > 0; i--) {
 		let rand = Math.floor(Math.random() * (i + 1));
 		[array[i], array[rand]] = [array[rand], array[i]];
 	}
+
+	return array
 }
 
-export function randomIncorrectAnswers (dictionaries, basic, count = 5) {
-	if (!isArray(dictionaries)) {
+function setAnswers (words, basic, count = 5) {
+	if (!isArray(words)) {
 		throw new Error('dictionaries are not on Array')
 	}
 	if (!isString(basic)) {
@@ -23,21 +36,63 @@ export function randomIncorrectAnswers (dictionaries, basic, count = 5) {
 	if (!Number.isInteger(count) && count === 0)  {
 		throw new Error('count is not correct')
 	}
-	if (count >= dictionaries.length) {
-		count = dictionaries.length
+	if (count >= words.length) {
+		count = words.length
 	}
 
-	const array = ref([])
-	array.value.push(basic)
+	const array = []
+	array.push(basic)
 
-	while (array.value.length < count) {
-		let word = randArray(dictionaries)
-		if (!array.value.includes(word)) {
-			array.value.push(word)
+	while (array.length < count) {
+		let word = randArray(words)
+		if (!array.includes(word)) {
+			array.push(word)
 		}
 	}
 
-	shuffle(array.value)
+	return shuffle(array)
+}
 
-	return array
+function typeAnswers(currentTask) {
+	let lang = 'original'
+	if (Number(currentTask.rating) === 1) {
+		lang = 'translation'
+	}
+	if (Number(currentTask.rating) === 3) {
+		lang = 'translation'
+	}
+
+	if (lang === 'translation') {
+		let tempWord = currentTask.word
+		return {
+			...currentTask,
+			word: currentTask.translation,
+			translation: tempWord,
+			type: 'translation'
+		}
+	}
+
+	return currentTask
+}
+
+export function collectQuestions (tasks, currentTask) {
+	if (!isArray(tasks)) {
+		throw new Error('dictionaries are not on Array')
+	}
+
+	let allAnswers;
+	currentTask = typeAnswers(currentTask);
+
+	if (currentTask.type === 'translation') {
+		allAnswers = getAllAnswers(tasks, 'original')
+	} else {
+		allAnswers = getAllAnswers(tasks)
+	}
+
+	const answers = setAnswers(allAnswers, currentTask.translation, 3)
+
+	return {
+		...currentTask,
+		answers
+	}
 }

@@ -1,7 +1,7 @@
 <template>
-  <div>
-	  Вы ответили на {{ count }} правильно из {{ tasks.length }}
-  </div>
+  <p class="practice-result">
+	  Вы ответили на {{ successCount }} правильно из {{ count }}
+  </p>
 </template>
 
 <script>
@@ -10,8 +10,9 @@ import { inject } from 'vue';
 export default {
 	setup() {
 		return {
-			tasks: inject('tasks'),
+            finishResults: inject('finishResults'),
 			count: inject('count'),
+            successCount: inject('successCount'),
 		}
 	}
 }
