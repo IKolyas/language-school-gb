@@ -68,21 +68,22 @@ const actions = {
 
     updateDictionaryRating({commit, dispatch}, payload) {
         try {
-            updateRatings(payload.user_id, {words: payload.words}).then();
+            updateRatings(payload.user_id, {words: payload.words})
+            dispatch('fetchDictionaryWithRating', {
+                dictionary_id: payload.dictionary_id,
+                user_id: payload.user_id
+            });
         } catch (e) {
             console.error('updateDictionaryRating', e);
         }
-        dispatch('fetchDictionaryWithRating', {
-            dictionary_id: payload.dictionary_id,
-            user_id: payload.user_id
-        });
+
     },
 
     actionDestroyDictionary({commit, dispatch}, payload) {
         try {
-            destroyDictionary(payload.id).then(() => {
-                dispatch('fetchDictionaries');
-            });
+            const res = destroyDictionary(payload.id)
+            console.log('res', res);
+            dispatch('fetchDictionaries');
         } catch (e) {
             console.error('destroyDictionary', e);
         }

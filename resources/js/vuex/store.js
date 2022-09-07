@@ -26,8 +26,12 @@ const store = createStore({
         setLoader(state, value) {
             state.mainLoader = value;
         },
-        changePageLocked (state, locked) {
-            state.isPageLocked = locked
+        changePageLocked (state, payload) {
+            if (payload !== undefined) {
+                state.isPageLocked = payload
+            } else {
+                state.isPageLocked = !state.isPageLocked
+            }
         },
     },
 
