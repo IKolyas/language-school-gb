@@ -3,7 +3,6 @@
         <h2 class="visually-hidden">Ваши словари</h2>
         <div class="user-dictionaries-page__links-group">
             <router-link :to="{name: 'dictionaryCreate'}" class="user-dictionaries-page__link-button">
-                <!--TODO поменять классы кнопок-->
                 Создать новый словарь
             </router-link>
             <router-link :to="{name: 'dictionaries'}" class="user-dictionaries-page__link-button">

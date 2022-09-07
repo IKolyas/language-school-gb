@@ -4,7 +4,7 @@
             <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
             <router-link :to="{name: 'practice', params: {dictionaryId: id}}"
                          class="dictionary-content__start-button dictionary-content__button"
-                         v-if="userHasDictionary">
+                         v-if="userHasDictionary && !addFormActive">
                 Начать неистово тренироваться
             </router-link>
             <div class="dictionary-content__buttons-group">
