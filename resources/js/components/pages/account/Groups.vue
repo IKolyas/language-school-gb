@@ -1,5 +1,5 @@
 <template>
-    <section class="user-groups">
+    <section class="user-groups container">
         <h2 class="visually-hidden">Ваши группы</h2>
         <h3 class="user-groups__title">Число групп, в которых вы состоите: <span
             class="user-groups__count">{{ groupsCount }} группы</span></h3>

@@ -1,5 +1,5 @@
 <template>
-    <main class="dictionary-page">
+    <main class="dictionary-page container">
         <section class="dictionary-content dictionary-page__content">
             <dictionary-add-word v-if="addFormActive" @toggle-add-form="toggleAddForm"></dictionary-add-word>
             <router-link :to="{name: 'practice', params: {dictionaryId: id}}"

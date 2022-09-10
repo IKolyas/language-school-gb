@@ -3,7 +3,7 @@
         <div class="task-area__current-word current-word">
 			<div>
 				<span class="current-word__word">{{ task.word }}</span>
-				<span @click="voiceWord(task.word)"><i class="bi bi-volume-up voice-action voice-action__active"></i></span>
+				<span @click="voiceWord(task.word)" @mouseover="voiceWord(task.word)" @mouseout="clearTimeoutVoice"><i class="bi bi-volume-up voice-action voice-action__active"></i></span>
 			</div>
         </div>
         <ul class="task-area__answers-list answers-list">
@@ -11,6 +11,8 @@
                 v-for="(answer, index) in task.answers" :key="index"
                 :answer="answer"
                 @onAnswerClick="onAnswerClick"
+				@mouseover="voiceWord(answer)"
+				@mouseout="clearTimeoutVoice"
             />
         </ul>
         <div class="task-area__result">
@@ -38,19 +40,17 @@ export default {
 
     methods: {
         voiceWord (word) {
-            if (this.onIsVoice) {
-                const synth = window.speechSynthesis;
-                const voices = synth.getVoices();
-                let utterance = new SpeechSynthesisUtterance(word);
-                utterance.voice = voices[3]; // US ENGLISH
-                this.setTimeoutVoice(utterance);
-            }
+			const synth = window.speechSynthesis;
+			const voices = synth.getVoices();
+			let utterance = new SpeechSynthesisUtterance(word);
+			utterance.voice = voices[3]; // US ENGLISH
+			this.setTimeoutVoice(utterance);
         },
 
         setTimeoutVoice (utterance) {
             this.timeoutVoice = setTimeout(() => {
                 speechSynthesis.speak(utterance)
-            }, 100);
+            }, 200);
         },
 
         clearTimeoutVoice () {

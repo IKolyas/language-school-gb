@@ -1,5 +1,5 @@
 <template>
-    <section class="settings-page">
+    <section class="settings-page container">
         <h2 class="visually-hidden">Настройте свой профиль</h2>
         <img class="settings-page__avatar" src="http://placekitten.com/300/300" alt="avatar" width="200" height="200">
         <form v-on:submit.prevent="onSubmit" class="settings-page__form settings-form">
