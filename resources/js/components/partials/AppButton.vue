@@ -124,6 +124,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.btn {
+	border-width: 3px;
+	border-radius: 10px;
+	background-color: white;
+}
 
 .content_item {
   display: flex;

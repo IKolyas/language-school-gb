@@ -5,7 +5,7 @@
 			   {{ error }}
 		   </div>
 		   <img src="../../../../img/register-logo.png" alt="Language school project logotype"
-				class="register-page__logo" width="401" height="69">
+				class="register-page__logo">
 		   <h1 class="register-page__heading">Добро пожаловать!</h1>
 		   <div class="register-page__column-wrapper">
 			   <div class="register-page__column">
@@ -25,16 +25,31 @@
 					   <label for="password-submit" class="register-form__label">Подтверждение пароля</label>
 					   <input id="password-submit" type="password" class="primary-input register-form__input register-form__input_last-input" v-model="passwordSubmit"
 							  required autocomplete="off" placeholder="повторите пароль">
-					   <button type="submit" class="register-form__submit-button" @click="handleSubmit">
-						   Зарегистрироваться
-					   </button>
+
+					   <AppButton
+						   text="Зарегистрироваться"
+						   width="100%"
+						   height="44px"
+						   class="btn-outline-primary"
+						   :loading="loadingBtn"
+						   typeBtn="submit"
+					   />
 				   </form>
 			   </div>
 			   <div class="register-page__column register-page__column_right">
 				   <ul class="register-page__authorization-options authorization-options">
-					   <li class="authorization-options__item authorization-options__item_google">Продолжить с Google</li>
-					   <li class="authorization-options__item authorization-options__item_apple">Продолжить с Apple</li>
-					   <li class="authorization-options__item authorization-options__item_vk">Продолжить с Вконтакте</li>
+					   <li class="authorization-options__item authorization-options__item_google">
+						   <img src="../../../../img/icons/google-icon.png" alt="google">
+						   <span>Продолжить с Google</span>
+					   </li>
+					   <li class="authorization-options__item authorization-options__item_apple">
+						   <img src="../../../../img/icons/apple-icon.png" alt="apple">
+						   <span>Продолжить с Apple</span>
+					   </li>
+					   <li class="authorization-options__item authorization-options__item_vk">
+						   <img src="../../../../img/icons/vk-square-icon.png" alt="vk">
+						   <span>Продолжить с Вконтакте</span>
+					   </li>
 				   </ul>
 			   </div>
 		   </div>
@@ -43,16 +58,20 @@
 </template>
 
 <script>
+import AppButton from '../../partials/AppButton';
 export default {
     name: "Register",
-    data() {
+	components: {AppButton},
+	data() {
         return {
             name: "",
             lastname: "",
             email: "",
             password: "",
             passwordSubmit: "",
-            error: null
+            error: null,
+
+			loadingBtn: false
         }
     },
     methods: {
@@ -84,7 +103,59 @@ export default {
 </script>
 
 <style lang="scss">
+.authorization-options {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	height: 100%;
+
+	.authorization-options__item {
+		width: 100%;
+		height: 64px;
+		line-height: 64px;
+		border-radius: 40px;
+		margin-bottom: 35px;
+		text-align: center;
+		font-size: 16px;
+		font-weight: 600;
+		position: relative;
+		@media (min-width: 768px) {
+			font-size: 20px;
+		}
+
+		& img {
+			position: absolute;
+			top: 0;
+			left: 22px;
+			transform: translateY(50%);
+			margin-right: 5px;
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	.authorization-options__item_google {
+		background-color: #F1F1F1;
+	}
+
+	.authorization-options__item_apple {
+		background-color: #0A0A0A;
+		color: #FFF;
+	}
+
+	.authorization-options__item_vk {
+		background-color: #567FBD;
+		color: #FFF;
+	}
+}
+
 .register-page {
+	padding-top: 30px;
+	padding-bottom: 30px;
 
 	@media (min-width: 1200px) {
 		background-image: url("../../../../img/register-page-background.png");
@@ -98,7 +169,6 @@ export default {
 	}
 
 	.register-page__heading {
-		font-family: 'Raleway', sans-serif;
 		font-size: 36px;
 		text-align: center;
 		margin-bottom: 60px;
@@ -106,13 +176,21 @@ export default {
 	}
 
 	.register-page__column-wrapper {
-		display: flex;
-		justify-content: space-between;
+
+		@media (min-width: 1200px) {
+			display: flex;
+			justify-content: space-between;
+		}
 	}
 
 	.register-page__column {
-		width: 570px;
-		padding: 20px;
+		max-width: 570px;
+		width: 100%;
+		padding: 20px 0;
+
+		&.register-page__column_right {
+			margin-top: auto;
+		}
 	}
 
 	.register-form__label {
@@ -122,26 +200,14 @@ export default {
 		margin-bottom: 19px;
 	}
 
-	.register-form__input {
-		margin-bottom: 19px;
+	.register-form {
+		input {
+			margin-bottom: 20px;
+		}
+		input:last-child {
+			margin-bottom: 37px;
+		}
 	}
 
-	.register-form__submit-button {
-		width: 419px;
-		border: 3px solid #3B6CE9;
-		border-radius: 10px;
-		padding: 12px 30px;
-		color: #3B6CE9;
-		font-family: Source Sans Pro, sans-serif;
-		font-size: 36px;
-		text-align: center;
-		margin-left: 50px;
-		margin-top: 50px;
-		background-color: #FFF;
-	}
-
-	.register-page__column_right {
-		padding-top: 500px;
-	}
 }
 </style>

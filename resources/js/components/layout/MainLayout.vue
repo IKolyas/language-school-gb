@@ -1,7 +1,7 @@
 <template>
+	<TheLoader v-if="isLoadingMain" />
 	<div class="root-container" :class="{'locked': isPageLocked}" style="height: 100%">
 		<TheHeader/>
-	<!--	<AppLoader v-if="isLoading"/>-->
 		<router-view/>
 		<TheFooter/>
 	</div>
@@ -10,11 +10,12 @@
 <script>
 import TheHeader from '../partials/TheHeader'
 import TheFooter from "../partials/TheFooter";
+import TheLoader from '../partials/TheLoader';
 export default {
-    components: {TheFooter, TheHeader},
+    components: {TheLoader, TheFooter, TheHeader},
 
     computed: {
-        isLoading () {
+		isLoadingMain () {
             return this.$store.getters.mainLoader;
         },
 		isPageLocked () {
