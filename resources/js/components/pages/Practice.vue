@@ -75,19 +75,19 @@ const testDictionary = {
             id: 1,
             word: 'слово',
             translation: 'word',
-            rating: 4,
+            rating: 0,
         },
         {
             id: 2,
             word: 'символ',
             translation: 'symbol',
-            rating: 4,
+            rating: 0,
         },
         {
             id: 3,
             word: 'число',
             translation: 'number',
-            rating: 4,
+            rating: 0,
         },
 
         {
