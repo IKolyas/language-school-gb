@@ -1,5 +1,5 @@
 <template>
-    <form v-on:submit.prevent="onSubmitWord" class="dictionary-content__add-word-form add-word-form">
+    <form v-on:submit.prevent="onSubmitWord" class="dictionary-content__add-word-form add-word-form container">
         <div class="add-word-form__row">
             <div class="add-word-form__input-area">
                 <p class="add-word-form__input-label">Word in English</p>

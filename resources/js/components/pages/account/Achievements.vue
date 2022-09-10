@@ -1,5 +1,5 @@
 <template>
-    <section class="achievements-page">
+    <section class="achievements-page container">
         <h2 class="visually-hidden">Достижения</h2>
         <ul class="achievements-page__top bottom-marked">
             <li class="achievements-page__top-item">

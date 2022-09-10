@@ -1,5 +1,5 @@
 <template>
-    <form v-on:submit.prevent="onSubmitDictionary">
+    <form v-on:submit.prevent="onSubmitDictionary" class="container">
         <div class="mb-3">
             <label for="formFile" class="form-label">Выберите изображение</label>
             <input class="form-control" type="file" id="formFile">

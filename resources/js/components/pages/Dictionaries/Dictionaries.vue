@@ -1,6 +1,5 @@
 <template>
-    <main class="container">
-		<div class="dictionaries-page">
+    <main class="dictionaries-page container">
 			<h1 class="visually-hidden">Все словари</h1>
 			<div class="dictionaries-page__search-form search-form">
 				<input v-model="search" type="search" class="search-form__input" placeholder="Поиск по словарям"/>
@@ -15,7 +14,6 @@
 					</DictionaryCard>
 				</li>
 			</ul>
-		</div>
     </main>
 </template>
 
