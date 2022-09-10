@@ -1,19 +1,16 @@
 <template>
     <section class="task-area">
         <div class="task-area__current-word current-word">
-            <span class="current-word__word">{{ task.word }}</span>
-            <div @click="changeVoiceOption" class="current-word__voice-option">
-                <span v-if="!onIsVoice">Включить звук<i class="bi bi-volume-up voice-action voice-action__active"></i></span>
-                <span v-else>Выключить звук<i class="bi bi-volume-mute-fill voice-action"></i></span>
-            </div>
+			<div>
+				<span class="current-word__word">{{ task.word }}</span>
+				<span @click="voiceWord(task.word)"><i class="bi bi-volume-up voice-action voice-action__active"></i></span>
+			</div>
         </div>
         <ul class="task-area__answers-list answers-list">
             <AnswerItem
                 v-for="(answer, index) in task.answers" :key="index"
                 :answer="answer"
                 @onAnswerClick="onAnswerClick"
-                @mouseover="voiceWord(answer)"
-                @mouseout="clearTimeoutVoice"
             />
         </ul>
         <div class="task-area__result">
@@ -40,7 +37,7 @@ export default {
     },
 
     methods: {
-        voiceWord: function (word) {
+        voiceWord (word) {
             if (this.onIsVoice) {
                 const synth = window.speechSynthesis;
                 const voices = synth.getVoices();
@@ -50,17 +47,17 @@ export default {
             }
         },
 
-        setTimeoutVoice: function (utterance) {
+        setTimeoutVoice (utterance) {
             this.timeoutVoice = setTimeout(() => {
                 speechSynthesis.speak(utterance)
-            }, 500);
+            }, 100);
         },
 
-        clearTimeoutVoice: function () {
+        clearTimeoutVoice () {
             clearTimeout(this.timeoutVoice);
         },
 
-        changeVoiceOption: function () {
+        changeVoiceOption () {
             this.onIsVoice = !this.onIsVoice;
         }
     },
@@ -93,6 +90,17 @@ export default {
     font-size: 2rem;
     &:hover {
         cursor: pointer;
+
+		&:before {
+			transition: .3s;
+			transform: scale(1.05);
+		}
+    }
+    &:active {
+		&:before {
+			transition: .3s;
+			transform: scale(1);
+		}
     }
 }
 
