@@ -1,56 +1,58 @@
 <template>
-    <main class="practice-page">
-        <AppLoader v-if="loading"/>
-        <div class="practice-page__wrap" v-else>
-            <h2 class="practice-page__heading">Время практиковаться со&nbsp;словарём!</h2>
-            <p class="practice-page__dictionary-name">{{ dictionaryName }}</p>
+    <main class="container">
+		<div class="practice-page">
+			<AppLoader v-if="loading"/>
+			<div class="practice-page__wrap" v-else>
+				<h2 class="practice-page__heading">Время практиковаться со&nbsp;словарём!</h2>
+				<p class="practice-page__dictionary-name">{{ dictionaryName }}</p>
 
-            <button
-                class="practice-page__start-button"
-                v-if="!isPractice && !isFinished"
-                @click="onStartedPractice"
-            >Начать тренировку
-            </button>
+				<button
+				class="practice-page__start-button"
+				v-if="!isPractice && !isFinished"
+				@click="onStartedPractice"
+				>Начать тренировку
+				</button>
 
-            <div v-if="isPractice || isFinished" class="practice-page__practice practice">
-                <div class="practice__score" v-if="isPractice">
-                    <p>{{ currentTask.rating }} / 5</p>
-                </div>
-                <p class="practice__question" v-if="isPractice">Выберите верный вариант:</p>
+				<div v-if="isPractice || isFinished" class="practice-page__practice practice">
+					<div class="practice__score" v-if="isPractice">
+						<p>{{ currentTask.rating }} / 5</p>
+					</div>
+					<p class="practice__question" v-if="isPractice">Выберите верный вариант:</p>
 
-                <VTask
-                    v-if="isPractice"
-                    @onAnswerClick="onAnswerClick"
-                />
-                <FinishedTasks v-else-if="isFinished"/>
-                <div
-                    v-if="isPractice"
-                    class="practice__controls"
-                >
-                    <button
-                        v-if="!hasCheckAnswer"
-                        class="practice-controls__button practice-controls__button_check"
-                        :class="{'disabled': !isActiveAnswer}"
-                        @click="onCheckAnswer(currentTask)"
-                    >
-                        Проверить
-                    </button>
-                    <button
-                        v-else
-                        class="practice-controls__button practice-controls__button_continue"
-                        @click="onNextTask"
-                    >
-                        Продолжить
-                    </button>
-                    <button
-                        class="practice-controls__button practice-controls__button_finish"
-                        @click="onFinishedTask"
-                    >
-                        Закончить тренировку
-                    </button>
-                </div>
-            </div>
-        </div>
+					<VTask
+					v-if="isPractice"
+					@onAnswerClick="onAnswerClick"
+					/>
+					<FinishedTasks v-else-if="isFinished"/>
+					<div
+					v-if="isPractice"
+					class="practice__controls"
+					>
+						<button
+						v-if="!hasCheckAnswer"
+						class="practice-controls__button practice-controls__button_check"
+						:class="{'disabled': !isActiveAnswer}"
+						@click="onCheckAnswer(currentTask)"
+						>
+							Проверить
+						</button>
+						<button
+						v-else
+						class="practice-controls__button practice-controls__button_continue"
+						@click="onNextTask"
+						>
+							Продолжить
+						</button>
+						<button
+						class="practice-controls__button practice-controls__button_finish"
+						@click="onFinishedTask"
+						>
+							Закончить тренировку
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
     </main>
 </template>
 
@@ -363,9 +365,13 @@ export default {
 
 	.practice {
 		box-shadow: 0 5px 5px 5px #3B6CE973;
-		padding: 50px;
+		padding: 40px 20px 20px;
 		border-radius: 10px;
 		position: relative;
+
+		@media (min-width: 768px) {
+			padding: 50px;
+		}
 	}
 
 	.practice__question {
@@ -379,13 +385,17 @@ export default {
 		top: 10px;
 		right: 10px;
 		font-family: Raleway, sans-serif;
-		font-size: 36px;
+		font-size: 26px;
 		font-weight: 700;
 		color: #3B6CE9;
+		@media (min-width: 768px) {
+			font-size: 36px;
+		}
 	}
 
 	.current-word {
 		position: relative;
+		margin-bottom: 50px;
 	}
 
 	.current-word__word {
@@ -408,9 +418,15 @@ export default {
 
 	.answers-list {
 		display: flex;
-		justify-content: space-around;
-		padding: 30px;
-		margin-bottom: 0;
+		flex-direction: column;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+		margin-bottom: 30px;
+
+		@media (min-width: 768px) {
+			flex-direction: row;
+		}
 	}
 
 	.answer-list__answer-item {
@@ -421,6 +437,15 @@ export default {
 		font-family: Source Sans Pro, sans-serif;
 		font-size: 36px;
 		font-weight: 400;
+		width: 100%;
+
+		&:not(:last-child) {
+			margin-bottom: 30px;
+			@media (min-width: 768px) {
+				margin-bottom: 0;
+				margin-right: 30px;
+			}
+		}
 	}
 
 	.answer-list__answer-item.active {
@@ -450,8 +475,11 @@ export default {
 
 	.practice__controls {
 		display: flex;
-		justify-content: space-around;
-		padding: 0 250px;
+		flex-direction: column;
+
+		@media (min-width: 768px) {
+			flex-direction: row;
+		}
 	}
 
 	.practice-controls__button {
@@ -463,6 +491,14 @@ export default {
 		color: #256C39;
 		padding: 8px 15px;
 		background-color: #FFF;
+
+		&:not(:last-child) {
+			margin-bottom: 30px;
+			@media (min-width: 768px) {
+				margin-bottom: 0;
+				margin-right: 30px;
+			}
+		}
 	}
 
 	.practice-controls__button_finish {
@@ -473,6 +509,8 @@ export default {
 	.practice-controls__button.disabled, .practice-controls__button:disabled {
 		color: gray;
 		border-color: gray;
+		cursor: default;
+		opacity: 0.5;
 	}
 
 	.practice-result {
