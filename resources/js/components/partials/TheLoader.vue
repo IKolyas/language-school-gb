@@ -1,11 +1,13 @@
 <template>
-  <div class="container-loader">
-    <div class="📦"></div>
-    <div class="📦"></div>
-    <div class="📦"></div>
-    <div class="📦"></div>
-    <div class="📦"></div>
-  </div>
+	<div class="wrapper">
+		<div class="container-loader">
+			<div class="📦"></div>
+			<div class="📦"></div>
+			<div class="📦"></div>
+			<div class="📦"></div>
+			<div class="📦"></div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -13,6 +15,16 @@ export default {}
 </script>
 
 <style>
+.wrapper {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: white;
+	z-index: 1000;
+}
+
 :root {
   --duration: 1.5s;
   --container-size: 250px;

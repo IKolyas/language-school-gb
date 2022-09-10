@@ -150,21 +150,28 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const isAuth = to.meta.middleware === 'auth'
 
-    // window.axios.get('/sanctum/csrf-cookie').then(() => {
-    //     store.dispatch('user/isAuth').then(() => {
-    //         if (to.meta.middleware === "guest" || store.state.user.authenticated) {
-    //             next()
-    //         } else {
-    //             next({name: "login"})
-    //         }
-    //     })
-    // })
-
-    if (isAuth && !store.state.user.authenticated) {
-        return next({name: "login"})
-    } else {
+    if (!isAuth) {
         return next()
+    } else {
+        store.dispatch('changeLoader', true);
+        window.axios.get('/sanctum/csrf-cookie').then(() => {
+            store.dispatch('user/isAuth').then(() => {
+                store.dispatch('changeLoader', false);
+                if (to.meta.middleware === "guest" || store.state.user.authenticated) {
+                    next()
+                } else {
+                    next({name: "login"})
+                }
+            })
+        })
     }
+
+
+    // if (isAuth && !store.state.user.authenticated) {
+    //     return next({name: "login"})
+    // } else {
+    //     return next()
+    // }
 })
 
 export default router;
