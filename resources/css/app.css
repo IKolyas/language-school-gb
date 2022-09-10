@@ -5,7 +5,6 @@
 /*font-family: 'Sacramento', cursive;*/
 /*font-family: 'Source Sans Pro', sans-serif;*/
 
-
 html,
 body,
 #app {
@@ -40,9 +39,8 @@ footer {
 
 /* Forms */
 .primary-input {
-    border: 2px solid rgba(59, 108, 233, 1);
+    border: 3px solid rgba(59, 108, 233, 1);
     height: 46px;
-    max-width: 522px;
     width: 100%;
     border-radius: 20px;
     font-size: 20px;
@@ -52,39 +50,6 @@ footer {
 
 .primary-input:hover, .primary-input:focus {
     border-width: 4px;
-}
-
-/*Register-page*/
-
-.authorization-options__item {
-    width: 473px;
-    height: 64px;
-    border-radius: 40px;
-    margin-bottom: 35px;
-    text-align: center;
-    font-family: Raleway, sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    background-repeat: no-repeat;
-    background-position: top 17px left 20px;
-    padding: 10px;
-}
-
-.authorization-options__item_google {
-    background-image: url("../img/icons/google-icon.png");
-    background-color: #F1F1F1;
-}
-
-.authorization-options__item_apple {
-    background-image: url("../img/icons/apple-icon.png");
-    background-color: #0A0A0A;
-    color: #FFF;
-}
-
-.authorization-options__item_vk {
-    background-image: url("../img/icons/vk-square-icon.png");
-    background-color: #567FBD;
-    color: #FFF;
 }
 
 /*Account-page*/
