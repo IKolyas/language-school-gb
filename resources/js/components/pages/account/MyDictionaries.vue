@@ -1,5 +1,5 @@
 <template>
-    <section class="user-dictionaries-page">
+    <section class="user-dictionaries-page container">
         <h2 class="visually-hidden">Ваши словари</h2>
         <div class="user-dictionaries-page__links-group">
             <router-link :to="{name: 'dictionaryCreate'}" class="user-dictionaries-page__link-button">

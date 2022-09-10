@@ -1,5 +1,5 @@
 <template>
-    <main class="account-page">
+    <main class="account-page container">
         <h1 class="visually-hidden">Личный кабинет пользователя</h1>
         <nav class="account-page__sidebar account-navbar">
             <img src="http://placekitten.com/100/100" class="account-navbar__avatar" alt="avatar" width="120"

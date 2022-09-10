@@ -93,10 +93,10 @@ export default {
 					text: 'Словари',
 					linkName: 'dictionaries'
 				},
-				{
-					text: 'Арена',
-					linkName: 'dictionaryWar'
-				}
+				// {
+				// 	text: 'Арена',
+				// 	linkName: 'dictionaryWar'
+				// }
 			],
 			isOpen: false,
 			isMobile: true
